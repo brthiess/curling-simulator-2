@@ -1,0 +1,46 @@
+@page "/pick-teams"
+@inject NavigationManager NavigationManager
+@inject SimulationContainer State;
+@using CurlingSimulator
+
+
+
+
+<h1 class='page-title pick-teams-title'>Pick Teams</h1>
+
+<button class='done-button continue-button' @onclick="NavigateToSimulationResults">Simulate</button>
+
+@code { 
+    private void NavigateToSimulationResults() 
+    { 
+        RunTournament();
+        NavigationManager.NavigateTo("simulation-results"); 
+    }
+
+    protected void RunTournament()
+    {
+        State.Reset();
+        State.State = SimulationState.Running;
+        State.Tournament = new WorldsTournament();
+        State.Tournament.AddTeam(new Team("Hasselborg", null, 1));
+        State.Tournament.AddTeam(new Team("Tirinzoni", null, 4));
+        State.Tournament.AddTeam(new Team("Fujisawa", null, 5));
+        State.Tournament.AddTeam(new Team("Muirhead", null, 8));
+        State.Tournament.AddTeam(new Team("Kovaleva", null, 13));
+        State.Tournament.AddTeam(new Team("Roth\t", null, 14));
+        State.Tournament.AddTeam(new Team("Kubeskova", null, 75));
+        State.Tournament.AddTeam(new Team("Halse\t", null, 168));
+        State.Tournament.AddTeam(new Team("Jentsch\t", null, 25));
+        State.Tournament.AddTeam(new Team("Gim\t", null, 15));
+        State.Tournament.AddTeam(new Team("Sullanmaa", null, 152));
+        State.Tournament.AddTeam(new Team("Han\t", null, 36));
+        State.Tournament.AddTeam(new Team("Carey\t", null, 10));
+
+        for (var i =0; i < 1; i++)
+        {
+            State.TournamentResult = State.Tournament.Run();
+        }
+        State.State = SimulationState.Finished;
+    }    
+}
+

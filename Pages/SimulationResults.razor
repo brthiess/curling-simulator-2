@@ -1,0 +1,63 @@
+@page "/simulation-results"
+@inject SimulationContainer State;
+@using CurlingSimulator 
+
+
+<h1 class='page-title simulation-results-title'>Simulation Results</h1>
+
+<h3 class='round-robin-title results-title'>Round Robin</h3>
+<table class='round-robin-table'>
+    <tr>
+        <th>Team</th>
+        <th>W</th>
+        <th>L</th>
+        <th>LSD</th>
+    </tr>
+@foreach (var team in State.TournamentResult.GetTeamsSortedByRoundRobin())
+{
+    <tr>
+        <td>@team.Name</td>
+        <td>@team.RoundRobinRecord.Wins</td>
+        <td>@team.RoundRobinRecord.Losses</td>
+        <td>@team.LsdTotal</td>
+    </tr>
+}     
+</table>
+
+<h3 class='playoffs-title results-title'>Playoffs</h3>
+@if (State.Tournament.TournamentType == TournamentType.Worlds){
+ 
+    <div class='round-1'>
+        @foreach (var team in GetRoundOneTeams())
+        {
+            <div class="team-name">@team.Name</div>
+        }
+    </div>
+}
+
+@code 
+{
+        public List<Team> GetRoundOneTeams()
+        {
+            var roundOneTeams = new List<Team>();
+            var teams = State.TournamentResult.GetTeamsSortedByRoundRobin();
+            roundOneTeams.Add(teams[2]);
+            roundOneTeams.Add(teams[5]);
+            roundOneTeams.Add(teams[3]);
+            roundOneTeams.Add(teams[4]);
+            return roundOneTeams;
+        }
+
+        public List<Team> GetRoundTwoTeams()
+        {
+            var roundOneTeams = new List<Team>();
+            var teams = State.TournamentResult.GetTeamsSortedByRoundRobin();
+            roundOneTeams.Add(teams[0]);
+            roundOneTeams.Add(teams[3]);
+            roundOneTeams.Add(teams[1]);
+            roundOneTeams.Add(teams[5]);
+            return roundOneTeams;
+        }
+}
+
+

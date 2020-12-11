@@ -1,0 +1,18 @@
+@page "/pick-format"
+@inject NavigationManager NavigationManager
+@inject SimulationContainer State;
+@using CurlingSimulator
+@inject WorldsTournament TournamentObject
+
+<h1 class='page-title pick-format-title'>Pick Tournament Format</h1>
+
+<button class="format-button continue-button" @onclick="NavigateToPickTeams">Women's Worlds</button>
+
+
+@code { 
+    private void NavigateToPickTeams() 
+    {
+        State.Tournament = new WorldsTournament();
+        NavigationManager.NavigateTo("pick-teams"); 
+    } 
+}
