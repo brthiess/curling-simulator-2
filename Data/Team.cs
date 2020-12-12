@@ -29,7 +29,7 @@ namespace CurlingSimulator
 			}
 			else if (tourRanking.HasValue)
 			{
-				Rating = GetRatingFromRanking(tourRanking.Value, RegressionType.Logarithmic);
+				Rating = GetRatingFromRanking(tourRanking.Value, RegressionType.Inverse);
 			}
 			else
 			{
@@ -130,7 +130,7 @@ namespace CurlingSimulator
         private static void DrawToTheButton(Team team)
         {
 			Random r = new Random();
-			double lsdLength = 500/(Math.Sqrt(team.Rating) * r.Next(1,100)) - 5.7;
+			double lsdLength = 1000/(Math.Sqrt(team.Rating) * r.Next(1,200) * Math.Sqrt(team.Rating)) - 5.7;
 			if (lsdLength < 0 )
 			{
 				lsdLength = 0;

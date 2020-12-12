@@ -5,12 +5,11 @@ public class SimulationContainer
 
     public Tournament Tournament {get;set;}
 
-    public TournamentResult TournamentResult {get;set;}
+    public TournamentType TournamentType {get;set;}
 
     public void Reset(){
         State = SimulationState.NotStarted;
-        Tournament = null;
-        TournamentResult = null;
+        Tournament = TournamentFactory.GetTournament(TournamentType);
     }
 }
 

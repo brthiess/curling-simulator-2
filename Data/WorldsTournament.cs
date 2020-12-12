@@ -15,22 +15,20 @@ namespace CurlingSimulator
 				return TournamentType.Worlds;
 			}
 		}
-		
-		public override TournamentResult Run()
+
+		public override void Run()
 		{
-			ResetTeams();
 			DoRoundRobin();
 			DoPlayoffs();
-			return new TournamentResult(this);
 		}
 
 		private void DoRoundRobin()
 		{
-			for(var i = 0; i < teams.Count; i++)
+			for(var i = 0; i < Teams.Count; i++)
 			{
-				for (var j = i + 1; j < teams.Count; j++)
+				for (var j = i + 1; j < Teams.Count; j++)
 				{
-					Team.PlayGame(teams[j], teams[i]);
+					Team.PlayGame(Teams[j], Teams[i]);
 				}
 			}
 			SetFinalRankingsForNonPlayoffTeams();
@@ -65,20 +63,23 @@ namespace CurlingSimulator
 			quarterFinalResult1.LosingTeam.FinalRanking = 5;
 			quarterFinalResult2.LosingTeam.FinalRanking = 6;
 
-			
-			var playoffResults = new System.Collections.Generic.Dictionary<string, List<Game>>();
-			playoffResults.Add("Quarter Finals", new List<Game>(new Game[] {quarterFinalResult1, quarterFinalResult2}));
+			var playoffResults = new System.Collections.Generic.Dictionary<PlayoffRoundType, List<Game>>();
+			playoffResults.Add(PlayoffRoundType.Quarters, new List<Game>(new Game[] {quarterFinalResult1, quarterFinalResult2}));
+			playoffResults.Add(PlayoffRoundType.Semis, new List<Game>(new Game[] {semiFinalResult1, semiFinalResult2}));
+			playoffResults.Add(PlayoffRoundType.Finals, new List<Game>(new Game[] {semiFinalResult1, semiFinalResult2}));
+			playoffResults.Add(PlayoffRoundType.Bronze, new List<Game>(new Game[] {bronzeMedalResult, bronzeMedalResult}));
+			this.PlayoffResults = new PlayoffResults(playoffResults);
 		}
 
 		private List<Team> GetTop6Teams()
 		{
-			List<Team> TeamsSorted = teams.OrderByDescending(o => o.RoundRobinRecord.Wins).ThenBy(o => o.LsdTotal).ToList();
+			List<Team> TeamsSorted = Teams.OrderByDescending(o => o.RoundRobinRecord.Wins).ThenBy(o => o.LsdTotal).ToList();
 			return TeamsSorted.GetRange(0, 6);
 		}
 
 		private List<Team> GetAllTeamsButTop6()
 		{
-			List<Team> TeamsSorted = teams.OrderByDescending(o => o.RoundRobinRecord.Wins).ThenBy(o => o.LsdTotal).ToList();
+			List<Team> TeamsSorted = Teams.OrderByDescending(o => o.RoundRobinRecord.Wins).ThenBy(o => o.LsdTotal).ToList();
 			return TeamsSorted.GetRange(6, TeamsSorted.Count() - 6);
 		}
 	}

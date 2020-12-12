@@ -13,7 +13,7 @@
         <th>L</th>
         <th>LSD</th>
     </tr>
-@foreach (var team in State.TournamentResult.GetTeamsSortedByRoundRobin())
+@foreach (var team in State.Tournament.GetTeamsSortedByRoundRobin())
 {
     <tr>
         <td>@team.Name</td>
@@ -27,36 +27,84 @@
 <h3 class='playoffs-title results-title'>Playoffs</h3>
 @if (State.Tournament.TournamentType == TournamentType.Worlds){
  
-    <div class='round-1'>
-        @foreach (var team in GetRoundOneTeams())
+    <div class='quarter-final-round'>
+        @foreach (var game in GetRoundOneGames())
         {
-            <div class="team-name">@team.Name</div>
+            <div class="game">
+                <div class='home-team team-name'>
+                    @game.HomeTeam.Name
+                </div>
+                <div class='away-team team-name'>
+                    @game.AwayTeam.Name
+                </div>
+            </div>
+        }
+    </div>
+    <div class='semi-final-round'>
+        @foreach (var game in GetRoundTwoGames())
+        {
+            <div class="game">
+                <div class='home-team team-name'>
+                    @game.HomeTeam.Name
+                </div>
+                <div class='away-team team-name'>
+                    @game.AwayTeam.Name
+                </div>
+            </div>
+        }
+    </div>
+    <div class='final-round'>
+        @foreach (var game in GetFinal())
+        {
+            <div class="game">
+                <div class='home-team team-name'>
+                    @game.HomeTeam.Name
+                </div>
+                <div class='away-team team-name'>
+                    @game.AwayTeam.Name
+                </div>
+            </div>
+        }
+    </div>
+    <div class='bronze-round'>
+        @foreach (var game in GetFinal())
+        {
+            <div class="game">
+                <div class='home-team team-name'>
+                    @game.HomeTeam.Name
+                </div>
+                <div class='away-team team-name'>
+                    @game.AwayTeam.Name
+                </div>
+            </div>
         }
     </div>
 }
 
 @code 
 {
-        public List<Team> GetRoundOneTeams()
+        public List<Game> GetRoundOneGames()
         {
-            var roundOneTeams = new List<Team>();
-            var teams = State.TournamentResult.GetTeamsSortedByRoundRobin();
-            roundOneTeams.Add(teams[2]);
-            roundOneTeams.Add(teams[5]);
-            roundOneTeams.Add(teams[3]);
-            roundOneTeams.Add(teams[4]);
-            return roundOneTeams;
+            var quartersGames = State.Tournament.PlayoffResults.ListOfGameRounds[PlayoffRoundType.Quarters];
+            return quartersGames;
         }
 
-        public List<Team> GetRoundTwoTeams()
+        public List<Game> GetRoundTwoGames()
         {
-            var roundOneTeams = new List<Team>();
-            var teams = State.TournamentResult.GetTeamsSortedByRoundRobin();
-            roundOneTeams.Add(teams[0]);
-            roundOneTeams.Add(teams[3]);
-            roundOneTeams.Add(teams[1]);
-            roundOneTeams.Add(teams[5]);
-            return roundOneTeams;
+            var semisGames = State.Tournament.PlayoffResults.ListOfGameRounds[PlayoffRoundType.Semis];
+            return semisGames;
+        }
+
+        public List<Game> GetFinal()
+        {
+            var finalGame = State.Tournament.PlayoffResults.ListOfGameRounds[PlayoffRoundType.Finals];
+            return finalGame;
+        }
+
+        public List<Game> GetBronze()
+        {
+            var bronzeGame = State.Tournament.PlayoffResults.ListOfGameRounds[PlayoffRoundType.Bronze];
+            return bronzeGame;
         }
 }
 

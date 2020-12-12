@@ -7,30 +7,43 @@ namespace CurlingSimulator
 {
 	public abstract class Tournament
 	{
-		public List<Team> teams;
+		//List of teams in the tournament
+		public List<Team> Teams;
 
+		//The tournament type
 		public abstract TournamentType TournamentType {get;}
+		
+		//The playoff results of the tournament
+		public PlayoffResults PlayoffResults;
 
 		public Tournament()
 		{
-			teams = new List<Team>();
+			Teams = new List<Team>();
 		}
 
 		public void AddTeam(Team team)
 		{
-			teams.Add(team);
+			Teams.Add(team);
 		}
 
-	
-
-		public abstract TournamentResult Run();
+		public abstract void Run();
 
 		protected void ResetTeams()
 		{
-			for (var i = 0; i < teams.Count; i++)
+			for (var i = 0; i < Teams.Count; i++)
 			{
-				teams[i] = new Team(teams[i].Name, teams[i].TourRecord, teams[i].TourRanking);
+				Teams[i] = new Team(Teams[i].Name, Teams[i].TourRecord, Teams[i].TourRanking);
 			}
+		}
+
+		public List<Team> GetTeamsSortedByRoundRobin()
+		{
+			return Teams.OrderByDescending(o => o.RoundRobinRecord.Wins).ThenByDescending(o => o.LsdTotal).ToList();
+		}
+
+		public List<Team> GetTeamsSortedByPlayoffResults()
+		{
+			return  Teams.OrderBy(o => o.FinalRanking).ToList();
 		}
 	}
 
