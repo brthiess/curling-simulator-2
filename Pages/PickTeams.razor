@@ -1,6 +1,8 @@
 @page "/pick-teams"
 @inject NavigationManager NavigationManager
 @inject SimulationContainer SimulationContainer;
+@using System.Net.Http.Json
+@inject HttpClient Http
 @using CurlingSimulator
 
 
@@ -8,12 +10,37 @@
 
 <h1 class='page-title pick-teams-title'>Pick Teams</h1>
 
+<p class='pick-teams-text'>Pick @SimulationContainer.Tournament.NumberOfTeams</p>
+
+<ul class='teams-list'>
+    @if (rankings != null){
+        @for (var i = 0; i < rankings.Count; i++)
+        {
+            <li class='team-list-item'>
+                <input type="checkbox" id="@i" />
+                <label class="team-list-item-label" for="@i">
+                    <div class="team-list-item-location">
+                        <img src="/images/locations/@rankings[i].location" />
+                    </div>
+                    <div class="team-list-item-name">
+                        @rankings[i].name
+                    </div>
+                </label>
+                
+            </li>
+        }
+    }
+</ul>
+
 <button class='done-button continue-button' @onclick="NavigateToSimulationResults">Simulate</button>
 
 @code { 
-    private async Task<List<TeamRanking>> GetTeamRankings()
+
+    private List<TeamRanking> rankings;
+
+    protected override async Task OnInitializedAsync()
     {
-        forecasts = await Http.GetJsonAsync<WeatherForecast[]>("sample-data/weather.json");
+        rankings = await Http.GetFromJsonAsync<List<TeamRanking>>("/json/rankings.json");
     }
     private void NavigateToSimulationResults() 
     { 
@@ -23,7 +50,10 @@
 
     protected void RunTournament()
     {
-        SimulationContainer.Reset();
+        if (SimulationContainer.State != SimulationState.NotStarted)
+        {
+            SimulationContainer.RestartTournament();
+        }
         SimulationContainer.State = SimulationState.Running;
         SimulationContainer.Tournament.AddTeam(new Team("Hasselborg", null, 1));
         SimulationContainer.Tournament.AddTeam(new Team("Tirinzoni", null, 4));

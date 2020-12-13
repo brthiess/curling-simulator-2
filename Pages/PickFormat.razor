@@ -1,6 +1,6 @@
 @page "/pick-format"
 @inject NavigationManager NavigationManager
-@inject SimulationContainer State;
+@inject SimulationContainer SimulationContainer;
 @using CurlingSimulator
 @inject WorldsTournament TournamentObject
 
@@ -12,7 +12,8 @@
 @code { 
     private void NavigateToPickTeams() 
     {
-        State.TournamentType = TournamentType.Worlds;
+        SimulationContainer.TournamentType = TournamentType.Worlds;
+        SimulationContainer.RestartTournament();
         NavigationManager.NavigateTo("pick-teams"); 
     } 
 }
