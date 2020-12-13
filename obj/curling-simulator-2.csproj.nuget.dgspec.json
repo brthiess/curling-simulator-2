@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\brthi\\Projects\\curling-simulator-2\\curling-simulator-2.csproj": {}
+    "C:\\Users\\brthi\\Projects\\curling-simulator\\curling-simulator-2.csproj": {}
   },
   "projects": {
-    "C:\\Users\\brthi\\Projects\\curling-simulator-2\\curling-simulator-2.csproj": {
+    "C:\\Users\\brthi\\Projects\\curling-simulator\\curling-simulator-2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\brthi\\Projects\\curling-simulator-2\\curling-simulator-2.csproj",
+        "projectUniqueName": "C:\\Users\\brthi\\Projects\\curling-simulator\\curling-simulator-2.csproj",
         "projectName": "curling-simulator-2",
-        "projectPath": "C:\\Users\\brthi\\Projects\\curling-simulator-2\\curling-simulator-2.csproj",
+        "projectPath": "C:\\Users\\brthi\\Projects\\curling-simulator\\curling-simulator-2.csproj",
         "packagesPath": "C:\\Users\\brthi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\brthi\\Projects\\curling-simulator-2\\obj\\",
+        "outputPath": "C:\\Users\\brthi\\Projects\\curling-simulator\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

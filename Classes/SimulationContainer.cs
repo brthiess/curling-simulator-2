@@ -1,7 +1,7 @@
 using CurlingSimulator;
 public class SimulationContainer
 {
-    public SimulationState State {get;set;}
+    public SimulationState State {get;set;} = SimulationState.NotStarted;
 
     public Tournament Tournament {get;set;}
 

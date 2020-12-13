@@ -14,16 +14,16 @@
 
 <ul class='teams-list'>
     @if (rankings != null){
-        @for (var i = 0; i < rankings.Count; i++)
+        @foreach (var team in rankings)
         {
             <li class='team-list-item'>
-                <input type="checkbox" id="@i" />
-                <label class="team-list-item-label" for="@i">
+                <input type="checkbox" id="@team.rank" @bind="team.selected" />
+                <label class="team-list-item-label" for="@team.rank">
                     <div class="team-list-item-location">
-                        <img src="/images/locations/@rankings[i].location" />
+                        <img src="/images/locations/@(team.location).png" />
                     </div>
                     <div class="team-list-item-name">
-                        @rankings[i].name
+                        @team.name
                     </div>
                 </label>
                 
@@ -55,19 +55,14 @@
             SimulationContainer.RestartTournament();
         }
         SimulationContainer.State = SimulationState.Running;
-        SimulationContainer.Tournament.AddTeam(new Team("Hasselborg", null, 1));
-        SimulationContainer.Tournament.AddTeam(new Team("Tirinzoni", null, 4));
-        SimulationContainer.Tournament.AddTeam(new Team("Fujisawa", null, 5));
-        SimulationContainer.Tournament.AddTeam(new Team("Muirhead", null, 8));
-        SimulationContainer.Tournament.AddTeam(new Team("Kovaleva", null, 13));
-        SimulationContainer.Tournament.AddTeam(new Team("Roth\t", null, 14));
-        SimulationContainer.Tournament.AddTeam(new Team("Kubeskova", null, 75));
-        SimulationContainer.Tournament.AddTeam(new Team("Halse\t", null, 168));
-        SimulationContainer.Tournament.AddTeam(new Team("Jentsch\t", null, 25));
-        SimulationContainer.Tournament.AddTeam(new Team("Gim\t", null, 15));
-        SimulationContainer.Tournament.AddTeam(new Team("Sullanmaa", null, 152));
-        SimulationContainer.Tournament.AddTeam(new Team("Han\t", null, 36));
-        SimulationContainer.Tournament.AddTeam(new Team("Carey\t", null, 10));
+        foreach(var team in rankings)
+        {
+            if (team.selected)
+            {
+                SimulationContainer.Tournament.AddTeam(new Team(team.name, null, team.rank));
+            }
+        }
+
 
         for (var i =0; i < 1; i++)
         {

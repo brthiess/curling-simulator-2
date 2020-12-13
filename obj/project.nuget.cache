@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "qe16GeELHzL2ymeQGFYOSk7Akg8OuijEldWVkN3jAqm8MunqTafkyRh4Q91JvPkbEzEhjI74iUHJIXfTt6YXKA==",
+  "dgSpecHash": "+NoSWfdwG8YkmNp52c9ppE1hxFMtTJi/lENI3tgsBP5pAEs/FtaDpTl8xanqNxf860Ptlpt8W3AoHYOSc2ptBw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\brthi\\Projects\\curling-simulator-2\\curling-simulator-2.csproj",
+  "projectFilePath": "C:\\Users\\brthi\\Projects\\curling-simulator\\curling-simulator-2.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\brthi\\.nuget\\packages\\microsoft.aspnetcore.authorization\\3.1.6\\microsoft.aspnetcore.authorization.3.1.6.nupkg.sha512",
     "C:\\Users\\brthi\\.nuget\\packages\\microsoft.aspnetcore.components\\3.1.6\\microsoft.aspnetcore.components.3.1.6.nupkg.sha512",

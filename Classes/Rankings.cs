@@ -2,9 +2,11 @@ using System.Collections.Generic;
 namespace CurlingSimulator
 {
     public class TeamRanking    {
-        public string rank { get; set; } 
+        public int rank { get; set; } 
         public string name { get; set; } 
         public string location { get; set; } 
+
+        public bool selected {get;set;} = false;
     }
 
     public class Rankings    {
