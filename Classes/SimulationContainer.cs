@@ -1,4 +1,5 @@
 using CurlingSimulator;
+using System.Collections.Generic;
 public class SimulationContainer
 {
     public SimulationState State {get;set;} = SimulationState.NotStarted;
@@ -11,6 +12,8 @@ public class SimulationContainer
         State = SimulationState.NotStarted;
         Tournament = TournamentFactory.GetTournament(TournamentType);
     }
+
+    public List<TeamRanking> Rankings;
 }
 
 public enum SimulationState{

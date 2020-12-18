@@ -13,39 +13,74 @@
 <p class='pick-teams-text'>Pick @SimulationContainer.Tournament.NumberOfTeams</p>
 
 <ul class='teams-list'>
-    @if (rankings != null){
-        @foreach (var team in rankings)
+    @if (SimulationContainer.Rankings != null){
+        @foreach (var team in SimulationContainer.Rankings)
         {
             <li class='team-list-item'>
-                <input type="checkbox" id="@team.rank" @bind="team.selected" />
-                <label class="team-list-item-label" for="@team.rank">
-                    <div class="team-list-item-location">
-                        <img src="/images/locations/@(team.location).png" />
-                    </div>
-                    <div class="team-list-item-name">
-                        @team.name
-                    </div>
-                </label>
+                <input type="checkbox" id="@team.rank" class='team-list-item-checkbox' @bind="team.selected" />
+                <div class='team-list-item-background'></div>
+                <label class="team-list-item-label" for="@team.rank"></label>
+                <div class="team-list-item-location">
+                    <img src="/images/locations/@(team.location).png" />
+                </div>
+                <div class="team-list-item-name">
+                    Team @team.lastName
+                </div>
                 
             </li>
         }
     }
 </ul>
 
-<button class='done-button continue-button' @onclick="NavigateToSimulationResults">Simulate</button>
+<button class='done-button continue-button' @onclick="NavigateToSimulationResults">@simulateButtonText</button>
 
 @code { 
 
-    private List<TeamRanking> rankings;
-
+    private string simulateButtonText 
+    {
+        get 
+        {
+            int numberOfSelectedTeams = GetNumberOfSelectedTeams();
+            var simulateButtonText = "Simulate";
+            if (numberOfSelectedTeams < SimulationContainer.Tournament.NumberOfTeams)
+            {
+                simulateButtonText = numberOfSelectedTeams + "/" + SimulationContainer.Tournament.NumberOfTeams;
+            } 
+            return simulateButtonText;
+        }
+    }
     protected override async Task OnInitializedAsync()
     {
-        rankings = await Http.GetFromJsonAsync<List<TeamRanking>>("/json/rankings.json");
+        if (SimulationContainer.Rankings == null)
+        {
+            SimulationContainer.Rankings = await Http.GetFromJsonAsync<List<TeamRanking>>("/json/rankings.json");
+        }
     }
     private void NavigateToSimulationResults() 
-    { 
+    {
+        if (GetNumberOfSelectedTeams() != SimulationContainer.Tournament.NumberOfTeams)
+        {
+            return;
+        }
         RunTournament();
         NavigationManager.NavigateTo("simulation-results"); 
+    }
+
+    private int GetNumberOfSelectedTeams()
+    {
+        if (SimulationContainer.Rankings == null)
+        {
+            return 0;
+        }
+        int numberOfSelectedTeams = 0;
+        foreach(var ranking in SimulationContainer.Rankings)
+        {
+            if (ranking.selected)
+            {
+                numberOfSelectedTeams++;
+            }
+        }
+        return numberOfSelectedTeams;
     }
 
     protected void RunTournament()
@@ -55,11 +90,11 @@
             SimulationContainer.RestartTournament();
         }
         SimulationContainer.State = SimulationState.Running;
-        foreach(var team in rankings)
+        foreach(var team in SimulationContainer.Rankings)
         {
             if (team.selected)
             {
-                SimulationContainer.Tournament.AddTeam(new Team(team.name, null, team.rank));
+                SimulationContainer.Tournament.AddTeam(new Team(team.lastName, null, team.rank));
             }
         }
 
@@ -69,6 +104,6 @@
             SimulationContainer.Tournament.Run();
         }
         SimulationContainer.State = SimulationState.Finished;
-    }    
+    }
 }
 

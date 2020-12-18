@@ -725,6 +725,6 @@ C:\Users\brthi\Projects\curling-simulator\obj\Debug\netstandard2.1\staticwebasse
 C:\Users\brthi\Projects\curling-simulator\obj\Debug\netstandard2.1\staticwebassets\curling-simulator-2.StaticWebAssets.xml
 C:\Users\brthi\Projects\curling-simulator\obj\Debug\netstandard2.1\curling-simulator-2.dll
 C:\Users\brthi\Projects\curling-simulator\obj\Debug\netstandard2.1\curling-simulator-2.pdb
-C:\Users\brthi\Projects\curling-simulator\obj\Debug\netstandard2.1\integrity\-avs3b4HhsoGpTDENr5BzxHuYpSRSturWiijv-bbSIY=.hash
-C:\Users\brthi\Projects\curling-simulator\obj\Debug\netstandard2.1\integrity\qloKUgOSKPPJ1xEPt6CM3N0uUCvOIUIuN8D7jIZAlD8=.hash
-C:\Users\brthi\Projects\curling-simulator\obj\Debug\netstandard2.1\integrity\-jd_rCF192lK59vt1bvkVGwEQ2Ez5HcQLqTcYwQckbg=.hash
+C:\Users\brthi\Projects\curling-simulator\obj\Debug\netstandard2.1\integrity\Sqj4XuGqPFge3juLvPHUZv40xMUP_rxmOZWeYVLyBCI=.hash
+C:\Users\brthi\Projects\curling-simulator\obj\Debug\netstandard2.1\integrity\jInz6lNfB4CSL1IIhtIYU9FPniCMIKlIXWvBsJw5BLI=.hash
+C:\Users\brthi\Projects\curling-simulator\obj\Debug\netstandard2.1\integrity\fwkFhX18iyfqQMfUaJ58l5xVp5NM-A6gwKGWtjCjJs0=.hash

@@ -8,6 +8,39 @@
   "ProjectWorkspaceState": {
     "TagHelpers": [
       {
+        "HashCode": 615218337,
+        "Kind": "Components.Component",
+        "Name": "curling_simulator_2.App",
+        "AssemblyName": "curling-simulator-2",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "App"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "curling_simulator_2.App"
+        }
+      },
+      {
+        "HashCode": -549896475,
+        "Kind": "Components.Component",
+        "Name": "curling_simulator_2.App",
+        "AssemblyName": "curling-simulator-2",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "curling_simulator_2.App"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "curling_simulator_2.App",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
         "HashCode": 761538762,
         "Kind": "Components.Component",
         "Name": "curling_simulator_2.Pages.Counter",
@@ -74,35 +107,35 @@
         }
       },
       {
-        "HashCode": -1876470664,
+        "HashCode": 1874703570,
         "Kind": "Components.Component",
-        "Name": "curling_simulator_2.Pages.PickTeams",
+        "Name": "curling_simulator_2.Pages.PickFormat",
         "AssemblyName": "curling-simulator-2",
         "CaseSensitive": true,
         "TagMatchingRules": [
           {
-            "TagName": "PickTeams"
+            "TagName": "PickFormat"
           }
         ],
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "curling_simulator_2.Pages.PickTeams"
+          "Common.TypeName": "curling_simulator_2.Pages.PickFormat"
         }
       },
       {
-        "HashCode": -1982048542,
+        "HashCode": 1285087926,
         "Kind": "Components.Component",
-        "Name": "curling_simulator_2.Pages.PickTeams",
+        "Name": "curling_simulator_2.Pages.PickFormat",
         "AssemblyName": "curling-simulator-2",
         "CaseSensitive": true,
         "TagMatchingRules": [
           {
-            "TagName": "curling_simulator_2.Pages.PickTeams"
+            "TagName": "curling_simulator_2.Pages.PickFormat"
           }
         ],
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "curling_simulator_2.Pages.PickTeams",
+          "Common.TypeName": "curling_simulator_2.Pages.PickFormat",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch"
         }
       },
@@ -173,68 +206,35 @@
         }
       },
       {
-        "HashCode": 1874703570,
+        "HashCode": -1876470664,
         "Kind": "Components.Component",
-        "Name": "curling_simulator_2.Pages.PickFormat",
+        "Name": "curling_simulator_2.Pages.PickTeams",
         "AssemblyName": "curling-simulator-2",
         "CaseSensitive": true,
         "TagMatchingRules": [
           {
-            "TagName": "PickFormat"
+            "TagName": "PickTeams"
           }
         ],
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "curling_simulator_2.Pages.PickFormat"
+          "Common.TypeName": "curling_simulator_2.Pages.PickTeams"
         }
       },
       {
-        "HashCode": 1285087926,
+        "HashCode": -1982048542,
         "Kind": "Components.Component",
-        "Name": "curling_simulator_2.Pages.PickFormat",
+        "Name": "curling_simulator_2.Pages.PickTeams",
         "AssemblyName": "curling-simulator-2",
         "CaseSensitive": true,
         "TagMatchingRules": [
           {
-            "TagName": "curling_simulator_2.Pages.PickFormat"
+            "TagName": "curling_simulator_2.Pages.PickTeams"
           }
         ],
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "curling_simulator_2.Pages.PickFormat",
-          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
-        }
-      },
-      {
-        "HashCode": 615218337,
-        "Kind": "Components.Component",
-        "Name": "curling_simulator_2.App",
-        "AssemblyName": "curling-simulator-2",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "App"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "curling_simulator_2.App"
-        }
-      },
-      {
-        "HashCode": -549896475,
-        "Kind": "Components.Component",
-        "Name": "curling_simulator_2.App",
-        "AssemblyName": "curling-simulator-2",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "curling_simulator_2.App"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "curling_simulator_2.App",
+          "Common.TypeName": "curling_simulator_2.Pages.PickTeams",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch"
         }
       },
