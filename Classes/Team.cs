@@ -19,8 +19,14 @@ namespace CurlingSimulator
 
 		public double LsdTotal {get;set;} 
 
-		public Team(string name, Record tourRecord = null, int? tourRanking = null)
+		public string Location {get;set;}
+
+		public string Image {get;set;}
+
+		public Team(string name, Record tourRecord = null, int? tourRanking = null, string location = null, string image = null)
 		{
+			Location = location;
+			Image = image;
 			TourRecord = tourRecord;
 			TourRanking = tourRanking;
 			if (tourRecord != null)

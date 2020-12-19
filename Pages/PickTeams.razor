@@ -16,23 +16,24 @@
     @if (SimulationContainer.Rankings != null){
         @foreach (var team in SimulationContainer.Rankings)
         {
-            <li class='team-list-item'>
-                <input type="checkbox" id="@team.rank" class='team-list-item-checkbox' @bind="team.selected" />
+            <li class='team-list-item @(PickedEnoughTeams() ? "disabled" : "")'>
+                <input type="checkbox" id="@team.rank" class='team-list-item-checkbox' disabled='@(PickedEnoughTeams() && !team.selected ? "disabled" : null)' @bind="team.selected" />
                 <div class='team-list-item-background'></div>
-                <label class="team-list-item-label" for="@team.rank"></label>
+                <label class='team-list-item-label @(PickedEnoughTeams() && !team.selected ? "disabled" : "")' for="@team.rank"></label>
                 <div class="team-list-item-location">
                     <img src="/images/locations/@(team.location).png" />
                 </div>
                 <div class="team-list-item-name">
                     Team @team.lastName
                 </div>
+                <div class="team-list-item-fake-checkbox"></div>
                 
             </li>
         }
     }
 </ul>
 
-<button class='done-button continue-button' @onclick="NavigateToSimulationResults">@simulateButtonText</button>
+<button class='done-button continue-button @(PickedEnoughTeams() ? "ready" : "")' @onclick="NavigateToSimulationResults">@simulateButtonText</button>
 
 @code { 
 
@@ -44,7 +45,7 @@
             var simulateButtonText = "Simulate";
             if (numberOfSelectedTeams < SimulationContainer.Tournament.NumberOfTeams)
             {
-                simulateButtonText = numberOfSelectedTeams + "/" + SimulationContainer.Tournament.NumberOfTeams;
+                simulateButtonText = numberOfSelectedTeams + "/" + SimulationContainer.Tournament.NumberOfTeams + " Teams";
             } 
             return simulateButtonText;
         }
@@ -83,6 +84,10 @@
         return numberOfSelectedTeams;
     }
 
+    private bool PickedEnoughTeams(){
+        return GetNumberOfSelectedTeams() == SimulationContainer.Tournament.NumberOfTeams;
+    }
+
     protected void RunTournament()
     {
         if (SimulationContainer.State != SimulationState.NotStarted)
@@ -94,7 +99,7 @@
         {
             if (team.selected)
             {
-                SimulationContainer.Tournament.AddTeam(new Team(team.lastName, null, team.rank));
+                SimulationContainer.Tournament.AddTeam(new Team(team.lastName, null, team.rank, team.location, team.image));
             }
         }
 

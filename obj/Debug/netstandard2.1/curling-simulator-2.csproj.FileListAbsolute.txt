@@ -528,7 +528,6 @@ C:\Users\brthi\Projects\curling-simulator\obj\Debug\netstandard2.1\RazorDeclarat
 C:\Users\brthi\Projects\curling-simulator\obj\Debug\netstandard2.1\RazorDeclaration\Pages\PickTeams.razor.g.cs
 C:\Users\brthi\Projects\curling-simulator\obj\Debug\netstandard2.1\RazorDeclaration\Pages\SimulationResults.razor.g.cs
 C:\Users\brthi\Projects\curling-simulator\obj\Debug\netstandard2.1\RazorDeclaration\Shared\MainLayout.razor.g.cs
-C:\Users\brthi\Projects\curling-simulator\obj\Debug\netstandard2.1\RazorDeclaration\Shared\NavMenu.razor.g.cs
 C:\Users\brthi\Projects\curling-simulator\obj\Debug\netstandard2.1\RazorDeclaration\Shared\SurveyPrompt.razor.g.cs
 C:\Users\brthi\Projects\curling-simulator\obj\Debug\netstandard2.1\RazorDeclaration\_Imports.razor.g.cs
 C:\Users\brthi\Projects\curling-simulator\obj\Debug\netstandard2.1\RazorDeclaration\curling-simulator-2.dll
@@ -543,7 +542,6 @@ C:\Users\brthi\Projects\curling-simulator\obj\Debug\netstandard2.1\Razor\Pages\P
 C:\Users\brthi\Projects\curling-simulator\obj\Debug\netstandard2.1\Razor\Pages\PickTeams.razor.g.cs
 C:\Users\brthi\Projects\curling-simulator\obj\Debug\netstandard2.1\Razor\Pages\SimulationResults.razor.g.cs
 C:\Users\brthi\Projects\curling-simulator\obj\Debug\netstandard2.1\Razor\Shared\MainLayout.razor.g.cs
-C:\Users\brthi\Projects\curling-simulator\obj\Debug\netstandard2.1\Razor\Shared\NavMenu.razor.g.cs
 C:\Users\brthi\Projects\curling-simulator\obj\Debug\netstandard2.1\Razor\Shared\SurveyPrompt.razor.g.cs
 C:\Users\brthi\Projects\curling-simulator\obj\Debug\netstandard2.1\Razor\_Imports.razor.g.cs
 C:\Users\brthi\Projects\curling-simulator\obj\Debug\netstandard2.1\curling-simulator-2.RazorTargetAssemblyInfo.cache
@@ -725,6 +723,8 @@ C:\Users\brthi\Projects\curling-simulator\obj\Debug\netstandard2.1\staticwebasse
 C:\Users\brthi\Projects\curling-simulator\obj\Debug\netstandard2.1\staticwebassets\curling-simulator-2.StaticWebAssets.xml
 C:\Users\brthi\Projects\curling-simulator\obj\Debug\netstandard2.1\curling-simulator-2.dll
 C:\Users\brthi\Projects\curling-simulator\obj\Debug\netstandard2.1\curling-simulator-2.pdb
-C:\Users\brthi\Projects\curling-simulator\obj\Debug\netstandard2.1\integrity\Sqj4XuGqPFge3juLvPHUZv40xMUP_rxmOZWeYVLyBCI=.hash
-C:\Users\brthi\Projects\curling-simulator\obj\Debug\netstandard2.1\integrity\jInz6lNfB4CSL1IIhtIYU9FPniCMIKlIXWvBsJw5BLI=.hash
-C:\Users\brthi\Projects\curling-simulator\obj\Debug\netstandard2.1\integrity\fwkFhX18iyfqQMfUaJ58l5xVp5NM-A6gwKGWtjCjJs0=.hash
+C:\Users\brthi\Projects\curling-simulator\obj\Debug\netstandard2.1\RazorDeclaration\Shared\Navigation.razor.g.cs
+C:\Users\brthi\Projects\curling-simulator\obj\Debug\netstandard2.1\Razor\Shared\Navigation.razor.g.cs
+C:\Users\brthi\Projects\curling-simulator\obj\Debug\netstandard2.1\integrity\lO4_eCSHbldMkcvttAfUDUlqKpZmtmxGFFacPS7jP8c=.hash
+C:\Users\brthi\Projects\curling-simulator\obj\Debug\netstandard2.1\integrity\y05DJiwe258FR62oRNhoOpf5GKaXkB-iVW0oGskB9Tw=.hash
+C:\Users\brthi\Projects\curling-simulator\obj\Debug\netstandard2.1\integrity\G5G6DfPa2rma_cNijjyuFe_7MPKO34T4dpBzLwH2EFk=.hash

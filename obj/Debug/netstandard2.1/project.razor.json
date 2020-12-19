@@ -107,72 +107,6 @@
         }
       },
       {
-        "HashCode": 1874703570,
-        "Kind": "Components.Component",
-        "Name": "curling_simulator_2.Pages.PickFormat",
-        "AssemblyName": "curling-simulator-2",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "PickFormat"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "curling_simulator_2.Pages.PickFormat"
-        }
-      },
-      {
-        "HashCode": 1285087926,
-        "Kind": "Components.Component",
-        "Name": "curling_simulator_2.Pages.PickFormat",
-        "AssemblyName": "curling-simulator-2",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "curling_simulator_2.Pages.PickFormat"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "curling_simulator_2.Pages.PickFormat",
-          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
-        }
-      },
-      {
-        "HashCode": 850151195,
-        "Kind": "Components.Component",
-        "Name": "curling_simulator_2.Pages.SimulationResults",
-        "AssemblyName": "curling-simulator-2",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "SimulationResults"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "curling_simulator_2.Pages.SimulationResults"
-        }
-      },
-      {
-        "HashCode": -1200351138,
-        "Kind": "Components.Component",
-        "Name": "curling_simulator_2.Pages.SimulationResults",
-        "AssemblyName": "curling-simulator-2",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "curling_simulator_2.Pages.SimulationResults"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "curling_simulator_2.Pages.SimulationResults",
-          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
-        }
-      },
-      {
         "HashCode": 1352055013,
         "Kind": "Components.Component",
         "Name": "curling_simulator_2.Pages.Index",
@@ -239,35 +173,68 @@
         }
       },
       {
-        "HashCode": -1733766623,
+        "HashCode": 1874703570,
         "Kind": "Components.Component",
-        "Name": "curling_simulator_2.Shared.NavMenu",
+        "Name": "curling_simulator_2.Pages.PickFormat",
         "AssemblyName": "curling-simulator-2",
         "CaseSensitive": true,
         "TagMatchingRules": [
           {
-            "TagName": "NavMenu"
+            "TagName": "PickFormat"
           }
         ],
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "curling_simulator_2.Shared.NavMenu"
+          "Common.TypeName": "curling_simulator_2.Pages.PickFormat"
         }
       },
       {
-        "HashCode": 1338857537,
+        "HashCode": 1285087926,
         "Kind": "Components.Component",
-        "Name": "curling_simulator_2.Shared.NavMenu",
+        "Name": "curling_simulator_2.Pages.PickFormat",
         "AssemblyName": "curling-simulator-2",
         "CaseSensitive": true,
         "TagMatchingRules": [
           {
-            "TagName": "curling_simulator_2.Shared.NavMenu"
+            "TagName": "curling_simulator_2.Pages.PickFormat"
           }
         ],
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "curling_simulator_2.Shared.NavMenu",
+          "Common.TypeName": "curling_simulator_2.Pages.PickFormat",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": 850151195,
+        "Kind": "Components.Component",
+        "Name": "curling_simulator_2.Pages.SimulationResults",
+        "AssemblyName": "curling-simulator-2",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "SimulationResults"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "curling_simulator_2.Pages.SimulationResults"
+        }
+      },
+      {
+        "HashCode": -1200351138,
+        "Kind": "Components.Component",
+        "Name": "curling_simulator_2.Pages.SimulationResults",
+        "AssemblyName": "curling-simulator-2",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "curling_simulator_2.Pages.SimulationResults"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "curling_simulator_2.Pages.SimulationResults",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch"
         }
       },
@@ -417,6 +384,39 @@
           "Runtime.Name": "Components.None",
           "Common.TypeName": "curling_simulator_2.Shared.MainLayout.Body",
           "Components.IsSpecialKind": "Components.ChildContent",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": -1578175337,
+        "Kind": "Components.Component",
+        "Name": "curling_simulator_2.Shared.Navigation",
+        "AssemblyName": "curling-simulator-2",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "Navigation"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "curling_simulator_2.Shared.Navigation"
+        }
+      },
+      {
+        "HashCode": 972869251,
+        "Kind": "Components.Component",
+        "Name": "curling_simulator_2.Shared.Navigation",
+        "AssemblyName": "curling-simulator-2",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "curling_simulator_2.Shared.Navigation"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "curling_simulator_2.Shared.Navigation",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch"
         }
       },
@@ -11886,6 +11886,11 @@
       "FileKind": "component"
     },
     {
+      "FilePath": "c:\\Users\\brthi\\Projects\\curling-simulator\\Shared\\Navigation.razor",
+      "TargetPath": "Shared\\Navigation.razor",
+      "FileKind": "component"
+    },
+    {
       "FilePath": "c:\\Users\\brthi\\Projects\\curling-simulator\\Shared\\MainLayout.razor",
       "TargetPath": "Shared\\MainLayout.razor",
       "FileKind": "component"
@@ -11893,11 +11898,6 @@
     {
       "FilePath": "c:\\Users\\brthi\\Projects\\curling-simulator\\Pages\\SimulationResults.razor",
       "TargetPath": "Pages\\SimulationResults.razor",
-      "FileKind": "component"
-    },
-    {
-      "FilePath": "c:\\Users\\brthi\\Projects\\curling-simulator\\Shared\\NavMenu.razor",
-      "TargetPath": "Shared\\NavMenu.razor",
       "FileKind": "component"
     },
     {

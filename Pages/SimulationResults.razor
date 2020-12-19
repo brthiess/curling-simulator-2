@@ -7,19 +7,21 @@
 
 <h3 class='round-robin-title results-title'>Round Robin</h3>
 <table class='round-robin-table'>
-    <tr>
-        <th>Team</th>
-        <th>W</th>
-        <th>L</th>
-        <th>LSD</th>
-    </tr>
+    <thead>
+        <tr>
+            <th>Team</th>
+            <th>W</th>
+            <th>L</th>
+            <th>LSD</th>
+        </tr>
+    </thead>
 @foreach (var team in State.Tournament.GetTeamsSortedByRoundRobin())
 {
     <tr>
-        <td>@team.Name</td>
+        <td class="round-robin-table-team-name"><img class="round-robin-table-team-image" src="@team.Image"/> @team.Name</td>
         <td>@team.RoundRobinRecord.Wins</td>
         <td>@team.RoundRobinRecord.Losses</td>
-        <td>@team.LsdTotal</td>
+        <td>@(Math.Round(team.LsdTotal))cm </td>
     </tr>
 }     
 </table>
