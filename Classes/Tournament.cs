@@ -2,18 +2,22 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using Newtonsoft.Json;
+using JsonSubTypes;
 
 namespace CurlingSimulator
 {
-	public abstract class Tournament
+	[JsonConverter(typeof(JsonSubtypes), "TournamentType")]
+    [JsonSubtypes.KnownSubType(typeof(WorldsTournament), TournamentType.Worlds)]
+	public class Tournament
 	{
 		//List of teams in the tournament
 		public List<Team> Teams;
 
 		//The tournament type
-		public abstract TournamentType TournamentType {get;}
+		public virtual TournamentType TournamentType {get;}
 
-		public abstract int NumberOfTeams {get;}
+		public virtual int NumberOfTeams {get;}
 		
 		//The playoff results of the tournament
 		public PlayoffResults PlayoffResults;
@@ -28,7 +32,7 @@ namespace CurlingSimulator
 			Teams.Add(team);
 		}
 
-		public abstract void Run();
+		public virtual void Run(){}
 
 		protected void ResetTeams()
 		{

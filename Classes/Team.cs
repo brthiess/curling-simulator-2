@@ -23,6 +23,8 @@ namespace CurlingSimulator
 
 		public string Image {get;set;}
 
+		public Team(){}
+
 		public Team(string name, Record tourRecord = null, int? tourRanking = null, string location = null, string image = null)
 		{
 			Location = location;

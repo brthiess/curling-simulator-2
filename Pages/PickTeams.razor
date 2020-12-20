@@ -4,16 +4,19 @@
 @using System.Net.Http.Json
 @inject HttpClient Http
 @using CurlingSimulator
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@using Newtonsoft.Json
 
 
+@if(SimulationContainer == null || SimulationContainer.State == SimulationState.Uninitialized){ Console.WriteLine("Tedasfsdfst"); return;}
 
 
 <h1 class='page-title pick-teams-title'>Pick Teams</h1>
 
-<p class='pick-teams-text'>Pick @SimulationContainer.Tournament.NumberOfTeams</p>
+<p class='pick-teams-text'>Pick @SimulationContainer?.Tournament?.NumberOfTeams</p>
 
 <ul class='teams-list'>
-    @if (SimulationContainer.Rankings != null){
+    @if (SimulationContainer?.Rankings != null){
         @foreach (var team in SimulationContainer.Rankings)
         {
             <li class='team-list-item @(PickedEnoughTeams() ? "disabled" : "")'>
@@ -33,17 +36,17 @@
     }
 </ul>
 
-<button class='done-button continue-button @(PickedEnoughTeams() ? "ready" : "")' @onclick="NavigateToSimulationResults">@simulateButtonText</button>
+<button class='done-button continue-button @(PickedEnoughTeams() ? "ready" : "")' @onclick="NavigateToSimulationResults">@SimulateButtonText</button>
 
 @code { 
 
-    private string simulateButtonText 
+    private string SimulateButtonText 
     {
         get 
         {
             int numberOfSelectedTeams = GetNumberOfSelectedTeams();
             var simulateButtonText = "Simulate";
-            if (numberOfSelectedTeams < SimulationContainer.Tournament.NumberOfTeams)
+            if (numberOfSelectedTeams < SimulationContainer?.Tournament?.NumberOfTeams)
             {
                 simulateButtonText = numberOfSelectedTeams + "/" + SimulationContainer.Tournament.NumberOfTeams + " Teams";
             } 
@@ -52,7 +55,12 @@
     }
     protected override async Task OnInitializedAsync()
     {
-        if (SimulationContainer.Rankings == null)
+        if (SimulationContainer.State == SimulationState.Uninitialized)
+        {
+            var simulationContainerString = await localStorage.GetItemAsStringAsync("SimulationContainer");
+            SimulationContainer = JsonConvert.DeserializeObject<SimulationContainer>(simulationContainerString);
+        }
+        if (SimulationContainer != null && SimulationContainer.Rankings == null)
         {
             SimulationContainer.Rankings = await Http.GetFromJsonAsync<List<TeamRanking>>("/json/rankings.json");
         }
@@ -69,7 +77,7 @@
 
     private int GetNumberOfSelectedTeams()
     {
-        if (SimulationContainer.Rankings == null)
+        if (SimulationContainer?.Rankings == null)
         {
             return 0;
         }
@@ -85,14 +93,14 @@
     }
 
     private bool PickedEnoughTeams(){
-        return GetNumberOfSelectedTeams() == SimulationContainer.Tournament.NumberOfTeams;
+        return GetNumberOfSelectedTeams() == SimulationContainer?.Tournament?.NumberOfTeams;
     }
 
     protected void RunTournament()
     {
-        if (SimulationContainer.State != SimulationState.NotStarted)
+        if (SimulationContainer.State != SimulationState.Initialized)
         {
-            SimulationContainer.RestartTournament();
+            SimulationContainer.RestartOrInitTournament();
         }
         SimulationContainer.State = SimulationState.Running;
         foreach(var team in SimulationContainer.Rankings)

@@ -3,6 +3,8 @@
 @inject SimulationContainer SimulationContainer;
 @using CurlingSimulator
 @inject WorldsTournament TournamentObject
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@using Newtonsoft.Json
 
 <h1 class='page-title pick-format-title'>Pick Tournament Format</h1>
 
@@ -16,7 +18,8 @@
     private void NavigateToPickTeams() 
     {
         SimulationContainer.TournamentType = TournamentType.Worlds;
-        SimulationContainer.RestartTournament();
+        SimulationContainer.RestartOrInitTournament();
+        localStorage.SetItemAsync("SimulationContainer", JsonConvert.SerializeObject(SimulationContainer));
         NavigationManager.NavigateTo("pick-teams"); 
     } 
 }

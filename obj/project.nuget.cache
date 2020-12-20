@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "+NoSWfdwG8YkmNp52c9ppE1hxFMtTJi/lENI3tgsBP5pAEs/FtaDpTl8xanqNxf860Ptlpt8W3AoHYOSc2ptBw==",
+  "dgSpecHash": "Xqo2g4WU72pBKNQowPmvj1zZN29grg8SL+XPoFUyLGTErB7hYUzk+AlTVgzHh5GL7ie7TWIZbOsk/XyCMcgNIg==",
   "success": true,
   "projectFilePath": "C:\\Users\\brthi\\Projects\\curling-simulator\\curling-simulator-2.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\brthi\\.nuget\\packages\\blazored.localstorage\\3.0.0\\blazored.localstorage.3.0.0.nupkg.sha512",
+    "C:\\Users\\brthi\\.nuget\\packages\\jsonsubtypes\\1.8.0\\jsonsubtypes.1.8.0.nupkg.sha512",
     "C:\\Users\\brthi\\.nuget\\packages\\microsoft.aspnetcore.authorization\\3.1.6\\microsoft.aspnetcore.authorization.3.1.6.nupkg.sha512",
     "C:\\Users\\brthi\\.nuget\\packages\\microsoft.aspnetcore.components\\3.1.6\\microsoft.aspnetcore.components.3.1.6.nupkg.sha512",
     "C:\\Users\\brthi\\.nuget\\packages\\microsoft.aspnetcore.components.analyzers\\3.1.6\\microsoft.aspnetcore.components.analyzers.3.1.6.nupkg.sha512",
@@ -32,6 +34,7 @@
     "C:\\Users\\brthi\\.nuget\\packages\\microsoft.extensions.primitives\\3.1.6\\microsoft.extensions.primitives.3.1.6.nupkg.sha512",
     "C:\\Users\\brthi\\.nuget\\packages\\microsoft.jsinterop\\3.1.6\\microsoft.jsinterop.3.1.6.nupkg.sha512",
     "C:\\Users\\brthi\\.nuget\\packages\\microsoft.jsinterop.webassembly\\3.2.1\\microsoft.jsinterop.webassembly.3.2.1.nupkg.sha512",
+    "C:\\Users\\brthi\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
     "C:\\Users\\brthi\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
     "C:\\Users\\brthi\\.nuget\\packages\\system.componentmodel.annotations\\4.7.0\\system.componentmodel.annotations.4.7.0.nupkg.sha512",
     "C:\\Users\\brthi\\.nuget\\packages\\system.memory\\4.5.4\\system.memory.4.5.4.nupkg.sha512",

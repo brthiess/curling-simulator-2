@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using CurlingSimulator;
+using Blazored.LocalStorage;
 
 namespace curling_simulator_2
 {
@@ -19,6 +20,7 @@ namespace curling_simulator_2
             builder.RootComponents.Add<App>("app");
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+            builder.Services.AddBlazoredLocalStorage();
             builder.Services.AddSingleton<SimulationContainer>();
             builder.Services.AddSingleton<WorldsTournament>();
             await builder.Build().RunAsync();

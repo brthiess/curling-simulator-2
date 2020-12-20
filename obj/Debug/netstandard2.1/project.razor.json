@@ -8,35 +8,35 @@
   "ProjectWorkspaceState": {
     "TagHelpers": [
       {
-        "HashCode": 615218337,
+        "HashCode": -1527820655,
         "Kind": "Components.Component",
-        "Name": "curling_simulator_2.App",
+        "Name": "curling_simulator_2.Pages.FetchData",
         "AssemblyName": "curling-simulator-2",
         "CaseSensitive": true,
         "TagMatchingRules": [
           {
-            "TagName": "App"
+            "TagName": "FetchData"
           }
         ],
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "curling_simulator_2.App"
+          "Common.TypeName": "curling_simulator_2.Pages.FetchData"
         }
       },
       {
-        "HashCode": -549896475,
+        "HashCode": -657560967,
         "Kind": "Components.Component",
-        "Name": "curling_simulator_2.App",
+        "Name": "curling_simulator_2.Pages.FetchData",
         "AssemblyName": "curling-simulator-2",
         "CaseSensitive": true,
         "TagMatchingRules": [
           {
-            "TagName": "curling_simulator_2.App"
+            "TagName": "curling_simulator_2.Pages.FetchData"
           }
         ],
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "curling_simulator_2.App",
+          "Common.TypeName": "curling_simulator_2.Pages.FetchData",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch"
         }
       },
@@ -70,39 +70,6 @@
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
           "Common.TypeName": "curling_simulator_2.Pages.Counter",
-          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
-        }
-      },
-      {
-        "HashCode": -1527820655,
-        "Kind": "Components.Component",
-        "Name": "curling_simulator_2.Pages.FetchData",
-        "AssemblyName": "curling-simulator-2",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "FetchData"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "curling_simulator_2.Pages.FetchData"
-        }
-      },
-      {
-        "HashCode": -657560967,
-        "Kind": "Components.Component",
-        "Name": "curling_simulator_2.Pages.FetchData",
-        "AssemblyName": "curling-simulator-2",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "curling_simulator_2.Pages.FetchData"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "curling_simulator_2.Pages.FetchData",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch"
         }
       },
@@ -173,39 +140,6 @@
         }
       },
       {
-        "HashCode": 1874703570,
-        "Kind": "Components.Component",
-        "Name": "curling_simulator_2.Pages.PickFormat",
-        "AssemblyName": "curling-simulator-2",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "PickFormat"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "curling_simulator_2.Pages.PickFormat"
-        }
-      },
-      {
-        "HashCode": 1285087926,
-        "Kind": "Components.Component",
-        "Name": "curling_simulator_2.Pages.PickFormat",
-        "AssemblyName": "curling-simulator-2",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "curling_simulator_2.Pages.PickFormat"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "curling_simulator_2.Pages.PickFormat",
-          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
-        }
-      },
-      {
         "HashCode": 850151195,
         "Kind": "Components.Component",
         "Name": "curling_simulator_2.Pages.SimulationResults",
@@ -239,55 +173,35 @@
         }
       },
       {
-        "HashCode": 1454668173,
+        "HashCode": 1874703570,
         "Kind": "Components.Component",
-        "Name": "curling_simulator_2.Shared.SurveyPrompt",
+        "Name": "curling_simulator_2.Pages.PickFormat",
         "AssemblyName": "curling-simulator-2",
         "CaseSensitive": true,
         "TagMatchingRules": [
           {
-            "TagName": "SurveyPrompt"
-          }
-        ],
-        "BoundAttributes": [
-          {
-            "Kind": "Components.Component",
-            "Name": "Title",
-            "TypeName": "System.String",
-            "Metadata": {
-              "Common.PropertyName": "Title"
-            }
+            "TagName": "PickFormat"
           }
         ],
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "curling_simulator_2.Shared.SurveyPrompt"
+          "Common.TypeName": "curling_simulator_2.Pages.PickFormat"
         }
       },
       {
-        "HashCode": -521693200,
+        "HashCode": 1285087926,
         "Kind": "Components.Component",
-        "Name": "curling_simulator_2.Shared.SurveyPrompt",
+        "Name": "curling_simulator_2.Pages.PickFormat",
         "AssemblyName": "curling-simulator-2",
         "CaseSensitive": true,
         "TagMatchingRules": [
           {
-            "TagName": "curling_simulator_2.Shared.SurveyPrompt"
-          }
-        ],
-        "BoundAttributes": [
-          {
-            "Kind": "Components.Component",
-            "Name": "Title",
-            "TypeName": "System.String",
-            "Metadata": {
-              "Common.PropertyName": "Title"
-            }
+            "TagName": "curling_simulator_2.Pages.PickFormat"
           }
         ],
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "curling_simulator_2.Shared.SurveyPrompt",
+          "Common.TypeName": "curling_simulator_2.Pages.PickFormat",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch"
         }
       },
@@ -388,6 +302,59 @@
         }
       },
       {
+        "HashCode": 1454668173,
+        "Kind": "Components.Component",
+        "Name": "curling_simulator_2.Shared.SurveyPrompt",
+        "AssemblyName": "curling-simulator-2",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "SurveyPrompt"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "Title",
+            "TypeName": "System.String",
+            "Metadata": {
+              "Common.PropertyName": "Title"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "curling_simulator_2.Shared.SurveyPrompt"
+        }
+      },
+      {
+        "HashCode": -521693200,
+        "Kind": "Components.Component",
+        "Name": "curling_simulator_2.Shared.SurveyPrompt",
+        "AssemblyName": "curling-simulator-2",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "curling_simulator_2.Shared.SurveyPrompt"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "Title",
+            "TypeName": "System.String",
+            "Metadata": {
+              "Common.PropertyName": "Title"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "curling_simulator_2.Shared.SurveyPrompt",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
         "HashCode": -1578175337,
         "Kind": "Components.Component",
         "Name": "curling_simulator_2.Shared.Navigation",
@@ -417,6 +384,39 @@
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
           "Common.TypeName": "curling_simulator_2.Shared.Navigation",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": 615218337,
+        "Kind": "Components.Component",
+        "Name": "curling_simulator_2.App",
+        "AssemblyName": "curling-simulator-2",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "App"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "curling_simulator_2.App"
+        }
+      },
+      {
+        "HashCode": -549896475,
+        "Kind": "Components.Component",
+        "Name": "curling_simulator_2.App",
+        "AssemblyName": "curling-simulator-2",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "curling_simulator_2.App"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "curling_simulator_2.App",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch"
         }
       },

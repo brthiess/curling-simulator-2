@@ -12,6 +12,7 @@ namespace CurlingSimulator
 
         public Dictionary<PlayoffRoundType, List<Game>> ListOfGameRounds {get; private set;}
 
+        public PlayoffResults(){}
 		public PlayoffResults(Dictionary<PlayoffRoundType, List<Game>> listOfGameRounds)
 		{
 			ListOfGameRounds = listOfGameRounds;

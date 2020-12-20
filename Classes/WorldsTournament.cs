@@ -7,14 +7,9 @@ namespace CurlingSimulator
 {
 	public class WorldsTournament : Tournament
 	{
+		public WorldsTournament():base(){}
 
-		public override TournamentType TournamentType
-		{
-			get 
-			{
-				return TournamentType.Worlds;
-			}
-		}
+		public override TournamentType TournamentType {get;} = TournamentType.Worlds;
 
         public override int NumberOfTeams => 13;
 

@@ -9,9 +9,13 @@ namespace CurlingSimulator
         public string location { get; set; } 
         public string image { get; set;}
         public bool selected {get;set;} = false;
+
+        public TeamRanking(){}
     }
 
     public class Rankings    {
         public List<TeamRanking> TeamRankings { get; set; } 
+
+        public Rankings(){}
     }
 }
