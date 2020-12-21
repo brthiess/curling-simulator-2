@@ -6,7 +6,7 @@
   "linkerEnabled": false,
   "resources": {
     "assembly": {
-      "curling-simulator-2.dll": "sha256-c6zrCOSj7r+VX1hlP6Cfyq7+L59h3J1KJuE+7TfdF8I=",
+      "curling-simulator-2.dll": "sha256-SflPM5TDEsXjts3RVTeKDt5hwj7C\/UOKIOmFg5\/uGrM=",
       "System.Net.Http.Json.dll": "sha256-99dseBOagY3mzu5Y8Eqm8gRI+o8QbbCp7R2Ew9bQ+5E=",
       "System.Buffers.dll": "sha256-ZxXy75PYbzJxNfAc\/SAP1nUYm4gt1jSaOpFnBb9m85M=",
       "mscorlib.dll": "sha256-BaZPMj95+YNe3G4ckTGD6szZFwZeA2MOHn91zTGKDeU=",
@@ -63,7 +63,7 @@
       "Microsoft.JSInterop.WebAssembly.dll": "sha256-czNf3btAeBW\/vvID5LAfgcsNZ+GM3ssVuPaMflcg0rs="
     },
     "pdb": {
-      "curling-simulator-2.pdb": "sha256-SuZ5TFKsqOCZuD1Oiyn+HG4eWK7AbPBtmr4o3Kog2vI="
+      "curling-simulator-2.pdb": "sha256-Ez0RvrI0u3GFFjERmdX7qBa5uQya4zJRULyaTAqA5Qw="
     },
     "runtime": {
       "dotnet.3.2.0.js": "sha256-mPoqx7XczFHBWk3gRNn0hc9ekG1OvkKY4XiKRY5Mj5U=",

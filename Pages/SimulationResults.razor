@@ -1,6 +1,7 @@
 @page "/simulation-results"
-@inject SimulationContainer State;
+@inject SimulationContainer SimulationContainer;
 @using CurlingSimulator 
+@using Newtonsoft.Json
 
 
 <h1 class='page-title simulation-results-title'>Simulation Results</h1>
@@ -15,7 +16,8 @@
             <th>LSD</th>
         </tr>
     </thead>
-@foreach (var team in State.Tournament.GetTeamsSortedByRoundRobin())
+
+@foreach (var team in SimulationContainer.Tournament.GetTeamsSortedByRoundRobin())
 {
     <tr>
         <td class="round-robin-table-team-name"><img class="round-robin-table-team-image" src="@team.Image"/> @team.Name</td>
@@ -27,7 +29,7 @@
 </table>
 
 <h3 class='playoffs-title results-title'>Playoffs</h3>
-@if (State.Tournament.TournamentType == TournamentType.Worlds){
+@if (SimulationContainer.Tournament.TournamentType == TournamentType.Worlds){
  
     <div class='quarter-final-round'>
         @foreach (var game in GetRoundOneGames())
@@ -88,25 +90,25 @@
 
         public List<Game> GetRoundOneGames()
         {
-            var quartersGames = State.Tournament.PlayoffResults.ListOfGameRounds[PlayoffRoundType.Quarters];
+            var quartersGames = SimulationContainer.Tournament.PlayoffResults.ListOfGameRounds[PlayoffRoundType.Quarters];
             return quartersGames;
         }
 
         public List<Game> GetRoundTwoGames()
         {
-            var semisGames = State.Tournament.PlayoffResults.ListOfGameRounds[PlayoffRoundType.Semis];
+            var semisGames = SimulationContainer.Tournament.PlayoffResults.ListOfGameRounds[PlayoffRoundType.Semis];
             return semisGames;
         }
 
         public List<Game> GetFinal()
         {
-            var finalGame = State.Tournament.PlayoffResults.ListOfGameRounds[PlayoffRoundType.Finals];
+            var finalGame = SimulationContainer.Tournament.PlayoffResults.ListOfGameRounds[PlayoffRoundType.Finals];
             return finalGame;
         }
 
         public List<Game> GetBronze()
         {
-            var bronzeGame = State.Tournament.PlayoffResults.ListOfGameRounds[PlayoffRoundType.Bronze];
+            var bronzeGame = SimulationContainer.Tournament.PlayoffResults.ListOfGameRounds[PlayoffRoundType.Bronze];
             return bronzeGame;
         }
 }

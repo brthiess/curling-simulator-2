@@ -9,13 +9,20 @@ public class SimulationContainer
 
     public TournamentType TournamentType {get;set;}
 
-    public List<TeamRanking> Rankings;
+    public Dictionary<int, TeamRanking> Rankings;
 
     public SimulationContainer(){}
     public void RestartOrInitTournament()
     {
         State = SimulationState.Initialized;
         Tournament = TournamentFactory.GetTournament(TournamentType);
+    }
+
+    public void SetState(SimulationContainer simulationContainer){
+        this.State = simulationContainer.State;
+        this.Tournament = simulationContainer.Tournament;
+        this.TournamentType = simulationContainer.TournamentType;
+        this.Rankings = simulationContainer.Rankings;
     }
 
 }

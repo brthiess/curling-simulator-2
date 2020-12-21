@@ -8,7 +8,7 @@
 @using Newtonsoft.Json
 
 
-@if(SimulationContainer == null || SimulationContainer.State == SimulationState.Uninitialized){ Console.WriteLine("Tedasfsdfst"); return;}
+@if(SimulationContainer == null || SimulationContainer.State == SimulationState.Uninitialized){return;}
 
 
 <h1 class='page-title pick-teams-title'>Pick Teams</h1>
@@ -20,7 +20,7 @@
         @foreach (var team in SimulationContainer.Rankings)
         {
             <li class='team-list-item @(PickedEnoughTeams() ? "disabled" : "")'>
-                <input type="checkbox" id="@team.rank" class='team-list-item-checkbox' disabled='@(PickedEnoughTeams() && !team.selected ? "disabled" : null)' @bind="team.selected" />
+                <input type="checkbox" id="@team.rank" class='team-list-item-checkbox' disabled='@(PickedEnoughTeams() && !team.selected ? "disabled" : null)' @onclick="@(e => UpdateSelectedTeams(" @bind="team.selected" />
                 <div class='team-list-item-background'></div>
                 <label class='team-list-item-label @(PickedEnoughTeams() && !team.selected ? "disabled" : "")' for="@team.rank"></label>
                 <div class="team-list-item-location">
@@ -58,7 +58,8 @@
         if (SimulationContainer.State == SimulationState.Uninitialized)
         {
             var simulationContainerString = await localStorage.GetItemAsStringAsync("SimulationContainer");
-            SimulationContainer = JsonConvert.DeserializeObject<SimulationContainer>(simulationContainerString);
+            var simulationContainerClone = JsonConvert.DeserializeObject<SimulationContainer>(simulationContainerString);
+            SimulationContainer.SetState(simulationContainerClone);
         }
         if (SimulationContainer != null && SimulationContainer.Rankings == null)
         {
@@ -112,10 +113,8 @@
         }
 
 
-        for (var i =0; i < 1; i++)
-        {
-            SimulationContainer.Tournament.Run();
-        }
+        SimulationContainer.Tournament.Run();
+
         SimulationContainer.State = SimulationState.Finished;
     }
 }
