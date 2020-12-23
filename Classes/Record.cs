@@ -6,8 +6,8 @@ namespace CurlingSimulator
 {
 	public class Record
 	{
-		public int Wins { get; private set; }
-		public int Losses { get; private set; }
+		public int Wins { get; set; }
+		public int Losses { get; set; }
 
 		public Record()
 		{

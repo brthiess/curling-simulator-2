@@ -743,6 +743,6 @@ C:\Users\brthi\Projects\curling-simulator\bin\Debug\netstandard2.1\JsonSubTypes.
 C:\Users\brthi\Projects\curling-simulator\obj\Debug\netstandard2.1\integrity\3EMOEdJwDGyRA72Jn6PKQEG3tpZgD__UP2x9b_J6bW8=.hash
 C:\Users\brthi\Projects\curling-simulator\obj\Debug\netstandard2.1\compressed\_framework\_bin\JsonSubTypes.dll.gz
 C:\Users\brthi\Projects\curling-simulator\obj\Debug\netstandard2.1\compressed\_framework\_bin\JsonSubTypes.dll.br
-C:\Users\brthi\Projects\curling-simulator\obj\Debug\netstandard2.1\integrity\SflPM5TDEsXjts3RVTeKDt5hwj7C-UOKIOmFg5-uGrM=.hash
-C:\Users\brthi\Projects\curling-simulator\obj\Debug\netstandard2.1\integrity\Ez0RvrI0u3GFFjERmdX7qBa5uQya4zJRULyaTAqA5Qw=.hash
-C:\Users\brthi\Projects\curling-simulator\obj\Debug\netstandard2.1\integrity\_zfJ60swskwUvBqe3I16cMo_cb8JOZhI-kANTcdgU1o=.hash
+C:\Users\brthi\Projects\curling-simulator\obj\Debug\netstandard2.1\integrity\ccpykXc-XaXmxqlW7gZ2c9AYIco5xX7Z7-JFAljGq_s=.hash
+C:\Users\brthi\Projects\curling-simulator\obj\Debug\netstandard2.1\integrity\JyQ2S_xnwW_0D3RNadf_CoVJMo-auOH8dmcnnaiqgWI=.hash
+C:\Users\brthi\Projects\curling-simulator\obj\Debug\netstandard2.1\integrity\JN886lsF2BTyblELQTh_JGqR28s0PE0MymPf5GcEEy8=.hash

@@ -20,7 +20,7 @@
         @foreach (var team in SimulationContainer.Rankings)
         {
             <li class='team-list-item @(PickedEnoughTeams() ? "disabled" : "")'>
-                <input type="checkbox" id="@team.rank" class='team-list-item-checkbox' disabled='@(PickedEnoughTeams() && !team.selected ? "disabled" : null)' @onclick="@(e => UpdateSelectedTeams(" @bind="team.selected" />
+                <input type="checkbox" id="@team.rank" class='team-list-item-checkbox' disabled='@(PickedEnoughTeams() && !team.selected ? "disabled" : null)' @onchange="@(e => UpdateSelectedTeamsCount(team, e.Value))" checked='@(team.selected ? "checked" : null)' />
                 <div class='team-list-item-background'></div>
                 <label class='team-list-item-label @(PickedEnoughTeams() && !team.selected ? "disabled" : "")' for="@team.rank"></label>
                 <div class="team-list-item-location">
@@ -39,6 +39,8 @@
 <button class='done-button continue-button @(PickedEnoughTeams() ? "ready" : "")' @onclick="NavigateToSimulationResults">@SimulateButtonText</button>
 
 @code { 
+
+    int selectedTeamsCount {get;set;} = 0;
 
     private string SimulateButtonText 
     {
@@ -65,6 +67,22 @@
         {
             SimulationContainer.Rankings = await Http.GetFromJsonAsync<List<TeamRanking>>("/json/rankings.json");
         }
+        selectedTeamsCount = GetNumberOfSelectedTeams(false);
+    }
+
+    private void UpdateSelectedTeamsCount(TeamRanking team, object checkedValue)
+    {
+
+        if ((bool)checkedValue)
+        {
+            team.selected = true;
+            selectedTeamsCount++;
+        }
+        else 
+        {
+            team.selected = false;
+            selectedTeamsCount--;
+        }
     }
     private void NavigateToSimulationResults() 
     {
@@ -73,15 +91,17 @@
             return;
         }
         RunTournament();
+        localStorage.SetItemAsync("SimulationContainer", JsonConvert.SerializeObject(SimulationContainer));
         NavigationManager.NavigateTo("simulation-results"); 
     }
 
-    private int GetNumberOfSelectedTeams()
+    private int GetNumberOfSelectedTeams(bool useCache = true)
     {
-        if (SimulationContainer?.Rankings == null)
+        if (useCache)
         {
-            return 0;
+            return selectedTeamsCount;
         }
+
         int numberOfSelectedTeams = 0;
         foreach(var ranking in SimulationContainer.Rankings)
         {

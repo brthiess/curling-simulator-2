@@ -18,6 +18,10 @@ namespace CurlingSimulator
 
         public int Team2Score{get;set;}
 
+        public double HomeTeamLsd {get;set;}
+
+        public double AwayTeamLsd {get;set;}
+
         public Game(){}
     }
 }

@@ -11,9 +11,9 @@ namespace CurlingSimulator
 
 		public Record RoundRobinRecord {get;set;}
 
-		public Record TourRecord { get; private set; }
+		public Record TourRecord { get; set; }
 
-		public int? TourRanking { get; private set; }
+		public int? TourRanking { get; set; }
 
 		public int FinalRanking { get; set; }
 
@@ -97,12 +97,14 @@ namespace CurlingSimulator
 			return (double) record.Wins / (record.Wins + record.Losses);
 		}
 
-		public static Game PlayGame(Team homeTeam, Team awayTeam, bool giveHammerAdvantageToTeamWithBetterRecord = false, bool isRoundRobinGame=true)
+		public static Game PlayGame(Team homeTeam, Team awayTeam, bool giveHammerAdvantageToTeamWithBetterRecord = false, bool isRoundRobinGame=true, bool isPlayoffGame=false)
 		{
-			double probabilityHomeBeatsAway = GetProbabilityOfHomeBeatingAway(homeTeam, awayTeam, false); 
+			var homeTeamLsd = DrawToTheButton(homeTeam, isPlayoffGame);
+			var awayTeamLsd = DrawToTheButton(awayTeam, isPlayoffGame);
+
+			double probabilityHomeBeatsAway = GetProbabilityOfHomeBeatingAway(homeTeam, awayTeam, homeTeamLsd, awayTeamLsd,  false); 
 			var random = new Random();
-			DrawToTheButton(homeTeam);
-			DrawToTheButton(awayTeam);
+			
 			
 			if (random.NextDouble() < probabilityHomeBeatsAway)
 			{				
@@ -115,7 +117,9 @@ namespace CurlingSimulator
 					WinningTeam = homeTeam,
 					LosingTeam = awayTeam,
 					HomeTeam = homeTeam,
-					AwayTeam = awayTeam					
+					AwayTeam = awayTeam,
+					HomeTeamLsd = homeTeamLsd,
+					AwayTeamLsd = awayTeamLsd		
 				};
 			}
 			else
@@ -135,7 +139,7 @@ namespace CurlingSimulator
 			
 		}
 
-        private static void DrawToTheButton(Team team)
+        private static double DrawToTheButton(Team team, bool isPlayoffGame)
         {
 			Random r = new Random();
 			double lsdLength = 1000/(Math.Sqrt(team.Rating) * r.Next(1,200) * Math.Sqrt(team.Rating)) - 5.7;
@@ -147,10 +151,14 @@ namespace CurlingSimulator
 			{
 				lsdLength = 144;
 			}
-			team.LsdTotal += lsdLength;
+			if (!isPlayoffGame)
+			{
+				team.LsdTotal += lsdLength;
+			}
+			return lsdLength;
         }
 
-        public static double GetProbabilityOfHomeBeatingAway(Team homeTeam, Team awayTeam, bool giveHammerAdvantageToTeamWithBetterRecord = false)
+        public static double GetProbabilityOfHomeBeatingAway(Team homeTeam, Team awayTeam, double homeTeamLsd, double awayTeamLsd,  bool giveHammerAdvantageToTeamWithBetterRecord = false)
 		{
 			if (homeTeam.Rating == 0)
 			{
@@ -175,9 +183,39 @@ namespace CurlingSimulator
 				}
 			}
 			var initialProbability =  ((1 - awayTeam.Rating) * homeTeam.Rating) / ((1 - awayTeam.Rating) * (homeTeam.Rating) + (1 - homeTeam.Rating) * (awayTeam.Rating));
-			return initialProbability + (giveHammerAdvantageToTeamWithBetterRecord && homeTeam.RoundRobinRecord.Wins > awayTeam.RoundRobinRecord.Wins ? 0.05 : (giveHammerAdvantageToTeamWithBetterRecord && awayTeam.RoundRobinRecord.Wins > homeTeam.RoundRobinRecord.Wins ? -0.05 : 0)); //TODO make this a little better instead of just adding 0.05
+			var homeTeamAdvantage = GetHomeTeamAdvantage(homeTeam, awayTeam, homeTeamLsd, awayTeamLsd, giveHammerAdvantageToTeamWithBetterRecord);
+			return initialProbability + homeTeamAdvantage;
+		}
+
+		private static double GetHomeTeamAdvantage(Team homeTeam, Team awayTeam, double homeTeamLsd, double awayTeamLsd, bool giveHammerAdvantageToTeamWithBetterRecord) 
+		{
+			if (!giveHammerAdvantageToTeamWithBetterRecord) 
+			{
+				if (homeTeamLsd < awayTeamLsd)
+				{
+					return 0.05;
+				}
+				if (homeTeamLsd > awayTeamLsd)
+				{
+					return -0.05;
+				}
+			}
+			else
+			{
+				if (homeTeam.RoundRobinRecord.Wins > awayTeam.RoundRobinRecord.Wins)
+				{
+					return 0.05;
+				}
+				else if (homeTeam.RoundRobinRecord.Wins < awayTeam.RoundRobinRecord.Wins) 
+				{
+					return -0.05;
+				}
+			}
+			return 0;
 		}
 	}
+
+	
 
 	public enum RegressionType {
 		Logarithmic,

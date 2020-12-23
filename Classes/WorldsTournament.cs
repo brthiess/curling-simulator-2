@@ -46,14 +46,14 @@ namespace CurlingSimulator
 		{
 			List<Team> teams = GetTop6Teams();
 			
-			var quarterFinalResult1 = Team.PlayGame(teams[2], teams[5], true, false);
-			var quarterFinalResult2 = Team.PlayGame(teams[3], teams[4], true, false);
+			var quarterFinalResult1 = Team.PlayGame(teams[2], teams[5], true, false, true);
+			var quarterFinalResult2 = Team.PlayGame(teams[3], teams[4], true, false, true);
 
-			var semiFinalResult1 = Team.PlayGame(teams[0], quarterFinalResult1.WinningTeam, true, false);
-			var semiFinalResult2 = Team.PlayGame(teams[1], quarterFinalResult2.WinningTeam, true, false);
+			var semiFinalResult1 = Team.PlayGame(teams[0], quarterFinalResult1.WinningTeam, true, false, true);
+			var semiFinalResult2 = Team.PlayGame(teams[1], quarterFinalResult2.WinningTeam, true, false, true);
 
-			var finalsResult = Team.PlayGame(semiFinalResult1.WinningTeam, semiFinalResult2.WinningTeam, true, false);
-			var bronzeMedalResult = Team.PlayGame(semiFinalResult1.LosingTeam, semiFinalResult2.LosingTeam, true, false);
+			var finalsResult = Team.PlayGame(semiFinalResult1.WinningTeam, semiFinalResult2.WinningTeam, true, false, true);
+			var bronzeMedalResult = Team.PlayGame(semiFinalResult1.LosingTeam, semiFinalResult2.LosingTeam, true, false, true);
 
 			finalsResult.WinningTeam.FinalRanking = 1;
 			finalsResult.LosingTeam.FinalRanking = 2;

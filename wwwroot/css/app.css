@@ -221,7 +221,56 @@ label.team-list-item-label.disabled {
     border-bottom: 1px solid #ccc;
 }
 .round-robin-table td:first-child {
-    width: 400px;
+    width: 300px;
+    font-size: 20px;
+}
+.round-robin-table-team-image {
+    height: 30px;
+    width: 30px;
+    margin: 0 20px 0 0;
+    object-fit: cover;
+    border-radius: 50px;
+    vertical-align: middle;
+}
+.round-robin-table-lsd-amount {
+    color: #777;
+}
+.round-robin-table-record{
+    font-weight: bold;
 }
 
 
+/* playoffs */
+
+.world-playoffs{
+    display: flex;
+    background: #ddd;
+    padding: 20px 40px;
+    box-shadow: 2px 1px 3px 1px rgba(0,0,0,0.4);
+}
+.quarter-final-round {
+    height: 
+}
+.playoff-round {
+    margin: 0 20px;
+}
+.quarter-final-round {
+    height: 400px;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-evenly;
+}
+.semi-final-round {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+}
+.team-name {
+    background: white;
+    margin: 5px 0;
+    font-size: 18px;
+    padding: 0 10px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+}

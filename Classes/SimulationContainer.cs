@@ -9,7 +9,7 @@ public class SimulationContainer
 
     public TournamentType TournamentType {get;set;}
 
-    public Dictionary<int, TeamRanking> Rankings;
+    public List<TeamRanking> Rankings;
 
     public SimulationContainer(){}
     public void RestartOrInitTournament()

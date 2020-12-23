@@ -2,7 +2,8 @@
 @inject SimulationContainer SimulationContainer;
 @using CurlingSimulator 
 @using Newtonsoft.Json
-
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject HttpClient Http
 
 <h1 class='page-title simulation-results-title'>Simulation Results</h1>
 
@@ -17,100 +18,117 @@
         </tr>
     </thead>
 
-@foreach (var team in SimulationContainer.Tournament.GetTeamsSortedByRoundRobin())
+@foreach (var team in SimulationContainer?.Tournament?.GetTeamsSortedByRoundRobin() ?? new List<Team>())
 {
     <tr>
-        <td class="round-robin-table-team-name"><img class="round-robin-table-team-image" src="@team.Image"/> @team.Name</td>
-        <td>@team.RoundRobinRecord.Wins</td>
-        <td>@team.RoundRobinRecord.Losses</td>
-        <td>@(Math.Round(team.LsdTotal))cm </td>
+        <td class="round-robin-table-team-name"><img class="round-robin-table-team-image" src="/images/locations/@team.Image"/> @team.Name</td>
+        <td class='round-robin-table-wins round-robin-table-record'>@team.RoundRobinRecord.Wins</td>
+        <td class='round-robin-table-losses round-robin-table-record' >@team.RoundRobinRecord.Losses</td>
+        <td class="round-robin-table-lsd-amount">@(Math.Round(team.LsdTotal))cm </td>
     </tr>
 }     
 </table>
 
 <h3 class='playoffs-title results-title'>Playoffs</h3>
-@if (SimulationContainer.Tournament.TournamentType == TournamentType.Worlds){
+@if (SimulationContainer?.Tournament?.TournamentType == TournamentType.Worlds){
  
-    <div class='quarter-final-round'>
-        @foreach (var game in GetRoundOneGames())
-        {
-            <div class="game">
-                <div class='home-team team-name'>
-                    @game.HomeTeam.Name
+    <div class="world-playoffs">
+        <div class='quarter-final-round'>
+            @foreach (var game in GetRoundOneGames())
+            {
+                <div class="game">
+                    <div class='home-team team-name'>
+                        @game.HomeTeam.Name
+                    </div>
+                    <div class='away-team team-name'>
+                        @game.AwayTeam.Name
+                    </div>
                 </div>
-                <div class='away-team team-name'>
-                    @game.AwayTeam.Name
+            }
+        </div>
+        <div class='semi-final-round'>
+            @foreach (var game in GetRoundTwoGames())
+            {
+                <div class="game">
+                    <div class='home-team team-name'>
+                        @game.HomeTeam.Name
+                    </div>
+                    <div class='away-team team-name'>
+                        @game.AwayTeam.Name
+                    </div>
                 </div>
-            </div>
-        }
-    </div>
-    <div class='semi-final-round'>
-        @foreach (var game in GetRoundTwoGames())
-        {
-            <div class="game">
-                <div class='home-team team-name'>
-                    @game.HomeTeam.Name
+            }
+        </div>
+        <div class='final-round'>
+            @foreach (var game in GetBronze())
+            {
+                <div class="game">
+                    <div class='home-team team-name'>
+                        @game.HomeTeam.Name
+                    </div>
+                    <div class='away-team team-name'>
+                        @game.AwayTeam.Name
+                    </div>
                 </div>
-                <div class='away-team team-name'>
-                    @game.AwayTeam.Name
+            }
+        </div>
+        <div class='bronze-round'>
+            @foreach (var game in GetFinal())
+            {
+                <div class="game">
+                    <div class='home-team team-name'>
+                        @game.HomeTeam.Name
+                    </div>
+                    <div class='away-team team-name'>
+                        @game.AwayTeam.Name
+                    </div>
                 </div>
-            </div>
-        }
-    </div>
-    <div class='final-round'>
-        @foreach (var game in GetFinal())
-        {
-            <div class="game">
-                <div class='home-team team-name'>
-                    @game.HomeTeam.Name
-                </div>
-                <div class='away-team team-name'>
-                    @game.AwayTeam.Name
-                </div>
-            </div>
-        }
-    </div>
-    <div class='bronze-round'>
-        @foreach (var game in GetFinal())
-        {
-            <div class="game">
-                <div class='home-team team-name'>
-                    @game.HomeTeam.Name
-                </div>
-                <div class='away-team team-name'>
-                    @game.AwayTeam.Name
-                </div>
-            </div>
-        }
+            }
+        </div>
     </div>
 }
 
 @code 
 {
 
-        public List<Game> GetRoundOneGames()
+    protected override async Task OnInitializedAsync()
+    {
+        if (SimulationContainer.State == SimulationState.Uninitialized)
         {
-            var quartersGames = SimulationContainer.Tournament.PlayoffResults.ListOfGameRounds[PlayoffRoundType.Quarters];
-            return quartersGames;
+            var simulationContainerString = await localStorage.GetItemAsStringAsync("SimulationContainer");
+            var simulationContainerClone = JsonConvert.DeserializeObject<SimulationContainer>(simulationContainerString);
+            SimulationContainer.SetState(simulationContainerClone);
         }
+        if (SimulationContainer != null && SimulationContainer.Rankings == null)
+        {
+            SimulationContainer.Rankings = await Http.GetFromJsonAsync<List<TeamRanking>>("/json/rankings.json");
+        }
+        
+    }
 
-        public List<Game> GetRoundTwoGames()
-        {
-            var semisGames = SimulationContainer.Tournament.PlayoffResults.ListOfGameRounds[PlayoffRoundType.Semis];
-            return semisGames;
-        }
+    public List<Game> GetRoundOneGames()
+    {
+        var quartersGames = SimulationContainer?.Tournament?.PlayoffResults?.ListOfGameRounds?[PlayoffRoundType.Quarters] ?? new List<Game>();
+        return quartersGames;
+    }
 
-        public List<Game> GetFinal()
-        {
-            var finalGame = SimulationContainer.Tournament.PlayoffResults.ListOfGameRounds[PlayoffRoundType.Finals];
-            return finalGame;
-        }
+    public List<Game> GetRoundTwoGames()
+    {
+        var semisGames = SimulationContainer?.Tournament?.PlayoffResults?.ListOfGameRounds?[PlayoffRoundType.Semis] ?? new List<Game>();
+        return semisGames;
+    }
 
-        public List<Game> GetBronze()
-        {
-            var bronzeGame = SimulationContainer.Tournament.PlayoffResults.ListOfGameRounds[PlayoffRoundType.Bronze];
-            return bronzeGame;
-        }
+    public List<Game> GetFinal()
+    {
+        var finalGame = SimulationContainer?.Tournament?.PlayoffResults?.ListOfGameRounds?[PlayoffRoundType.Finals] ?? new List<Game>();
+        return finalGame;
+    }
+
+    public List<Game> GetBronze()
+    {
+        var bronzeGame = SimulationContainer?.Tournament?.PlayoffResults?.ListOfGameRounds?[PlayoffRoundType.Bronze] ?? new List<Game>();
+        return bronzeGame;
+    }
 }
 
 
