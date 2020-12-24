@@ -11,6 +11,8 @@ public class SimulationContainer
 
     public List<TeamRanking> Rankings;
 
+    public Gender Gender {get;set;}
+
     public SimulationContainer(){}
     public void RestartOrInitTournament()
     {
@@ -20,6 +22,7 @@ public class SimulationContainer
 
     public void SetState(SimulationContainer simulationContainer){
         this.State = simulationContainer.State;
+        this.Gender = simulationContainer.Gender;
         this.Tournament = simulationContainer.Tournament;
         this.TournamentType = simulationContainer.TournamentType;
         this.Rankings = simulationContainer.Rankings;
@@ -32,4 +35,9 @@ public enum SimulationState{
     Initialized,
     Running,
     Finished
+}
+
+public enum Gender {
+    Male,
+    Female
 }

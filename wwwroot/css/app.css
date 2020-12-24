@@ -60,6 +60,9 @@ body {
 .main-button:hover {
     background: #004683
 }
+.format-container {
+    display: flex;
+}
 .format-button{
     height: 200px;
     width: 230px;
@@ -68,6 +71,7 @@ body {
     background-color: #f1f1f1;
     cursor: pointer;
     font-size: 20px;
+    margin: 0 50px;
 }
 .format-button:hover {
     background-color: rgb(224, 224, 224);

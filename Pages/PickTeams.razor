@@ -65,9 +65,21 @@
         }
         if (SimulationContainer != null && SimulationContainer.Rankings == null)
         {
-            SimulationContainer.Rankings = await Http.GetFromJsonAsync<List<TeamRanking>>("/json/rankings.json");
+            SimulationContainer.Rankings = await Http.GetFromJsonAsync<List<TeamRanking>>(GetJSONPath(SimulationContainer));
         }
         selectedTeamsCount = GetNumberOfSelectedTeams(false);
+    }
+
+    private string GetJSONPath(SimulationContainer simulationContainer)
+    {
+        if (simulationContainer.TournamentType == TournamentType.Worlds)
+        {
+            if (simulationContainer.Gender == Gender.Male)
+            {
+                return "/json/rankings-worlds-men.json";
+            }
+        }
+        return "/json/rankings.json";
     }
 
     private void UpdateSelectedTeamsCount(TeamRanking team, object checkedValue)

@@ -8,16 +8,23 @@
 
 <h1 class='page-title pick-format-title'>Pick Tournament Format</h1>
 
-<button class="format-button" @onclick="NavigateToPickTeams">
-    <span class="format-button-logo world-women-logo"></span> 
-    <span class="format-button-text">Women's Worlds</span>
-</button>
+<div class="format-container">
+    <button class="format-button" @onclick="@(e => NavigateToPickTeams(TournamentType.Worlds, Gender.Female))">
+        <span class="format-button-logo world-women-logo"></span> 
+        <span class="format-button-text">Women's Worlds</span>
+    </button>
+    <button class="format-button" @onclick="@(e => NavigateToPickTeams(TournamentType.Worlds, Gender.Male))">
+        <span class="format-button-logo world-men-logo"></span> 
+        <span class="format-button-text">Men's Worlds</span>
+    </button>
+</div>
 
 
 @code { 
-    private void NavigateToPickTeams() 
+    private void NavigateToPickTeams(TournamentType tournamentType, Gender gender) 
     {
         SimulationContainer.TournamentType = TournamentType.Worlds;
+        SimulationContainer.Gender = gender;
         SimulationContainer.RestartOrInitTournament();
         localStorage.SetItemAsync("SimulationContainer", JsonConvert.SerializeObject(SimulationContainer));
         NavigationManager.NavigateTo("pick-teams"); 
