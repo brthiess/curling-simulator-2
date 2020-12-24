@@ -65,8 +65,8 @@ namespace CurlingSimulator
 			var playoffResults = new System.Collections.Generic.Dictionary<PlayoffRoundType, List<Game>>();
 			playoffResults.Add(PlayoffRoundType.Quarters, new List<Game>(new Game[] {quarterFinalResult1, quarterFinalResult2}));
 			playoffResults.Add(PlayoffRoundType.Semis, new List<Game>(new Game[] {semiFinalResult1, semiFinalResult2}));
-			playoffResults.Add(PlayoffRoundType.Finals, new List<Game>(new Game[] {semiFinalResult1, semiFinalResult2}));
-			playoffResults.Add(PlayoffRoundType.Bronze, new List<Game>(new Game[] {bronzeMedalResult, bronzeMedalResult}));
+			playoffResults.Add(PlayoffRoundType.Finals, new List<Game>(new Game[] {finalsResult}));
+			playoffResults.Add(PlayoffRoundType.Bronze, new List<Game>(new Game[] {bronzeMedalResult}));
 			this.PlayoffResults = new PlayoffResults(playoffResults);
 		}
 

@@ -33,57 +33,77 @@
 @if (SimulationContainer?.Tournament?.TournamentType == TournamentType.Worlds){
  
     <div class="world-playoffs">
-        <div class='quarter-final-round'>
+        <div class='playoff-round-container'>
+            <h4 class="playoff-round-text">Quarter Finals</h4>
+            <div class='quarter-final-round playoff-round'>
             @foreach (var game in GetRoundOneGames())
             {
                 <div class="game">
-                    <div class='home-team team-name'>
-                        @game.HomeTeam.Name
+                    <div class='home-team team-name @(game.HomeTeamWon ? "winner" : "loser")'>
+                        <img class="team-image" src="/images/locations/@(game.HomeTeam.Image)"/>
+                        <div class="team-name-text">@game.HomeTeam.Name</div>
                     </div>
-                    <div class='away-team team-name'>
-                        @game.AwayTeam.Name
+                    <div class='away-team team-name @(game.AwayTeamWon ? "winner" : "loser")'>
+                        <img class="team-image" src="/images/locations/@(game.AwayTeam.Image)"/>
+                        <div class="team-name-text">@game.AwayTeam.Name</div>
                     </div>
                 </div>
             }
+            </div>
         </div>
-        <div class='semi-final-round'>
+        <div class='playoff-round-container'>
+            <h4 class="playoff-round-text">Semi-Finals</h4>
+            <div class='semi-final-round playoff-round'>
             @foreach (var game in GetRoundTwoGames())
             {
                 <div class="game">
-                    <div class='home-team team-name'>
-                        @game.HomeTeam.Name
+                    <div class='home-team team-name @(game.HomeTeamWon ? "winner" : "loser")'>
+                        <img class="team-image" src="/images/locations/@(game.HomeTeam.Image)"/>
+                        <div class="team-name-text">@game.HomeTeam.Name</div>
                     </div>
-                    <div class='away-team team-name'>
-                        @game.AwayTeam.Name
-                    </div>
-                </div>
-            }
-        </div>
-        <div class='final-round'>
-            @foreach (var game in GetBronze())
-            {
-                <div class="game">
-                    <div class='home-team team-name'>
-                        @game.HomeTeam.Name
-                    </div>
-                    <div class='away-team team-name'>
-                        @game.AwayTeam.Name
+                    <div class='away-team team-name @(game.AwayTeamWon ? "winner" : "loser")'>
+                        <img class="team-image" src="/images/locations/@(game.AwayTeam.Image)"/>
+                        <div class="team-name-text">@game.AwayTeam.Name</div>
                     </div>
                 </div>
             }
+            </div>
         </div>
-        <div class='bronze-round'>
+        <div class='playoff-round-container'>
+            <h4 class="playoff-round-text">Finals</h4>
+            <div class='final-round playoff-round'>
             @foreach (var game in GetFinal())
             {
                 <div class="game">
-                    <div class='home-team team-name'>
-                        @game.HomeTeam.Name
+                    <div class='home-team team-name @(game.HomeTeamWon ? "winner" : "loser")'>
+                        <img class="team-image" src="/images/locations/@(game.HomeTeam.Image)"/>
+                        <div class="team-name-text">@game.HomeTeam.Name</div>
                     </div>
-                    <div class='away-team team-name'>
-                        @game.AwayTeam.Name
+                    <div class='away-team team-name @(game.AwayTeamWon ? "winner" : "loser")'>
+                        <img class="team-image" src="/images/locations/@(game.AwayTeam.Image)"/>
+                        <div class="team-name-text">@game.AwayTeam.Name</div>
                     </div>
                 </div>
             }
+            </div>
+        </div>
+        <div class='playoff-round-container'>
+            <h4 class="playoff-round-text">Bronze</h4>
+            <div class='bronze-round playoff-round'>
+            @foreach (var game in GetBronze())
+            {
+                <div class="game">
+                    <div class='home-team team-name @(game.HomeTeamWon ? "winner" : "loser")'>
+                        <img class="team-image" src="/images/locations/@(game.HomeTeam.Image)"/>
+                        <div class="team-name-text">@game.HomeTeam.Name</div>
+                    </div>
+                    <div class='away-team team-name @(game.AwayTeamWon ? "winner" : "loser")'>
+                        <img class="team-image" src="/images/locations/@(game.AwayTeam.Image)"/>
+                        <div class="team-name-text">@game.AwayTeam.Name</div>
+                    </div>
+                </div>
+            }
+            </div>
         </div>
     </div>
 }

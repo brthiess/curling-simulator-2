@@ -247,17 +247,17 @@ label.team-list-item-label.disabled {
     background: #ddd;
     padding: 20px 40px;
     box-shadow: 2px 1px 3px 1px rgba(0,0,0,0.4);
+    margin: 0 0 40px 0;
 }
-.quarter-final-round {
-    height: 
-}
-.playoff-round {
+.playoff-round-container {
     margin: 0 20px;
 }
-.quarter-final-round {
+.playoff-round {
     height: 400px;
     display: flex;
     flex-flow: column;
+}
+.quarter-final-round {
     justify-content: space-evenly;
 }
 .semi-final-round {
@@ -265,12 +265,39 @@ label.team-list-item-label.disabled {
     flex-flow: column;
     justify-content: space-around;
 }
+.final-round {
+    display: flex;
+    justify-content: center;
+}
+.final-round .winner {
+    background: #F4BC01;
+}
+.bronze-round {
+    justify-content: flex-end;
+}
+.bronze-round .winner {
+    background: #9F663E;
+}
 .team-name {
     background: white;
-    margin: 5px 0;
+    margin: 10px 0;
     font-size: 18px;
-    padding: 0 10px;
-    height: 30px;
+    padding: 0 15px 0 6px;
+    height: 50px;
     display: flex;
+    border-radius: 5px;
     align-items: center;
+    box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.3);
+}
+.team-name.loser {
+    opacity: 0.5;
+}
+.team-image {
+    height: 30px;
+    width: 30px;
+    margin-right: 20px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 40px;
+    box-shadow: 1px 1px 2px 2px rgba(0,0,0,0.3);
 }

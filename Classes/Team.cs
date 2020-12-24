@@ -119,7 +119,9 @@ namespace CurlingSimulator
 					HomeTeam = homeTeam,
 					AwayTeam = awayTeam,
 					HomeTeamLsd = homeTeamLsd,
-					AwayTeamLsd = awayTeamLsd		
+					AwayTeamLsd = awayTeamLsd,
+					HomeTeamWon = true,
+					AwayTeamWon = false	
 				};
 			}
 			else
@@ -133,7 +135,11 @@ namespace CurlingSimulator
 					WinningTeam = awayTeam,
 					LosingTeam = homeTeam,
 					HomeTeam = homeTeam,
-					AwayTeam = awayTeam
+					AwayTeam = awayTeam,
+					HomeTeamLsd = homeTeamLsd,
+					AwayTeamLsd = awayTeamLsd,
+					HomeTeamWon = false,
+					AwayTeamWon = true
 				};
 			}
 			

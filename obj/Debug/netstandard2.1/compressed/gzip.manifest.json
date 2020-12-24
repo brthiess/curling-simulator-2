@@ -1,7 +1,7 @@
 {
   "FilesToCompress": [
     {
-      "InputSource": "obj\\Debug\\netstandard2.1\\integrity\\ccpykXc-XaXmxqlW7gZ2c9AYIco5xX7Z7-JFAljGq_s=.hash",
+      "InputSource": "obj\\Debug\\netstandard2.1\\integrity\\ggKb6zCPndqazZbsN1qzpwCsmHFDUcFPxKgPHa0Irws=.hash",
       "Source": "C:\\Users\\brthi\\Projects\\curling-simulator\\obj\\Debug\\netstandard2.1\\blazor\\unlinked\\curling-simulator-2.dll",
       "Target": "obj\\Debug\\netstandard2.1\\compressed\\_framework\/_bin\/curling-simulator-2.dll.gz"
     },
@@ -276,7 +276,7 @@
       "Target": "obj\\Debug\\netstandard2.1\\compressed\\_framework\/_bin\/Microsoft.JSInterop.WebAssembly.dll.gz"
     },
     {
-      "InputSource": "obj\\Debug\\netstandard2.1\\integrity\\JyQ2S_xnwW_0D3RNadf_CoVJMo-auOH8dmcnnaiqgWI=.hash",
+      "InputSource": "obj\\Debug\\netstandard2.1\\integrity\\Jc-FizKRfNu-cFHHe0C7WlBR7iG5qp6UxzuB5WvfZX0=.hash",
       "Source": "C:\\Users\\brthi\\Projects\\curling-simulator\\obj\\Debug\\netstandard2.1\\blazor\\unlinked\\curling-simulator-2.pdb",
       "Target": "obj\\Debug\\netstandard2.1\\compressed\\_framework\/_bin\/curling-simulator-2.pdb.gz"
     },
@@ -301,7 +301,7 @@
       "Target": "obj\\Debug\\netstandard2.1\\compressed\\_framework\/blazor.webassembly.js.gz"
     },
     {
-      "InputSource": "obj\\Debug\\netstandard2.1\\integrity\\JN886lsF2BTyblELQTh_JGqR28s0PE0MymPf5GcEEy8=.hash",
+      "InputSource": "obj\\Debug\\netstandard2.1\\integrity\\3R710Ajoz8VdSLX17m9ZJNLR5GK4C343i_tZJ_-5Y30=.hash",
       "Source": "C:\\Users\\brthi\\Projects\\curling-simulator\\obj\\Debug\\netstandard2.1\\blazor\\blazor.boot.json",
       "Target": "obj\\Debug\\netstandard2.1\\compressed\\_framework\/blazor.boot.json.gz"
     }
