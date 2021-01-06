@@ -1,7 +1,24 @@
 ﻿@inherits LayoutComponentBase
 @inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject PageState PageState;
 
 
 <div class="main">
         @Body
 </div>
+<div class='loader-container-container @(PageState.State == LoadingState.Loading ? "visible" : "")'>
+        <div class="loader-container">
+                <img class="loader" src="/images/loader.png">
+                <div class='loader-text'>@PageState.LoadingText</div>
+        </div>
+</div>
+
+@code 
+{
+        protected override void OnInitialized()
+        {
+                PageState.SetState(LoadingState.Finished, null);
+                PageState.OnChange += StateHasChanged;
+        }
+        
+}

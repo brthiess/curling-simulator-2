@@ -1,5 +1,17 @@
 ﻿@page "/"
+@inject PageState PageState;
+@inject NavigationManager NavigationManager
 
 <h1 class='main-title'>Curling Simulator</h1>
 
-<a href="/pick-format/" class='button main-button'>Begin</a>
+<a class='button main-button' @onclick='NavigateToPickFormat'>Begin</a>
+
+
+@code {
+    private async void NavigateToPickFormat() 
+    {
+        PageState.SetState(LoadingState.Loading, "Loading tournaments...");
+        await Task.Delay(1000);
+        NavigationManager.NavigateTo("pick-format");
+    } 
+}

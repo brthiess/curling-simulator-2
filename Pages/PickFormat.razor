@@ -5,6 +5,7 @@
 @inject WorldsTournament TournamentObject
 @inject Blazored.LocalStorage.ILocalStorageService localStorage
 @using Newtonsoft.Json
+@inject PageState PageState
 
 <h1 class='page-title pick-format-title'>Pick Tournament Format</h1>
 
@@ -19,14 +20,23 @@
     </button>
 </div>
 
-
 @code { 
-    private void NavigateToPickTeams(TournamentType tournamentType, Gender gender) 
+
+    protected override void OnInitialized()
     {
+        PageState.SetState(LoadingState.Finished, null);
+    }
+
+    private async void NavigateToPickTeams(TournamentType tournamentType, Gender gender) 
+    {
+        PageState.SetState(LoadingState.Loading, "Loading teams...");
+        await Task.Delay(1000);
+        
         SimulationContainer.TournamentType = TournamentType.Worlds;
         SimulationContainer.Gender = gender;
         SimulationContainer.RestartOrInitTournament();
-        localStorage.SetItemAsync("SimulationContainer", JsonConvert.SerializeObject(SimulationContainer));
-        NavigationManager.NavigateTo("pick-teams"); 
+        await localStorage.SetItemAsync("SimulationContainer", JsonConvert.SerializeObject(SimulationContainer)); 
+        NavigationManager.NavigateTo("pick-teams");
+
     } 
 }

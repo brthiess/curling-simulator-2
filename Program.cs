@@ -22,6 +22,7 @@ namespace curling_simulator_2
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
             builder.Services.AddBlazoredLocalStorage();
             builder.Services.AddSingleton<SimulationContainer>();
+            builder.Services.AddSingleton<PageState>();
             builder.Services.AddSingleton<WorldsTournament>();
             await builder.Build().RunAsync();
         }

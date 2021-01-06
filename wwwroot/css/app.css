@@ -17,6 +17,54 @@ body {
 .validation-message {
     color: red;
 }
+.loader-container-container {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    align-items: center;
+    justify-content: center;
+    background: #2e86de;
+    transition: all 0.5s;
+    opacity: 0;
+    z-index: 99;
+    display: flex;
+    pointer-events: none;
+}
+.loader-container-container.visible {
+    opacity: 1;
+    pointer-events:all;
+}
+
+.loader {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    width: 100px;
+    height: 100px;
+    animation-name: spin;
+    animation-duration: 1000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    z-index: 3;
+}
+.loader-container {
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+}
+.loader-text {
+    color: white;
+    font-size: 22px;
+    text-transform: uppercase;
+}
+@keyframes spin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
+}
 
 #blazor-error-ui {
     background: lightyellow;
@@ -56,6 +104,7 @@ body {
     text-decoration: none;
     border-radius: 5px;
     box-shadow: 2px 2px 3px 0px rgba(0,0,0,0.5);
+    cursor: pointer;
 }
 .main-button:hover {
     background: #004683
@@ -155,6 +204,7 @@ label.team-list-item-label.disabled {
     background: gray;
     border-radius: 50px;
     overflow: hidden;
+    box-shadow: 1px 1px 3px 1px rgba(0,0,0,0.2);
 }
 .team-list-item-location img {
     height: 100%;

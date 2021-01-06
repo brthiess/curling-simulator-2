@@ -4,6 +4,7 @@
 @using Newtonsoft.Json
 @inject Blazored.LocalStorage.ILocalStorageService localStorage
 @inject HttpClient Http
+@inject PageState PageState;
 
 <h1 class='page-title simulation-results-title'>Simulation Results</h1>
 
@@ -123,7 +124,7 @@
         {
             SimulationContainer.Rankings = await Http.GetFromJsonAsync<List<TeamRanking>>("/json/rankings.json");
         }
-        
+        PageState.SetState(LoadingState.Finished, null);        
     }
 
     public List<Game> GetRoundOneGames()

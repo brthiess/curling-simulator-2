@@ -6,6 +6,7 @@
 @using CurlingSimulator
 @inject Blazored.LocalStorage.ILocalStorageService localStorage
 @using Newtonsoft.Json
+@inject PageState PageState;
 
 
 @if(SimulationContainer == null || SimulationContainer.State == SimulationState.Uninitialized){return;}
@@ -20,11 +21,11 @@
         @foreach (var team in SimulationContainer.Rankings)
         {
             <li class='team-list-item @(PickedEnoughTeams() ? "disabled" : "")'>
-                <input type="checkbox" id="@team.rank" class='team-list-item-checkbox' disabled='@(PickedEnoughTeams() && !team.selected ? "disabled" : null)' @onchange="@(e => UpdateSelectedTeamsCount(team, e.Value))" checked='@(team.selected ? "checked" : null)' />
+                <input type="checkbox" id="@team.id" class='team-list-item-checkbox' disabled='@(PickedEnoughTeams() && !team.selected ? "disabled" : null)' @onchange="@(e => UpdateSelectedTeamsCount(team, e.Value))" checked='@(team.selected ? "checked" : null)' />
                 <div class='team-list-item-background'></div>
-                <label class='team-list-item-label @(PickedEnoughTeams() && !team.selected ? "disabled" : "")' for="@team.rank"></label>
+                <label class='team-list-item-label @(PickedEnoughTeams() && !team.selected ? "disabled" : "")' for="@team.id"></label>
                 <div class="team-list-item-location">
-                    <img src="/images/locations/@(team.location).png" />
+                    <img src="/images/locations/@(team.countryImage)" />
                 </div>
                 <div class="team-list-item-name">
                     Team @team.lastName
@@ -68,6 +69,8 @@
             SimulationContainer.Rankings = await Http.GetFromJsonAsync<List<TeamRanking>>(GetJSONPath(SimulationContainer));
         }
         selectedTeamsCount = GetNumberOfSelectedTeams(false);
+        await Task.Delay(100);
+        PageState.SetState(LoadingState.Finished, null);
     }
 
     private string GetJSONPath(SimulationContainer simulationContainer)
@@ -96,14 +99,16 @@
             selectedTeamsCount--;
         }
     }
-    private void NavigateToSimulationResults() 
+    private async void NavigateToSimulationResults() 
     {
         if (GetNumberOfSelectedTeams() != SimulationContainer.Tournament.NumberOfTeams)
         {
             return;
         }
+        PageState.SetState(LoadingState.Loading, "Simulating tournament...");
+        await Task.Delay(4000);
         RunTournament();
-        localStorage.SetItemAsync("SimulationContainer", JsonConvert.SerializeObject(SimulationContainer));
+        await localStorage.SetItemAsync("SimulationContainer", JsonConvert.SerializeObject(SimulationContainer));
         NavigationManager.NavigateTo("simulation-results"); 
     }
 
@@ -140,7 +145,7 @@
         {
             if (team.selected)
             {
-                SimulationContainer.Tournament.AddTeam(new Team(team.lastName, null, team.rank, team.location, team.image));
+                SimulationContainer.Tournament.AddTeam(new Team(team.lastName, null, team.rank, team.location, team.countryImage));
             }
         }
 
