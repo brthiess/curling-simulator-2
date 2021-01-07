@@ -81,6 +81,10 @@
             {
                 return "/json/rankings-worlds-men.json";
             }
+            else if (simulationContainer.Gender == Gender.Female)
+            {
+                return "/json/rankings-worlds-women.json";
+            }
         }
         return "/json/rankings.json";
     }

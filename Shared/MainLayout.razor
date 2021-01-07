@@ -3,7 +3,7 @@
 @inject PageState PageState;
 
 
-<div class="main">
+<div class='main @(Hidden ? "hidden" : "")'>
         @Body
 </div>
 <div class='loader-container-container @(PageState.State == LoadingState.Loading ? "visible" : "")'>
@@ -11,10 +11,19 @@
                 <img class="loader" src="/images/loader.png">
                 <div class='loader-text'>@PageState.LoadingText</div>
         </div>
+        
 </div>
+
 
 @code 
 {
+        private bool Hidden = true;
+        protected override async Task OnInitializedAsync()
+        {
+                await Task.Delay(500);
+                Hidden = false;
+        }
+
         protected override void OnInitialized()
         {
                 PageState.SetState(LoadingState.Finished, null);

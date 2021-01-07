@@ -44,7 +44,7 @@ namespace CurlingSimulator
 
 		public List<Team> GetTeamsSortedByRoundRobin()
 		{
-			return Teams.OrderByDescending(o => o.RoundRobinRecord.Wins).ThenByDescending(o => o.LsdTotal).ToList();
+			return Teams.OrderByDescending(o => o.RoundRobinRecord.Wins).ThenBy(o => o.LsdTotal).ToList();
 		}
 
 		public List<Team> GetTeamsSortedByPlayoffResults()
