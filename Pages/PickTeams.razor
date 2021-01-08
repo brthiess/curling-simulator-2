@@ -25,7 +25,7 @@
                 <div class='team-list-item-background'></div>
                 <label class='team-list-item-label @(PickedEnoughTeams() && !team.selected ? "disabled" : "")' for="@team.id"></label>
                 <div class="team-list-item-location">
-                    <img src="/images/locations/@(team.countryImage)" />
+                    <img src="images/locations/@(team.countryImage)" />
                 </div>
                 <div class="team-list-item-name">
                     Team @team.lastName
@@ -79,14 +79,14 @@
         {
             if (simulationContainer.Gender == Gender.Male)
             {
-                return "/json/rankings-worlds-men.json";
+                return "json/rankings-worlds-men.json";
             }
             else if (simulationContainer.Gender == Gender.Female)
             {
-                return "/json/rankings-worlds-women.json";
+                return "json/rankings-worlds-women.json";
             }
         }
-        return "/json/rankings.json";
+        return "json/rankings.json";
     }
 
     private void UpdateSelectedTeamsCount(TeamRanking team, object checkedValue)
