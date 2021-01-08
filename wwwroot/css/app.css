@@ -99,6 +99,7 @@ body {
 }
 .main-title {
     font-size: 60px;
+    text-align: center;
 }
 .main-button {
     background: #005cab;
@@ -116,6 +117,9 @@ body {
 }
 .format-container {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }
 .format-button{
     height: 200px;
@@ -125,7 +129,7 @@ body {
     background-color: #f1f1f1;
     cursor: pointer;
     font-size: 20px;
-    margin: 0 50px;
+    margin: 20px 50px;
 }
 .format-button:hover {
     background-color: rgb(224, 224, 224);
@@ -149,15 +153,16 @@ body {
 
 /*pick teams*/
 .teams-list {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
     padding: 0;
     margin: auto;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-gap: 1rem;
+    width: 100%;
     max-width: 1200px;
 }
 .team-list-item {
-    width: calc(33.3% - 40px);
-    margin: 20px;
+    margin: 10px;
     background: #f3f3f3;
     box-shadow: 1px 1px 3px 1px rgba(0,0,0,0.3);
     position: relative;
@@ -292,6 +297,10 @@ label.team-list-item-label.disabled {
     width: 300px;
     font-size: 20px;
 }
+.round-robin-table .qualified {
+    background: #2e86de;;
+    color: white;
+}
 .round-robin-table-team-image {
     height: 30px;
     width: 30px;
@@ -351,7 +360,7 @@ label.team-list-item-label.disabled {
     background: white;
     margin: 10px 0;
     font-size: 18px;
-    padding: 0 30px 0 6px;
+    padding: 0 30px 0 8px;
     height: 50px;
     display: flex;
     border-radius: 5px;
@@ -369,4 +378,92 @@ label.team-list-item-label.disabled {
     object-position: center;
     border-radius: 40px;
     box-shadow: 1px 1px 2px 2px rgba(0,0,0,0.3);
+}
+.team-hammer {
+    height: 16px;
+    margin: 0px 0 0 15px;
+    opacity: 0.7;
+}
+.team-hammer img {
+    height: 100%;
+    width: auto;
+}
+
+@media only screen and (max-width: 1100px) {
+    .world-playoffs {
+        padding: 20px;
+    }
+    .playoff-round-container {
+        margin: 0 10px;
+    }
+    .playoff-round-text {
+        margin: 25px 0 5px;
+    }
+    .playoff-round-text:first-child {
+        margin: 0 0 5px;
+    }
+}
+
+
+
+@media only screen and (max-width: 700px) {
+    .done-button {
+        width: 100%;
+        right: 0;
+        bottom: 0;
+        font-size: 30px;
+        height: 70px;
+    }
+
+    .round-robin-table {
+        font-size: 18px;
+    }
+    .round-robin-table td, .round-robin-table th {
+        padding: 15px;
+    }
+    .round-robin-table-team-image {
+        height: 25px;
+        width: 25px;
+        margin: 0 5px 0 0;
+    }
+    .round-robin-table td:first-child {
+        font-size: 18px;
+    } 
+}
+
+
+@media only screen and (max-width: 600px) {
+    .world-playoffs {
+        flex-flow: column;
+    }
+    .playoff-round-text {
+        margin: 25px 0 5px;
+    }
+    .playoff-round-text:first-child {
+        margin: 0 0 5px;
+    }
+    .playoff-round{
+        height: auto;
+    }
+    .game {
+        margin-bottom: 15px;
+    }
+}
+
+
+@media only screen and (max-width: 400px) {
+    .round-robin-table {
+        font-size: 15px;
+    }
+    .round-robin-table td, .round-robin-table th {
+        padding: 10px;
+    }
+    .round-robin-table-team-image {
+        height: 20px;
+        width: 20px;
+        margin: 0 5px 0 0;
+    }
+    .round-robin-table td:first-child {
+        font-size: 15px;
+    } 
 }

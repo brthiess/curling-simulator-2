@@ -34,6 +34,7 @@
         
         SimulationContainer.TournamentType = TournamentType.Worlds;
         SimulationContainer.Gender = gender;
+        SimulationContainer.Rankings = null;
         SimulationContainer.RestartOrInitTournament();
         await localStorage.SetItemAsync("SimulationContainer", JsonConvert.SerializeObject(SimulationContainer)); 
         NavigationManager.NavigateTo("pick-teams");

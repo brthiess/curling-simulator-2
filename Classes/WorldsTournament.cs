@@ -45,6 +45,7 @@ namespace CurlingSimulator
 		private void DoPlayoffs()
 		{
 			List<Team> teams = GetTop6Teams();
+			teams.ForEach(x => x.MadePlayoffs = true);
 			
 			var quarterFinalResult1 = Team.PlayGame(teams[2], teams[5], true, false, true);
 			var quarterFinalResult2 = Team.PlayGame(teams[3], teams[4], true, false, true);

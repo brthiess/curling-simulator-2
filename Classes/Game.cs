@@ -26,6 +26,10 @@ namespace CurlingSimulator
 
         public bool AwayTeamWon {get;set;}
 
+        public bool HomeHammer {get;set;}
+
+        public bool AwayHammer {get;set;}
+
         public Game(){}
     }
 }
