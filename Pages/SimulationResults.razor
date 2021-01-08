@@ -22,7 +22,7 @@
 @foreach (var team in SimulationContainer?.Tournament?.GetTeamsSortedByRoundRobin() ?? new List<Team>())
 {
     <tr>
-        <td class='round-robin-table-team-name @(team.MadePlayoffs ? "qualified" : "")'><img class="round-robin-table-team-image" src="/images/locations/@team.Image"/> @team.Name</td>
+        <td class='round-robin-table-team-name @(team.MadePlayoffs ? "qualified" : "")'><img class="round-robin-table-team-image" src="images/locations/@team.Image"/> @team.Name</td>
         <td class='round-robin-table-wins round-robin-table-record @(team.MadePlayoffs ? "qualified" : "")'>@team.RoundRobinRecord.Wins</td>
         <td class='round-robin-table-losses round-robin-table-record @(team.MadePlayoffs ? "qualified" : "")' >@team.RoundRobinRecord.Losses</td>
         <td class='round-robin-table-lsd-amount @(team.MadePlayoffs ? "qualified" : "")'>@(Math.Round(team.LsdTotal))cm </td>
@@ -41,22 +41,22 @@
             {
                 <div class="game">
                     <div class='home-team team-name @(game.HomeTeamWon ? "winner" : "loser")'>
-                        <img class="team-image" src="/images/locations/@(game.HomeTeam.Image)"/>
+                        <img class="team-image" src="images/locations/@(game.HomeTeam.Image)"/>
                         <div class="team-name-text">@game.HomeTeam.Name</div>
                         <div class="team-hammer">
                             @if (game.HomeHammer)
                             {
-                                <img src='/images/hammer.png'/>
+                                <img src='images/hammer.png'/>
                             }
                         </div>
                     </div>
                     <div class='away-team team-name @(game.AwayTeamWon ? "winner" : "loser")'>
-                        <img class="team-image" src="/images/locations/@(game.AwayTeam.Image)"/>
+                        <img class="team-image" src="images/locations/@(game.AwayTeam.Image)"/>
                         <div class="team-name-text">@game.AwayTeam.Name</div>
                         <div class="team-hammer">
                             @if (game.AwayHammer)
                             {
-                                <img src='/images/hammer.png'/>
+                                <img src='images/hammer.png'/>
                             }
                         </div>
                     </div>
@@ -71,22 +71,22 @@
             {
                 <div class="game">
                     <div class='home-team team-name @(game.HomeTeamWon ? "winner" : "loser")'>
-                        <img class="team-image" src="/images/locations/@(game.HomeTeam.Image)"/>
+                        <img class="team-image" src="images/locations/@(game.HomeTeam.Image)"/>
                         <div class="team-name-text">@game.HomeTeam.Name</div>
                         <div class="team-hammer">
                             @if (game.HomeHammer)
                             {
-                                <img src='/images/hammer.png'/>
+                                <img src='images/hammer.png'/>
                             }
                         </div>
                     </div>
                     <div class='away-team team-name @(game.AwayTeamWon ? "winner" : "loser")'>
-                        <img class="team-image" src="/images/locations/@(game.AwayTeam.Image)"/>
+                        <img class="team-image" src="images/locations/@(game.AwayTeam.Image)"/>
                         <div class="team-name-text">@game.AwayTeam.Name</div>
                         <div class="team-hammer">
                             @if (game.AwayHammer)
                             {
-                                <img src='/images/hammer.png'/>
+                                <img src='images/hammer.png'/>
                             }
                         </div>
                     </div>
@@ -101,23 +101,23 @@
             {
                 <div class="game">
                     <div class='home-team team-name @(game.HomeTeamWon ? "winner" : "loser")'>
-                        <img class="team-image" src="/images/locations/@(game.HomeTeam.Image)"/>
+                        <img class="team-image" src="images/locations/@(game.HomeTeam.Image)"/>
                         <div class="team-name-text">@game.HomeTeam.Name</div>
                         <div class="team-hammer">
                             @if (game.HomeHammer)
                             {
-                                <img src='/images/hammer.png'/>
+                                <img src='images/hammer.png'/>
                             }
                         </div>
                         
                     </div>
                     <div class='away-team team-name @(game.AwayTeamWon ? "winner" : "loser")'>
-                        <img class="team-image" src="/images/locations/@(game.AwayTeam.Image)"/>
+                        <img class="team-image" src="images/locations/@(game.AwayTeam.Image)"/>
                         <div class="team-name-text">@game.AwayTeam.Name</div>
                         <div class="team-hammer">
                             @if (game.AwayHammer)
                             {
-                                <img src='/images/hammer.png'/>
+                                <img src='images/hammer.png'/>
                             }
                         </div>
                     </div>
@@ -132,22 +132,22 @@
             {
                 <div class="game">
                     <div class='home-team team-name @(game.HomeTeamWon ? "winner" : "loser")'>
-                        <img class="team-image" src="/images/locations/@(game.HomeTeam.Image)"/>
+                        <img class="team-image" src="images/locations/@(game.HomeTeam.Image)"/>
                         <div class="team-name-text">@game.HomeTeam.Name</div>
                         <div class="team-hammer">
                             @if (game.HomeHammer)
                             {
-                                <img src='/images/hammer.png'/>
+                                <img src='images/hammer.png'/>
                             }
                         </div>
                     </div>
                     <div class='away-team team-name @(game.AwayTeamWon ? "winner" : "loser")'>
-                        <img class="team-image" src="/images/locations/@(game.AwayTeam.Image)"/>
+                        <img class="team-image" src="images/locations/@(game.AwayTeam.Image)"/>
                         <div class="team-name-text">@game.AwayTeam.Name</div>
                         <div class="team-hammer">
                             @if (game.AwayHammer)
                             {
-                                <img src='/images/hammer.png'/>
+                                <img src='images/hammer.png'/>
                             }
                         </div>
                     </div>
