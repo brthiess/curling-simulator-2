@@ -115,12 +115,17 @@ body {
 .main-button:hover {
     background: #004683
 }
+.main-title, .pick-format-title {
+    padding: 0 20px;
+    text-align: center;
+}
 .format-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
 }
+
 .format-button{
     height: 200px;
     width: 230px;
@@ -429,6 +434,10 @@ label.team-list-item-label.disabled {
     .round-robin-table td:first-child {
         font-size: 18px;
     } 
+    .loader {
+        height: 60px;
+        width: 60px;
+    }
 }
 
 
@@ -447,6 +456,9 @@ label.team-list-item-label.disabled {
     }
     .game {
         margin-bottom: 15px;
+    }
+    .main-title {
+        font-size: 40px;
     }
 }
 
