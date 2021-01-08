@@ -148,10 +148,10 @@ body {
     background-size: contain;
 }
 .world-women-logo {
-    background-image: url("images/world-women-logo.png");
+    background-image: url("../images/world-women-logo.png");
 }
 .world-men-logo {
-    background-image: url("images/world-men-logo.png");
+    background-image: url("../images/world-men-logo.png");
 }
 
 
