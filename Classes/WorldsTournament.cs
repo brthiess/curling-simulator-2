@@ -27,7 +27,7 @@ namespace CurlingSimulator
 			{
 				for (var j = i + 1; j < Teams.Count; j++)
 				{
-					Team.PlayGame(Teams[j], Teams[i]);
+					Team.PlayGame(Teams[j], Teams[i], RoundType.Qualifying);
 				}
 			}
 			SetFinalRankingsForNonPlayoffTeams();
@@ -47,14 +47,14 @@ namespace CurlingSimulator
 			List<Team> teams = GetTop6Teams();
 			teams.ForEach(x => x.MadePlayoffs = true);
 			
-			var quarterFinalResult1 = Team.PlayGame(teams[2], teams[5], true, false, true);
-			var quarterFinalResult2 = Team.PlayGame(teams[3], teams[4], true, false, true);
+			var quarterFinalResult1 = Team.PlayGame(teams[2], teams[5], RoundType.Playoff, true);
+			var quarterFinalResult2 = Team.PlayGame(teams[3], teams[4], RoundType.Playoff, true);
 
-			var semiFinalResult1 = Team.PlayGame(teams[0], quarterFinalResult1.WinningTeam, true, false, true);
-			var semiFinalResult2 = Team.PlayGame(teams[1], quarterFinalResult2.WinningTeam, true, false, true);
+			var semiFinalResult1 = Team.PlayGame(teams[0], quarterFinalResult1.WinningTeam, RoundType.Playoff, true);
+			var semiFinalResult2 = Team.PlayGame(teams[1], quarterFinalResult2.WinningTeam, RoundType.Playoff, true);
 
-			var finalsResult = Team.PlayGame(semiFinalResult1.WinningTeam, semiFinalResult2.WinningTeam, true, false, true);
-			var bronzeMedalResult = Team.PlayGame(semiFinalResult1.LosingTeam, semiFinalResult2.LosingTeam, true, false, true);
+			var finalsResult = Team.PlayGame(semiFinalResult1.WinningTeam, semiFinalResult2.WinningTeam, RoundType.Playoff, true);
+			var bronzeMedalResult = Team.PlayGame(semiFinalResult1.LosingTeam, semiFinalResult2.LosingTeam, RoundType.Playoff, true);
 
 			finalsResult.WinningTeam.FinalRanking = 1;
 			finalsResult.LosingTeam.FinalRanking = 2;
@@ -73,13 +73,13 @@ namespace CurlingSimulator
 
 		private List<Team> GetTop6Teams()
 		{
-			List<Team> TeamsSorted = Teams.OrderByDescending(o => o.RoundRobinRecord.Wins).ThenBy(o => o.LsdTotal).ToList();
+			List<Team> TeamsSorted = Teams.OrderByDescending(o => o.QualifyingRoundRecord.Wins).ThenBy(o => o.LsdTotal).ToList();
 			return TeamsSorted.GetRange(0, 6);
 		}
 
 		private List<Team> GetAllTeamsButTop6()
 		{
-			List<Team> TeamsSorted = Teams.OrderByDescending(o => o.RoundRobinRecord.Wins).ThenBy(o => o.LsdTotal).ToList();
+			List<Team> TeamsSorted = Teams.OrderByDescending(o => o.QualifyingRoundRecord.Wins).ThenBy(o => o.LsdTotal).ToList();
 			return TeamsSorted.GetRange(6, TeamsSorted.Count() - 6);
 		}
 	}

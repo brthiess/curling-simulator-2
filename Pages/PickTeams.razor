@@ -25,7 +25,7 @@
                 <div class='team-list-item-background'></div>
                 <label class='team-list-item-label @(PickedEnoughTeams() && !team.selected ? "disabled" : "")' for="@team.id"></label>
                 <div class="team-list-item-location">
-                    <img src="images/locations/@(team.countryImage)" />
+                    <img src="/images/locations/@(team.countryImage)" />
                 </div>
                 <div class="team-list-item-name">
                     Team @team.lastName
@@ -149,7 +149,7 @@
         {
             if (team.selected)
             {
-                SimulationContainer.Tournament.AddTeam(new Team(team.lastName, null, team.rank, team.location, team.countryImage));
+                SimulationContainer.Tournament.AddTeam(new Team(team.lastName, 1, null, team.rank, team.location, team.countryImage), 1);
             }
         }
 

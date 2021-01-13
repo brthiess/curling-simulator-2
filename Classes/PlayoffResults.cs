@@ -25,6 +25,8 @@ namespace CurlingSimulator
         Semis,
         Finals,
         Bronze,
-        Sixteens
+        Sixteens,
+        ThreeFourGame,
+        OneTwoGame
     }
 }

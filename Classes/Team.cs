@@ -11,6 +11,10 @@ namespace CurlingSimulator
 
 		public Record RoundRobinRecord {get;set;}
 
+		public Record QualifyingRoundRecord {get;set;}
+
+		public Record ChampionshipRoundRecord {get;set;}
+
 		public Record TourRecord { get; set; }
 
 		public int? TourRanking { get; set; }
@@ -25,14 +29,19 @@ namespace CurlingSimulator
 
 		public bool MadePlayoffs {get;set;}
 
+		public bool MadeChampionshipRound {get;set;}
+
+		public int DivisionNumber {get;set;}
+
 		public Team(){}
 
-		public Team(string name, Record tourRecord = null, int? tourRanking = null, string location = null, string image = null)
+		public Team(string name, int divisionNumber, Record tourRecord = null, int? tourRanking = null, string location = null, string image = null)
 		{
 			Location = location;
 			Image = image;
 			TourRecord = tourRecord;
 			TourRanking = tourRanking;
+			DivisionNumber = divisionNumber;
 			if (tourRecord != null)
 			{
 				Rating = GetRatingFromRecord(tourRecord);
@@ -51,7 +60,9 @@ namespace CurlingSimulator
 			}
 
 			this.Name = name;
+			this.QualifyingRoundRecord = new Record();
 			this.RoundRobinRecord = new Record();
+			this.ChampionshipRoundRecord = new Record();
 			this.LsdTotal = 0;
 		}
 
@@ -95,10 +106,10 @@ namespace CurlingSimulator
 			return (double) record.Wins / (record.Wins + record.Losses);
 		}
 
-		public static Game PlayGame(Team homeTeam, Team awayTeam, bool giveHammerAdvantageToTeamWithBetterRecord = false, bool isRoundRobinGame=true, bool isPlayoffGame=false)
+		public static Game PlayGame(Team homeTeam, Team awayTeam, RoundType roundType, bool giveHammerAdvantageToTeamWithBetterRecord = false)
 		{
-			var homeTeamLsd = DrawToTheButton(homeTeam, isPlayoffGame);
-			var awayTeamLsd = DrawToTheButton(awayTeam, isPlayoffGame);
+			var homeTeamLsd = DrawToTheButton(homeTeam, roundType);
+			var awayTeamLsd = DrawToTheButton(awayTeam, roundType);
 
 			bool homeHasHammer = GetHomeHasHammer(homeTeam, awayTeam, homeTeamLsd, awayTeamLsd, giveHammerAdvantageToTeamWithBetterRecord);
 
@@ -108,7 +119,12 @@ namespace CurlingSimulator
 			
 			if (random.NextDouble() < probabilityHomeBeatsAway)
 			{				
-				if (isRoundRobinGame)
+				if (roundType == RoundType.Qualifying)
+				{
+					homeTeam.QualifyingRoundRecord.AddWin();
+					awayTeam.QualifyingRoundRecord.AddLoss();
+				}
+				if (roundType != RoundType.Playoff)
 				{
 					homeTeam.RoundRobinRecord.AddWin();
 					awayTeam.RoundRobinRecord.AddLoss();
@@ -128,7 +144,12 @@ namespace CurlingSimulator
 			}
 			else
 			{				
-				if (isRoundRobinGame)
+				if (roundType == RoundType.Qualifying)
+				{
+					homeTeam.QualifyingRoundRecord.AddLoss();
+					awayTeam.QualifyingRoundRecord.AddWin();
+				}
+				if (roundType != RoundType.Playoff)
 				{
 					homeTeam.RoundRobinRecord.AddLoss();
 					awayTeam.RoundRobinRecord.AddWin();
@@ -150,11 +171,11 @@ namespace CurlingSimulator
 
 		private static bool GetHomeHasHammer(Team homeTeam, Team awayTeam, double homeTeamLsd, double awayTeamLsd,  bool giveHammerAdvantageToTeamWithBetterRecord = false)
 		{
-			if (homeTeam.RoundRobinRecord.Wins > awayTeam.RoundRobinRecord.Wins && giveHammerAdvantageToTeamWithBetterRecord)
+			if (homeTeam.QualifyingRoundRecord.Wins > awayTeam.QualifyingRoundRecord.Wins && giveHammerAdvantageToTeamWithBetterRecord)
 			{
 				return true;
 			}
-			else if (homeTeam.RoundRobinRecord.Wins < awayTeam.RoundRobinRecord.Wins && giveHammerAdvantageToTeamWithBetterRecord) 
+			else if (homeTeam.QualifyingRoundRecord.Wins < awayTeam.QualifyingRoundRecord.Wins && giveHammerAdvantageToTeamWithBetterRecord) 
 			{
 				return false;
 			}
@@ -172,7 +193,7 @@ namespace CurlingSimulator
 			throw new Exception("Could not determine which team has hammer. " + homeTeamLsd + " " + awayTeamLsd + " " + homeTeam.Name + " " + awayTeam.Name);
 		}
 
-        private static double DrawToTheButton(Team team, bool isPlayoffGame)
+        private static double DrawToTheButton(Team team, RoundType roundType)
         {
 			Random r = new Random();
 			double lsdLength = 1000/(Math.Sqrt(team.Rating) * r.Next(1,200) * Math.Sqrt(team.Rating)) - 5.7;
@@ -184,7 +205,7 @@ namespace CurlingSimulator
 			{
 				lsdLength = 144;
 			}
-			if (!isPlayoffGame)
+			if (roundType != RoundType.Playoff)
 			{
 				team.LsdTotal += lsdLength;
 			}

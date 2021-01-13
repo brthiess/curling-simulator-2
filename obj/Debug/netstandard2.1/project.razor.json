@@ -173,6 +173,39 @@
         }
       },
       {
+        "HashCode": 850151195,
+        "Kind": "Components.Component",
+        "Name": "curling_simulator_2.Pages.SimulationResults",
+        "AssemblyName": "curling-simulator-2",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "SimulationResults"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "curling_simulator_2.Pages.SimulationResults"
+        }
+      },
+      {
+        "HashCode": -1200351138,
+        "Kind": "Components.Component",
+        "Name": "curling_simulator_2.Pages.SimulationResults",
+        "AssemblyName": "curling-simulator-2",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "curling_simulator_2.Pages.SimulationResults"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "curling_simulator_2.Pages.SimulationResults",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
         "HashCode": -1876470664,
         "Kind": "Components.Component",
         "Name": "curling_simulator_2.Pages.PickTeams",
@@ -202,92 +235,6 @@
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
           "Common.TypeName": "curling_simulator_2.Pages.PickTeams",
-          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
-        }
-      },
-      {
-        "HashCode": -1578175337,
-        "Kind": "Components.Component",
-        "Name": "curling_simulator_2.Shared.Navigation",
-        "AssemblyName": "curling-simulator-2",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "Navigation"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "curling_simulator_2.Shared.Navigation"
-        }
-      },
-      {
-        "HashCode": 972869251,
-        "Kind": "Components.Component",
-        "Name": "curling_simulator_2.Shared.Navigation",
-        "AssemblyName": "curling-simulator-2",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "curling_simulator_2.Shared.Navigation"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "curling_simulator_2.Shared.Navigation",
-          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
-        }
-      },
-      {
-        "HashCode": 1454668173,
-        "Kind": "Components.Component",
-        "Name": "curling_simulator_2.Shared.SurveyPrompt",
-        "AssemblyName": "curling-simulator-2",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "SurveyPrompt"
-          }
-        ],
-        "BoundAttributes": [
-          {
-            "Kind": "Components.Component",
-            "Name": "Title",
-            "TypeName": "System.String",
-            "Metadata": {
-              "Common.PropertyName": "Title"
-            }
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "curling_simulator_2.Shared.SurveyPrompt"
-        }
-      },
-      {
-        "HashCode": -521693200,
-        "Kind": "Components.Component",
-        "Name": "curling_simulator_2.Shared.SurveyPrompt",
-        "AssemblyName": "curling-simulator-2",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "curling_simulator_2.Shared.SurveyPrompt"
-          }
-        ],
-        "BoundAttributes": [
-          {
-            "Kind": "Components.Component",
-            "Name": "Title",
-            "TypeName": "System.String",
-            "Metadata": {
-              "Common.PropertyName": "Title"
-            }
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "curling_simulator_2.Shared.SurveyPrompt",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch"
         }
       },
@@ -384,6 +331,92 @@
           "Runtime.Name": "Components.None",
           "Common.TypeName": "curling_simulator_2.Shared.MainLayout.Body",
           "Components.IsSpecialKind": "Components.ChildContent",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": -1578175337,
+        "Kind": "Components.Component",
+        "Name": "curling_simulator_2.Shared.Navigation",
+        "AssemblyName": "curling-simulator-2",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "Navigation"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "curling_simulator_2.Shared.Navigation"
+        }
+      },
+      {
+        "HashCode": 972869251,
+        "Kind": "Components.Component",
+        "Name": "curling_simulator_2.Shared.Navigation",
+        "AssemblyName": "curling-simulator-2",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "curling_simulator_2.Shared.Navigation"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "curling_simulator_2.Shared.Navigation",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": 1454668173,
+        "Kind": "Components.Component",
+        "Name": "curling_simulator_2.Shared.SurveyPrompt",
+        "AssemblyName": "curling-simulator-2",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "SurveyPrompt"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "Title",
+            "TypeName": "System.String",
+            "Metadata": {
+              "Common.PropertyName": "Title"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "curling_simulator_2.Shared.SurveyPrompt"
+        }
+      },
+      {
+        "HashCode": -521693200,
+        "Kind": "Components.Component",
+        "Name": "curling_simulator_2.Shared.SurveyPrompt",
+        "AssemblyName": "curling-simulator-2",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "curling_simulator_2.Shared.SurveyPrompt"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "Title",
+            "TypeName": "System.String",
+            "Metadata": {
+              "Common.PropertyName": "Title"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "curling_simulator_2.Shared.SurveyPrompt",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch"
         }
       },

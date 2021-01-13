@@ -14,6 +14,8 @@ namespace CurlingSimulator
 		//List of teams in the tournament
 		public List<Team> Teams;
 
+		public Dictionary<int, List<Team>> Divisions;
+
 		//The tournament type
 		public virtual TournamentType TournamentType {get;}
 
@@ -25,11 +27,17 @@ namespace CurlingSimulator
 		public Tournament()
 		{
 			Teams = new List<Team>();
+			Divisions = new Dictionary<int, List<Team>>();
 		}
 
-		public void AddTeam(Team team)
+		public void AddTeam(Team team, int divisionNumber)
 		{
 			Teams.Add(team);
+			if (!Divisions.ContainsKey(divisionNumber))
+			{
+				Divisions.Add(divisionNumber, new List<Team>());
+			}
+			Divisions[divisionNumber].Add(team);
 		}
 
 		public virtual void Run(){}
@@ -38,13 +46,13 @@ namespace CurlingSimulator
 		{
 			for (var i = 0; i < Teams.Count; i++)
 			{
-				Teams[i] = new Team(Teams[i].Name, Teams[i].TourRecord, Teams[i].TourRanking);
+				Teams[i] = new Team(Teams[i].Name, Teams[i].DivisionNumber, Teams[i].TourRecord, Teams[i].TourRanking);
 			}
 		}
 
 		public List<Team> GetTeamsSortedByRoundRobin()
 		{
-			return Teams.OrderByDescending(o => o.RoundRobinRecord.Wins).ThenBy(o => o.LsdTotal).ToList();
+			return Teams.OrderByDescending(o => o.QualifyingRoundRecord.Wins).ThenBy(o => o.LsdTotal).ToList();
 		}
 
 		public List<Team> GetTeamsSortedByPlayoffResults()
@@ -57,5 +65,11 @@ namespace CurlingSimulator
 		Worlds,
 		CanadaNational,
 		Slam
+	}
+
+	public enum RoundType {
+		Qualifying,
+		Championship,
+		Playoff
 	}
 }

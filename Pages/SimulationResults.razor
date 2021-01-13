@@ -23,8 +23,8 @@
 {
     <tr>
         <td class='round-robin-table-team-name @(team.MadePlayoffs ? "qualified" : "")'><img class="round-robin-table-team-image" src="/images/locations/@team.Image"/> @team.Name</td>
-        <td class='round-robin-table-wins round-robin-table-record @(team.MadePlayoffs ? "qualified" : "")'>@team.RoundRobinRecord.Wins</td>
-        <td class='round-robin-table-losses round-robin-table-record @(team.MadePlayoffs ? "qualified" : "")' >@team.RoundRobinRecord.Losses</td>
+        <td class='round-robin-table-wins round-robin-table-record @(team.MadePlayoffs ? "qualified" : "")'>@team.QualifyingRoundRecord.Wins</td>
+        <td class='round-robin-table-losses round-robin-table-record @(team.MadePlayoffs ? "qualified" : "")' >@team.QualifyingRoundRecord.Losses</td>
         <td class='round-robin-table-lsd-amount @(team.MadePlayoffs ? "qualified" : "")'>@(Math.Round(team.LsdTotal))cm </td>
     </tr>
 }     
