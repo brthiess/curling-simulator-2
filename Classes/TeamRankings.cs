@@ -9,6 +9,8 @@ namespace CurlingSimulator
         public string location { get; set; } 
         public string image { get; set;}
 
+        public int? division {get;set;}
+
         public string countryImage {get;set;}
 
         public string provinceImage {get;set;}

@@ -13,7 +13,9 @@ namespace CurlingSimulator
 
         public override int NumberOfTeams => 13;
 
-        
+        public override int NumberOfDivisions => 2;
+
+        public override int NumberOfTeamsPerDivision => 8;        
 
 		public override void Run()
 		{
@@ -60,7 +62,7 @@ namespace CurlingSimulator
 			var championshipTeams = new List<Team>();
 			foreach(var division in Divisions)
 			{
-				championshipTeams.Concat(GetQualifyingTeamsInDivision(division.Value));
+				championshipTeams = championshipTeams.Concat(GetQualifyingTeamsInDivision(division.Value)).ToList();
 			}
 			List<Team> teamsSorted = championshipTeams.OrderByDescending(o => o.QualifyingRoundRecord.Wins).ThenBy(o => o.LsdTotal).ToList();
 			return teamsSorted;
@@ -111,7 +113,7 @@ namespace CurlingSimulator
 
 		private List<Team> GetTop4Teams()
 		{
-			List<Team> TeamsSorted = Teams.OrderByDescending(o => o.QualifyingRoundRecord.Wins).ThenBy(o => o.LsdTotal).ToList();
+			List<Team> TeamsSorted = Teams.OrderByDescending(o => o.RoundRobinRecord.Wins).ThenBy(o => o.LsdTotal).ToList();
 			return TeamsSorted.GetRange(0, 4);
 		}
 
@@ -126,7 +128,7 @@ namespace CurlingSimulator
 			var qualifyingTeams = new List<Team>();
 			foreach(var division in Divisions)
 			{
-				qualifyingTeams.Concat(GetQualifyingTeamsInDivision(division.Value));
+				qualifyingTeams = qualifyingTeams.Concat(GetQualifyingTeamsInDivision(division.Value)).ToList();
 			}
 			List<Team> teamsSorted = qualifyingTeams.OrderByDescending(o => o.QualifyingRoundRecord.Wins).ThenBy(o => o.LsdTotal).ToList();
 			return teamsSorted;
@@ -137,7 +139,7 @@ namespace CurlingSimulator
 			var nonQualifyingTeams = new List<Team>();
 			foreach(var division in Divisions)
 			{
-				nonQualifyingTeams.Concat(GetNonQualifyingTeamsInDivision(division.Value));
+				nonQualifyingTeams = nonQualifyingTeams.Concat(GetNonQualifyingTeamsInDivision(division.Value)).ToList();
 			}
 			List<Team> teamsSorted = nonQualifyingTeams.OrderByDescending(o => o.QualifyingRoundRecord.Wins).ThenBy(o => o.LsdTotal).ToList();
 			return teamsSorted;

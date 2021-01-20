@@ -14,7 +14,7 @@
 
 <h1 class='page-title pick-teams-title'>Pick Teams</h1>
 
-<p class='pick-teams-text'>Pick @SimulationContainer?.Tournament?.NumberOfTeams</p>
+<p class='pick-teams-text'>@PickTeamsText</p>
 
 <ul class='teams-list'>
     @if (SimulationContainer?.Rankings != null){
@@ -37,11 +37,16 @@
     }
 </ul>
 
-<button class='done-button continue-button @(PickedEnoughTeams() ? "ready" : "")' @onclick="NavigateToSimulationResults">@SimulateButtonText</button>
+<button class='done-button continue-button division-@(CurrentDivisionBeingSelectedFor) @(PickedEnoughTeams() ? "ready" : "")' @onclick="NavigateToSimulationResults">
+    <span class="button-main-text">@SimulateButtonText</span>
+    <span class='button-sub-text @(SimulationContainer?.Tournament?.NumberOfDivisions == 1 ? "hidden" : "")'>@SimulateButtonSubText</span>
+</button>
 
 @code { 
 
-    int selectedTeamsCount {get;set;} = 0;
+    int SelectedTeamsCount {get;set;} = 0;
+    int CurrentDivision {get;set;} = 1;
+    int CurrentDivisionBeingSelectedFor {get;set;} = 1;
 
     private string SimulateButtonText 
     {
@@ -56,6 +61,22 @@
             return simulateButtonText;
         }
     }
+
+    private string SimulateButtonSubText 
+    {
+        get 
+        {
+            return "Pool " + CurrentDivisionBeingSelectedFor;
+        }
+    }
+
+    private string PickTeamsText
+    {
+        get 
+        {
+            return "Pick " + SimulationContainer?.Tournament?.NumberOfTeams;
+        }
+    }
     protected override async Task OnInitializedAsync()
     {
         if (SimulationContainer.State == SimulationState.Uninitialized)
@@ -68,7 +89,7 @@
         {
             SimulationContainer.Rankings = await Http.GetFromJsonAsync<List<TeamRanking>>(GetJSONPath(SimulationContainer));
         }
-        selectedTeamsCount = GetNumberOfSelectedTeams(false);
+        SelectedTeamsCount = GetNumberOfSelectedTeams(false);
         await Task.Delay(100);
         PageState.SetState(LoadingState.Finished, null);
     }
@@ -94,15 +115,21 @@
 
         if ((bool)checkedValue)
         {
+            SelectedTeamsCount++;
+            CurrentDivision = (int) Math.Ceiling(((double)SelectedTeamsCount / (double) SimulationContainer.Tournament.NumberOfTeamsPerDivision));
+            CurrentDivisionBeingSelectedFor = (int) Math.Ceiling(((double)(SelectedTeamsCount + 1) / (double) SimulationContainer.Tournament.NumberOfTeamsPerDivision));
             team.selected = true;
-            selectedTeamsCount++;
+            team.division = CurrentDivision;
         }
         else 
         {
+            SelectedTeamsCount--;
+            team.division = null;
             team.selected = false;
-            selectedTeamsCount--;
         }
     }
+    
+
     private async void NavigateToSimulationResults() 
     {
         if (GetNumberOfSelectedTeams() != SimulationContainer.Tournament.NumberOfTeams)
@@ -120,7 +147,7 @@
     {
         if (useCache)
         {
-            return selectedTeamsCount;
+            return SelectedTeamsCount;
         }
 
         int numberOfSelectedTeams = 0;
@@ -149,7 +176,7 @@
         {
             if (team.selected)
             {
-                SimulationContainer.Tournament.AddTeam(new Team(team.lastName, 1, null, team.rank, team.location, team.countryImage), 1);
+                SimulationContainer.Tournament.AddTeam(new Team(team.lastName, team.division.HasValue ? team.division.Value : 1, null, team.rank, team.location, team.countryImage));
             }
         }
 

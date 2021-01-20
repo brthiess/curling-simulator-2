@@ -13,7 +13,9 @@ namespace CurlingSimulator
 
         public override int NumberOfTeams => 13;
 
-        
+        public override int NumberOfTeamsPerDivision => 13;
+
+        public override int NumberOfDivisions => 1; 
 
 		public override void Run()
 		{

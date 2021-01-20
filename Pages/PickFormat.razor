@@ -18,6 +18,14 @@
         <span class="format-button-logo world-men-logo"></span> 
         <span class="format-button-text">Men's Worlds</span>
     </button>
+    <button class="format-button" @onclick="@(e => NavigateToPickTeams(TournamentType.CanadaNational, Gender.Female))">
+        <span class="format-button-logo scotties-logo"></span> 
+        <span class="format-button-text">Scotties</span>
+    </button>
+    <button class="format-button" @onclick="@(e => NavigateToPickTeams(TournamentType.CanadaNational, Gender.Male))">
+        <span class="format-button-logo brier-logo"></span> 
+        <span class="format-button-text">Brier</span>
+    </button>
 </div>
 
 @code { 

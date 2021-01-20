@@ -13,6 +13,9 @@ body {
 .invalid {
     outline: 1px solid red;
 }
+.hidden {
+    display: none;
+}
 
 .validation-message {
     color: red;
@@ -140,7 +143,7 @@ body {
     background-color: rgb(224, 224, 224);
 }
 .format-button-logo {
-    height: 90px;
+    height: 120px;
     display: block;
     margin: 0px 0 20px;
     background-position: center;
@@ -153,7 +156,12 @@ body {
 .world-men-logo {
     background-image: url("/images/world-men-logo.png");
 }
-
+.brier-logo {
+    background-image: url("/images/brier-logo.png");
+}
+.scotties-logo {
+    background-image: url("/images/scotties-logo.png");
+}
 
 
 /*pick teams*/

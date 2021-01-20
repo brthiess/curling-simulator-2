@@ -20,6 +20,11 @@ namespace CurlingSimulator
 		public virtual TournamentType TournamentType {get;}
 
 		public virtual int NumberOfTeams {get;}
+
+		public virtual int NumberOfTeamsPerDivision {get;}
+
+		public virtual int NumberOfDivisions {get;}
+
 		
 		//The playoff results of the tournament
 		public PlayoffResults PlayoffResults;
@@ -30,14 +35,14 @@ namespace CurlingSimulator
 			Divisions = new Dictionary<int, List<Team>>();
 		}
 
-		public void AddTeam(Team team, int divisionNumber)
+		public void AddTeam(Team team)
 		{
 			Teams.Add(team);
-			if (!Divisions.ContainsKey(divisionNumber))
+			if (!Divisions.ContainsKey(team.DivisionNumber))
 			{
-				Divisions.Add(divisionNumber, new List<Team>());
+				Divisions.Add(team.DivisionNumber, new List<Team>());
 			}
-			Divisions[divisionNumber].Add(team);
+			Divisions[team.DivisionNumber].Add(team);
 		}
 
 		public virtual void Run(){}
