@@ -75,8 +75,20 @@ A Team's final rank in a Run. 1 is the champion.
 _Avoid_: Ranking (a Ranking is tour strength, not a finish)
 
 **Ranking**:
-A Team's standing on the world or tour list, used to derive strength.
+A Team's standing on a dated Tour Snapshot, used to derive strength.
 _Avoid_: Placing
+
+**Snapshot**:
+A frozen Tour Ranking list with an as-of date. The maintainer refreshes it about once a year. The app does not scrape rankings live.
+_Avoid_: live scrape, API
+
+**Page playoff**:
+A four-team playoff: 1v2 winner goes to the final; 1v2 loser plays the 3v4 winner in the semifinal.
+_Avoid_: straight knockout (that is quarters–semis–final with no 1v2 bye to the final)
+
+**Triple knockout**:
+A Slam Format Variant: 16 Teams, win three Games before losing three. Two A-side (3–0), three B-side (3–1), and three C-side (3–2) Teams reach the quarterfinals.
+
 
 **Hammer**:
 Last-stone advantage in a Game.
