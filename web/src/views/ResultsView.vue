@@ -11,7 +11,7 @@
         </p>
       </div>
       <div class="actions">
-        <button class="btn primary" type="button" @click="copyLink">{{ copied ? 'Link copied ✓' : 'Share result' }}</button>
+        <button class="btn primary" type="button" @click="copyLink">{{ copied ? 'Copied ✓' : 'Copy link' }}</button>
         <button class="btn" type="button" :disabled="refreshing" @click="rerun">{{ refreshing ? 'Running…' : 'Run again' }}</button>
         <RouterLink class="btn ghost" to="/play">New tournament</RouterLink>
       </div>
