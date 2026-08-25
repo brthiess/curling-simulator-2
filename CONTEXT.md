@@ -40,7 +40,7 @@ A named championship Field the app can load without picking Teams one by one.
 _Avoid_: automatic tournament
 
 **Custom Field**:
-A Field of Tour Teams chosen by the user. They need not have qualified for that championship in real life.
+A Field of Tour Teams chosen by the user. They need not have qualified for that championship in real life. When the Format Variant uses Pools, the user assigns every Team to a Pool.
 _Avoid_: invented team, fantasy roster
 
 **Tour**:
@@ -52,7 +52,7 @@ A real Tour rink, identified by its skip. Strength is its real Ranking. There ar
 _Avoid_: custom-created team, fictional team, user-set rating
 
 **Pool**:
-A subset of the Field that plays a round robin among itself. Scotties and Brier use Pools; Worlds does not.
+A subset of the Field that plays a round robin among itself. Used by some Format Variants (current Brier/Scotties, current Europeans); not by current Worlds. A Preset uses the real event's Pools; a Custom Field lets the user assign Pools.
 _Avoid_: Division
 
 **Run**:
