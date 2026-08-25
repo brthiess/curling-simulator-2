@@ -1,11 +1,26 @@
 <template>
   <div class="play">
     <ol class="steps">
-      <li v-for="s in visibleSteps" :key="s.id" :class="{ on: step === s.id }">{{ s.label }}</li>
+      <li
+        v-for="(s, index) in visibleSteps"
+        :key="s.id"
+        :class="{ on: step === s.id, done: index < currentStepIndex }"
+      >
+        <button
+          type="button"
+          :disabled="index > currentStepIndex"
+          :aria-current="step === s.id ? 'step' : undefined"
+          @click="step = s.id"
+        >
+          <span>{{ index + 1 }}</span>{{ s.label }}
+        </button>
+      </li>
     </ol>
 
-    <section v-if="step === 'format'">
+    <Transition name="step" mode="out-in">
+    <section v-if="step === 'format'" :key="step" class="step-panel">
       <h1 class="page-title">Pick a championship</h1>
+      <p class="hint">Choose the ice. You can fine-tune the format next.</p>
       <div class="format-grid">
         <button
           v-for="card in formatCards"
@@ -24,7 +39,7 @@
       </div>
     </section>
 
-    <section v-else-if="step === 'variant'">
+    <section v-else-if="step === 'variant'" :key="step" class="step-panel">
       <h1 class="page-title">Format variant</h1>
       <p class="hint">{{ store.format.name }} · {{ store.gender }}</p>
       <div class="choice-list">
@@ -42,7 +57,7 @@
       <button class="btn ghost" type="button" @click="step = 'format'">Back</button>
     </section>
 
-    <section v-else-if="step === 'field'">
+    <section v-else-if="step === 'field'" :key="step" class="step-panel">
       <h1 class="page-title">The field</h1>
       <p class="hint">{{ store.variant.fieldSize }} teams · {{ store.variant.name }}</p>
       <div class="choice-list">
@@ -65,12 +80,21 @@
       <button class="btn ghost" type="button" @click="backFromField">Back</button>
     </section>
 
-    <section v-else-if="step === 'teams'">
+    <section v-else-if="step === 'teams'" :key="step" class="step-panel">
       <h1 class="page-title">Pick teams</h1>
-      <p class="hint">
-        {{ store.selected.length }}/{{ store.variant.fieldSize }} · Rankings as of {{ store.snapshotAsOf }}
-      </p>
-      <input v-model="query" class="search" type="search" placeholder="Search skip or location" />
+      <div class="selection-status">
+        <div>
+          <strong>{{ store.selected.length }} of {{ store.variant.fieldSize }}</strong>
+          <span>teams selected · Rankings as of {{ store.snapshotAsOf }}</span>
+        </div>
+        <div class="selection-track" role="progressbar" :aria-valuenow="store.selected.length" aria-valuemin="0" :aria-valuemax="store.variant.fieldSize">
+          <span :style="{ width: `${selectionProgress}%` }"></span>
+        </div>
+      </div>
+      <div class="picker-tools">
+        <input v-model="query" class="search" type="search" placeholder="Search skip or location" />
+        <button class="btn" type="button" @click="fillTopTeams">Pick top {{ store.variant.fieldSize }}</button>
+      </div>
       <ul class="teams">
         <li v-for="team in filteredTour" :key="team.id">
           <label class="team-row" :class="{ on: isSelected(team.id), dim: pickerFull && !isSelected(team.id) }">
@@ -94,9 +118,12 @@
       </div>
     </section>
 
-    <section v-else-if="step === 'pools'" class="pools-section">
+    <section v-else-if="step === 'pools'" :key="step" class="pools-section step-panel">
       <h1 class="page-title">Assign pools</h1>
-      <p class="hint">Drag teams into pools. Each pool needs {{ store.variant.poolSize }}.</p>
+      <div class="pool-intro">
+        <p class="hint">Drag teams into pools. Each pool needs {{ store.variant.poolSize }}.</p>
+        <button class="btn" type="button" @click="autoAssignPools">Auto-balance pools</button>
+      </div>
       <div class="pool-board">
         <div class="pool-col unassigned">
           <h2>Unassigned ({{ unassigned.length }})</h2>
@@ -141,8 +168,9 @@
       </div>
     </section>
 
-    <section v-else-if="step === 'run'">
+    <section v-else-if="step === 'run'" :key="step" class="step-panel run-step">
       <h1 class="page-title">How to run it</h1>
+      <p class="hint">One dramatic draw, or the big-picture odds.</p>
       <div class="choice-list">
         <button class="choice" :class="{ on: store.mode === 'single' }" type="button" @click="store.mode = 'single'">
           <strong>Single run</strong>
@@ -163,18 +191,33 @@
       </label>
       <div class="bar">
         <button class="btn ghost" type="button" @click="backFromRun">Back</button>
-        <button class="btn primary" type="button" @click="go">Simulate</button>
+        <button class="btn primary" type="button" :disabled="simulating" @click="go">
+          {{ simulating ? 'Running…' : 'Simulate tournament' }}
+        </button>
       </div>
     </section>
+    </Transition>
+
+    <Transition name="overlay">
+      <div v-if="simulating" class="sim-overlay" role="status" aria-live="polite">
+        <div class="sim-card">
+          <div class="stone-spinner" aria-hidden="true"><span></span></div>
+          <p class="eyebrow">{{ store.mode === 'many' ? `${store.iterations.toLocaleString()} tournaments` : 'One tournament' }}</p>
+          <strong>{{ store.mode === 'many' ? 'Calculating the odds…' : 'Playing every end…' }}</strong>
+          <small>Fresh ice. New seed. Anything can happen.</small>
+        </div>
+      </div>
+    </Transition>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, nextTick, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import Flag from '../components/Flag.vue'
 import { asset } from '../asset'
-import { presetsFor, type Preset } from '../data/presets'
+import { assignSnakePools, presetsFor, type Preset } from '../data/presets'
+import { topN } from '../data/tour'
 import { getFormat } from '../sim/catalog'
 import type { FormatId, Gender, Team, VariantId } from '../sim/types'
 import { useSimStore } from '../stores/sim'
@@ -183,6 +226,7 @@ type Step = 'format' | 'variant' | 'field' | 'teams' | 'pools' | 'run'
 const step = ref<Step>('format')
 const query = ref('')
 const custom = ref(false)
+const simulating = ref(false)
 const store = useSimStore()
 const router = useRouter()
 
@@ -218,6 +262,8 @@ const availablePresets = computed(() => presetsFor(store.formatId, store.variant
 const fieldFull = computed(() => store.selected.length === store.variant.fieldSize)
 const pickerFull = computed(() => fieldFull.value)
 const unassigned = computed(() => store.selected.filter((t) => !t.poolId))
+const currentStepIndex = computed(() => visibleSteps.value.findIndex((s) => s.id === step.value))
+const selectionProgress = computed(() => (100 * store.selected.length) / store.variant.fieldSize)
 
 const filteredTour = computed(() => {
   const q = query.value.trim().toLowerCase()
@@ -270,6 +316,18 @@ function afterTeams() {
   step.value = store.variant.poolCount > 0 ? 'pools' : 'run'
 }
 
+function fillTopTeams() {
+  store.selected = topN(store.tour, store.variant.fieldSize).map((team) => ({ ...team, poolId: undefined }))
+}
+
+function autoAssignPools() {
+  store.selected = assignSnakePools(
+    [...store.selected].sort((a, b) => a.rank - b.rank),
+    store.variant.poolCount,
+    store.variant.poolSize,
+  )
+}
+
 function backFromField() {
   step.value = getFormat(store.formatId).variants.length > 1 ? 'variant' : 'format'
 }
@@ -296,10 +354,14 @@ function onDrop(poolId: string | undefined, ev: DragEvent) {
   store.setPool(id, poolId)
 }
 
-function go() {
+async function go() {
+  simulating.value = true
   store.seed = 0
+  await nextTick()
+  await new Promise((resolve) => setTimeout(resolve, 450))
   store.simulate()
-  router.push('/results')
+  await router.push('/results')
+  simulating.value = false
 }
 
 onMounted(() => {
