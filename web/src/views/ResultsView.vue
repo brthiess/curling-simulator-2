@@ -1,4 +1,5 @@
 <template>
+  <div class="results-page">
   <section v-if="ready" class="results">
     <header class="results-hero">
       <div>
@@ -192,6 +193,7 @@
       </div>
     </div>
   </Transition>
+  </div>
 </template>
 
 <script setup lang="ts">
