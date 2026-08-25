@@ -9,8 +9,12 @@ A championship instance: a Format plus a Field. Not a single Game, and not the w
 _Avoid_: Simulation, event
 
 **Format**:
-The structure of a championship — field size, pools, round robin, and playoff shape. Worlds, Scotties, Brier, Europeans, and Slam are Formats.
+The championship series a Tournament belongs to. Worlds, Scotties, Brier, Europeans, and Slam are Formats. A Format has one or more Format Variants.
 _Avoid_: TournamentType
+
+**Format Variant**:
+A specific field size, pool layout, and playoff shape for a Format (for example current 18-team Brier vs classic 12-team Page).
+_Avoid_: Edition (an edition is men's or women's), year (a year is a Preset's Field, not the rules)
 
 **Worlds**:
 The World Men's or Women's Championship Format.
@@ -36,11 +40,16 @@ A named championship Field the app can load without picking Teams one by one.
 _Avoid_: automatic tournament
 
 **Custom Field**:
-A Field the user assembles, including Teams that are not on the ranking list.
+A Field of Tour Teams chosen by the user. They need not have qualified for that championship in real life.
+_Avoid_: invented team, fantasy roster
+
+**Tour**:
+The World Curling Tour catalog of real Teams and their Rankings. Every Field is drawn from the Tour.
+_Avoid_: ranking list (that is a file, not the catalog)
 
 **Team**:
-A competing entry, usually named for its skip. Strength comes from a Ranking or a user-set rating.
-_Avoid_: rink, country (a Team is a skip's rink, not always a nation)
+A real Tour rink, identified by its skip. Strength is its real Ranking. There are no invented Teams.
+_Avoid_: custom-created team, fictional team, user-set rating
 
 **Pool**:
 A subset of the Field that plays a round robin among itself. Scotties and Brier use Pools; Worlds does not.
@@ -58,7 +67,8 @@ Many independent Runs of the same Tournament. Results show how often each Team w
 _Avoid_: Monte Carlo, batch, odds (odds is a view of a Many-Run, not the thing itself)
 
 **Game**:
-A match between two Teams.
+A match between two Teams, with Hammer, a winner, and a final score.
+_Avoid_: end-by-end scoreboard (a Game does not show ends)
 
 **Placing**:
 A Team's final rank in a Run. 1 is the champion.
