@@ -189,6 +189,8 @@
     eyebrow="New seed, new story"
     :message="simMessage"
     :progress="simProgress"
+    :stage-index="simStageIndex"
+    :stage-count="simStageCount"
   />
   </div>
 </template>
@@ -213,7 +215,7 @@ const copied = ref(false)
 const ready = ref(false)
 const collapsedRounds = ref<Set<RoundId>>(new Set(['round-robin', 'pool', 'tko']))
 const hammerSrc = asset('images/hammer.png')
-const { active: refreshing, message: simMessage, progress: simProgress, present, dismiss } = useSimOverlay()
+const { active: refreshing, message: simMessage, progress: simProgress, stageIndex: simStageIndex, stageCount: simStageCount, present, dismiss } = useSimOverlay()
 
 const ROUND_TITLES: { round: RoundId; title: string }[] = [
   { round: 'round-robin', title: 'Round robin' },

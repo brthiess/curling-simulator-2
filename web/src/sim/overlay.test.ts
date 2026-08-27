@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import { MANY_RUN_STAGES, SINGLE_RUN_STAGES, playSimStages, stagesFor } from './overlay'
 
 describe('simulation overlay stages', () => {
@@ -12,9 +12,17 @@ describe('simulation overlay stages', () => {
     expect(MANY_RUN_STAGES).toContain('Stimulating Final…')
   })
 
-  it('plays every stage in order', async () => {
+  it('plays every stage in order and waits between them', async () => {
+    vi.useFakeTimers()
     const seen: string[] = []
-    await playSimStages(['One…', 'Two…', 'Stimulating Final…'], (message) => seen.push(message), 0)
+    const done = playSimStages(['One…', 'Two…', 'Stimulating Final…'], (message) => seen.push(message), 1000)
+    expect(seen).toEqual(['One…'])
+    await vi.advanceTimersByTimeAsync(1000)
+    expect(seen).toEqual(['One…', 'Two…'])
+    await vi.advanceTimersByTimeAsync(1000)
     expect(seen).toEqual(['One…', 'Two…', 'Stimulating Final…'])
+    await vi.advanceTimersByTimeAsync(1000)
+    await done
+    vi.useRealTimers()
   })
 })

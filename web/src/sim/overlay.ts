@@ -16,17 +16,11 @@ export const MANY_RUN_STAGES = [
   'Ranking the favorites…',
 ] as const
 
-export const SIM_STAGE_DURATION_MS = 1100
+/** How long each theatrical stage stays on screen. */
+export const SIM_STAGE_DURATION_MS = 1200
 
 export function stagesFor(mode: RunMode): readonly string[] {
   return mode === 'many' ? MANY_RUN_STAGES : SINGLE_RUN_STAGES
-}
-
-export function simStageDelayMs(): number {
-  if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    return 50
-  }
-  return SIM_STAGE_DURATION_MS
 }
 
 export function delay(ms: number): Promise<void> {
@@ -36,7 +30,7 @@ export function delay(ms: number): Promise<void> {
 export async function playSimStages(
   stages: readonly string[],
   onStage: (message: string, index: number) => void,
-  delayMs = simStageDelayMs(),
+  delayMs: number,
 ): Promise<void> {
   for (let i = 0; i < stages.length; i++) {
     onStage(stages[i]!, i)

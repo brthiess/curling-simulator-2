@@ -1,5 +1,5 @@
 import { computed, nextTick, ref } from 'vue'
-import { playSimStages, stagesFor } from '../sim/overlay'
+import { SIM_STAGE_DURATION_MS, delay, playSimStages, stagesFor } from '../sim/overlay'
 import type { RunMode } from '../sim/types'
 
 export function useSimOverlay() {
@@ -18,10 +18,16 @@ export function useSimOverlay() {
     message.value = stages[0] ?? ''
     active.value = true
     await nextTick()
-    await playSimStages(stages, (next, index) => {
-      message.value = next
-      stageIndex.value = index
-    })
+    // Let the overlay paint before the first timed stage.
+    await delay(80)
+    await playSimStages(
+      stages,
+      (next, index) => {
+        message.value = next
+        stageIndex.value = index
+      },
+      SIM_STAGE_DURATION_MS,
+    )
   }
 
   function dismiss() {

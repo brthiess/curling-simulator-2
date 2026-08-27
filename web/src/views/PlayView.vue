@@ -203,6 +203,8 @@
       :eyebrow="store.mode === 'many' ? `${store.iterations.toLocaleString()} tournaments` : 'One tournament'"
       :message="simMessage"
       :progress="simProgress"
+      :stage-index="simStageIndex"
+      :stage-count="simStageCount"
       detail="Fresh ice. New seed. Anything can happen."
     />
   </div>
@@ -227,7 +229,7 @@ const query = ref('')
 const custom = ref(false)
 const store = useSimStore()
 const router = useRouter()
-const { active: simulating, message: simMessage, progress: simProgress, present, dismiss } = useSimOverlay()
+const { active: simulating, message: simMessage, progress: simProgress, stageIndex: simStageIndex, stageCount: simStageCount, present, dismiss } = useSimOverlay()
 
 const formatCards = [
   { key: 'ww', formatId: 'worlds' as const, gender: 'women' as const, label: 'Women’s Worlds', logo: 'world-women', image: 'images/world-women-logo.png' },

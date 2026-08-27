@@ -10,7 +10,7 @@
         <div class="sim-progress" aria-hidden="true">
           <span :style="{ width: `${progress}%` }"></span>
         </div>
-        <small v-if="detail">{{ detail }}</small>
+        <small>{{ stageIndex + 1 }} of {{ stageCount }}{{ detail ? ` · ${detail}` : '' }}</small>
       </div>
     </div>
   </Transition>
@@ -22,6 +22,8 @@ defineProps<{
   eyebrow: string
   message: string
   progress: number
+  stageIndex: number
+  stageCount: number
   detail?: string
 }>()
 </script>
