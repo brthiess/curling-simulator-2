@@ -4,14 +4,14 @@ export const SINGLE_RUN_STAGES = [
   'Sweeping the ice…',
   'Round robin in progress…',
   'Playoffs underway…',
-  'Stimulating Final…',
+  'Simulating Final…',
   'Last stone in the house…',
 ] as const
 
 export const MANY_RUN_STAGES = [
   'Seeding thousands of draws…',
   'Replaying every end…',
-  'Stimulating Final…',
+  'Simulating Final…',
   'Tallying the odds…',
   'Ranking the favorites…',
 ] as const
