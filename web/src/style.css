@@ -400,7 +400,6 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   border-bottom: 0;
   border-radius: 18px 18px 0 0;
 }
-.quick-start { padding: 64px 12px 24px; scroll-margin-top: 30px; }
 .section-heading {
   display: flex;
   justify-content: space-between;
@@ -410,30 +409,6 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 }
 .section-heading h2 { margin: 0; color: var(--navy); font: 600 clamp(25px, 3vw, 34px)/1.1 'IBM Plex Serif', serif; }
 .section-heading.compact h2 { font-size: 25px; }
-.quick-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
-.quick-card {
-  display: grid;
-  grid-template-columns: 82px 1fr auto;
-  align-items: center;
-  gap: 18px;
-  padding: 16px 18px;
-  border: 1px solid rgba(197,213,226,.85);
-  border-radius: 16px;
-  background: rgba(255,255,255,.82);
-  color: var(--ink);
-  text-align: left;
-  cursor: pointer;
-  box-shadow: 0 5px 20px rgba(11,58,102,.05);
-  transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
-}
-.quick-card:not(:disabled):hover { transform: translateY(-4px); border-color: var(--blue); box-shadow: 0 14px 32px rgba(11,58,102,.13); }
-.quick-card:disabled { cursor: wait; opacity: .65; }
-.quick-logo { width: 82px; height: 60px; background: center / contain no-repeat; }
-.quick-logo.monogram { display: grid; place-items: center; border-radius: 10px; background: var(--navy); color: #fff; font-weight: 700; letter-spacing: .1em; }
-.quick-copy { display: flex; flex-direction: column; gap: 4px; }
-.quick-copy strong { color: var(--navy); font-size: 16px; }
-.quick-copy small { color: var(--muted); }
-.quick-arrow { color: var(--blue); font-size: 22px; font-weight: 700; }
 
 /* Wizard */
 .play { max-width: 1040px; margin: 0 auto; }
@@ -572,8 +547,26 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   text-align: center;
   box-shadow: 0 30px 80px rgba(0,0,0,.25);
 }
-.sim-card strong { display: block; color: var(--navy); font: 600 25px/1.2 'IBM Plex Serif', serif; }
+.sim-card strong { display: block; min-height: 60px; color: var(--navy); font: 600 25px/1.2 'IBM Plex Serif', serif; }
 .sim-card small { display: block; margin-top: 9px; color: var(--muted); }
+.sim-progress {
+  overflow: hidden;
+  width: 70%;
+  height: 6px;
+  margin: 16px auto 0;
+  border-radius: 99px;
+  background: #dce8f1;
+}
+.sim-progress > span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--blue), #42a5d8);
+  transition: width .45s cubic-bezier(.2,.8,.2,1);
+}
+.sim-msg-enter-active, .sim-msg-leave-active { transition: opacity .22s ease, transform .22s ease; }
+.sim-msg-enter-from { opacity: 0; transform: translateY(8px); }
+.sim-msg-leave-to { opacity: 0; transform: translateY(-6px); }
 .stone-spinner {
   position: relative;
   width: 76px;
@@ -806,7 +799,6 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .hero-copy { display: flex; flex-direction: column; align-items: center; }
   .hero-house { width: min(390px, 82vw); margin: 10px auto 0; order: -1; }
   .hero-actions { justify-content: center; }
-  .quick-grid { grid-template-columns: 1fr; }
   .results-hero { align-items: flex-start; flex-direction: column; }
   .results-hero .actions { justify-content: flex-start; }
   .champion-card, .favorite-card { grid-template-columns: auto 1fr; padding: 23px; }
@@ -823,8 +815,6 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .hero h1 { font-size: 43px; }
   .hero-house { width: min(290px, 76vw); }
   .section-heading { align-items: flex-start; flex-direction: column; }
-  .quick-card { grid-template-columns: 62px 1fr auto; padding: 14px; }
-  .quick-logo { width: 62px; height: 50px; }
   .steps { margin-inline: -8px; }
   .steps button { font-size: 9px; }
   .steps button span { width: 27px; height: 27px; }
