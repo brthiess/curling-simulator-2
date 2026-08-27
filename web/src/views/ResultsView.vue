@@ -184,15 +184,12 @@
     <p>Loading the draw…</p>
   </div>
 
-  <Transition name="overlay">
-    <div v-if="refreshing" class="sim-overlay" role="status" aria-live="polite">
-      <div class="sim-card">
-        <div class="stone-spinner" aria-hidden="true"><span></span></div>
-        <p class="eyebrow">New seed, new story</p>
-        <strong>Resurfacing the ice…</strong>
-      </div>
-    </div>
-  </Transition>
+  <SimOverlay
+    :active="refreshing"
+    eyebrow="New seed, new story"
+    :message="simMessage"
+    :progress="simProgress"
+  />
   </div>
 </template>
 
@@ -200,7 +197,9 @@
 import { computed, nextTick, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import Flag from '../components/Flag.vue'
+import SimOverlay from '../components/SimOverlay.vue'
 import { asset } from '../asset'
+import { useSimOverlay } from '../composables/useSimOverlay'
 import { encodeShare, decodeShare } from '../share'
 import type { RoundId, Team } from '../sim/types'
 import { useSimStore } from '../stores/sim'
@@ -212,9 +211,9 @@ const route = useRoute()
 const router = useRouter()
 const copied = ref(false)
 const ready = ref(false)
-const refreshing = ref(false)
 const collapsedRounds = ref<Set<RoundId>>(new Set(['round-robin', 'pool', 'tko']))
 const hammerSrc = asset('images/hammer.png')
+const { active: refreshing, message: simMessage, progress: simProgress, present, dismiss } = useSimOverlay()
 
 const ROUND_TITLES: { round: RoundId; title: string }[] = [
   { round: 'round-robin', title: 'Round robin' },
@@ -303,13 +302,11 @@ async function openAndScroll(round: RoundId) {
 }
 
 async function rerun() {
-  refreshing.value = true
-  await nextTick()
-  await new Promise((resolve) => setTimeout(resolve, 450))
+  await present(store.mode)
   store.seed = randomSeed()
   store.simulate()
   await nextTick()
-  refreshing.value = false
+  dismiss()
 }
 
 onMounted(async () => {

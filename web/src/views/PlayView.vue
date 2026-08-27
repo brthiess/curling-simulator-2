@@ -198,24 +198,23 @@
     </section>
     </Transition>
 
-    <Transition name="overlay">
-      <div v-if="simulating" class="sim-overlay" role="status" aria-live="polite">
-        <div class="sim-card">
-          <div class="stone-spinner" aria-hidden="true"><span></span></div>
-          <p class="eyebrow">{{ store.mode === 'many' ? `${store.iterations.toLocaleString()} tournaments` : 'One tournament' }}</p>
-          <strong>{{ store.mode === 'many' ? 'Calculating the odds…' : 'Playing every end…' }}</strong>
-          <small>Fresh ice. New seed. Anything can happen.</small>
-        </div>
-      </div>
-    </Transition>
+    <SimOverlay
+      :active="simulating"
+      :eyebrow="store.mode === 'many' ? `${store.iterations.toLocaleString()} tournaments` : 'One tournament'"
+      :message="simMessage"
+      :progress="simProgress"
+      detail="Fresh ice. New seed. Anything can happen."
+    />
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, nextTick, onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import Flag from '../components/Flag.vue'
+import SimOverlay from '../components/SimOverlay.vue'
 import { asset } from '../asset'
+import { useSimOverlay } from '../composables/useSimOverlay'
 import { assignSnakePools, presetsFor, type Preset } from '../data/presets'
 import { topN } from '../data/tour'
 import { getFormat } from '../sim/catalog'
@@ -226,9 +225,9 @@ type Step = 'format' | 'variant' | 'field' | 'teams' | 'pools' | 'run'
 const step = ref<Step>('format')
 const query = ref('')
 const custom = ref(false)
-const simulating = ref(false)
 const store = useSimStore()
 const router = useRouter()
+const { active: simulating, message: simMessage, progress: simProgress, present, dismiss } = useSimOverlay()
 
 const formatCards = [
   { key: 'ww', formatId: 'worlds' as const, gender: 'women' as const, label: 'Women’s Worlds', logo: 'world-women', image: 'images/world-women-logo.png' },
@@ -355,13 +354,11 @@ function onDrop(poolId: string | undefined, ev: DragEvent) {
 }
 
 async function go() {
-  simulating.value = true
   store.seed = 0
-  await nextTick()
-  await new Promise((resolve) => setTimeout(resolve, 450))
+  await present(store.mode)
   store.simulate()
   await router.push('/results')
-  simulating.value = false
+  dismiss()
 }
 
 onMounted(() => {
