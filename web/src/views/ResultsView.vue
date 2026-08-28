@@ -57,7 +57,7 @@ O|===|* * * * * * *|
                     <td class="num">{{ row.lsdTotal.toFixed(1) }}</td>
                   </tr>
                   <tr v-if="showQualDivider(index)" class="standings-split">
-                    <td colspan="5">├────────────────────────────────┤</td>
+                    <td colspan="5"></td>
                   </tr>
                 </template>
               </tbody>

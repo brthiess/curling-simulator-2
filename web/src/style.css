@@ -1674,6 +1674,7 @@ html.theme-crt .champion-copy h2 {
   font: 700 24px/32px 'IBM Plex Mono', ui-monospace, monospace;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+  overflow-wrap: anywhere;
 }
 html.theme-crt .final-score {
   position: relative;
@@ -1783,11 +1784,14 @@ html.theme-crt .standings-table tbody tr:not(.qualified):hover td {
 }
 html.theme-crt .standings-table tbody tr.dim td { color: var(--crt-muted); }
 html.theme-crt .standings-split td {
-  padding: 4px 12px;
+  padding: 6px 12px;
   border: 0;
-  color: var(--crt-outline-variant);
-  text-align: center;
-  letter-spacing: 0.12em;
+  background: transparent;
+}
+html.theme-crt .standings-split td::before {
+  content: '';
+  display: block;
+  border-top: 1px dashed var(--crt-outline-variant);
 }
 
 html.theme-crt .bracket-wrap {
@@ -1908,6 +1912,7 @@ html.theme-crt .favorite-name {
   line-height: 40px;
   letter-spacing: -1px;
   text-transform: uppercase;
+  overflow-wrap: anywhere;
 }
 html.theme-crt .favorite-stat { text-align: left; }
 html.theme-crt .favorite-pct {
