@@ -1675,11 +1675,227 @@ html.theme-crt .odds-value { color: var(--crt-primary); }
 html.theme-crt .loading-state { color: var(--crt-muted); }
 html.theme-crt .flag { border-radius: 0; }
 
+html.theme-crt .pools-section .page-title { letter-spacing: 0.06em; }
+html.theme-crt .pool-head {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--crt-primary);
+}
+html.theme-crt .pool-head .page-title {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border-bottom: 0;
+}
+html.theme-crt .pool-head .hint { margin: 8px 0 0; }
+html.theme-crt .pool-auto {
+  width: 100%;
+  gap: 8px;
+}
+html.theme-crt .pool-tabs {
+  display: flex;
+  margin-bottom: 16px;
+  overflow-x: auto;
+  border: 2px solid var(--crt-primary);
+  scrollbar-width: none;
+}
+html.theme-crt .pool-tabs::-webkit-scrollbar { display: none; }
+html.theme-crt .pool-tab {
+  flex: 1 0 auto;
+  min-height: 36px;
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--crt-primary);
+  font: 400 12px/16px 'IBM Plex Mono', ui-monospace, monospace;
+  letter-spacing: 0;
+  text-transform: none;
+  cursor: pointer;
+}
+html.theme-crt .pool-tab.on {
+  background: var(--crt-primary);
+  color: var(--crt-bg);
+}
+html.theme-crt .pool-add {
+  margin-bottom: 16px;
+}
+html.theme-crt .pool-add-label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--crt-secondary);
+  font-size: 12px;
+  line-height: 16px;
+  text-transform: uppercase;
+}
+html.theme-crt .pool-search { margin-bottom: 8px; }
+html.theme-crt .pool-add-hint {
+  margin: 0;
+  color: var(--crt-muted);
+  font-size: 12px;
+  line-height: 16px;
+}
+html.theme-crt .pool-add-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 168px;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+}
+html.theme-crt .pool-add-row,
+html.theme-crt .pool-chip,
+html.theme-crt .pool-empty {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 40px;
+  padding: 8px;
+  border: 1px solid var(--crt-outline-variant);
+  border-radius: 0;
+  background: transparent;
+  color: var(--crt-primary);
+  font: 700 14px/16px 'IBM Plex Mono', ui-monospace, monospace;
+  letter-spacing: 0;
+  text-align: left;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+html.theme-crt .pool-add-row:hover,
+html.theme-crt .pool-chip:hover {
+  transform: none;
+  border-color: var(--crt-fixed);
+  background: var(--crt-primary);
+  color: var(--crt-bg);
+}
+html.theme-crt .pool-chip-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+html.theme-crt .pool-from {
+  color: var(--crt-secondary);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}
+html.theme-crt .pool-add-row:hover .pool-from { color: var(--crt-bg); }
+html.theme-crt .pool-idx {
+  flex: 0 0 auto;
+  color: var(--crt-fixed);
+  font-size: 12px;
+  font-weight: 400;
+  opacity: 0.7;
+}
+html.theme-crt .pool-chip:hover .pool-idx,
+html.theme-crt .pool-chip:hover .pool-chip-remove { opacity: 1; color: var(--crt-bg); }
+html.theme-crt .pool-chip-remove {
+  color: var(--crt-secondary);
+  font-size: 12px;
+  font-weight: 400;
+  opacity: 0.85;
+}
+html.theme-crt .pool-chip .flag,
+html.theme-crt .pool-add-row .flag {
+  width: 22px;
+  height: 22px;
+  flex-basis: 22px;
+}
+html.theme-crt .pool-empty {
+  justify-content: center;
+  border-style: dashed;
+  border-color: var(--crt-outline);
+  color: var(--crt-outline-variant);
+  font-weight: 400;
+  font-size: 12px;
+}
+html.theme-crt .pool-empty:hover {
+  border-color: var(--crt-fixed);
+  color: var(--crt-primary);
+}
+html.theme-crt .pools-section .pool-board {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+html.theme-crt .pool-panel {
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 280px;
+  max-height: 520px;
+  border: 2px solid var(--crt-fixed);
+  background: var(--crt-bg);
+}
+html.theme-crt .pool-panel.on { display: flex; }
+html.theme-crt .pool-panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 16px;
+  border-bottom: 2px solid var(--crt-fixed);
+  background: var(--crt-container);
+}
+html.theme-crt .pool-panel-head h2 {
+  margin: 0;
+  color: var(--crt-fixed);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+}
+html.theme-crt .pool-meter {
+  color: var(--crt-gold);
+  font-size: 12px;
+  line-height: 16px;
+  white-space: nowrap;
+}
+html.theme-crt .pool-panel-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 8px;
+  padding: 8px;
+  overflow-y: auto;
+}
+html.theme-crt .pool-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 2px solid var(--crt-primary);
+}
+html.theme-crt .pool-continue {
+  width: 100%;
+  min-height: 56px;
+  font-size: 24px;
+  line-height: 32px;
+}
+
 @media (min-width: 768px) {
   html.theme-crt .play,
   html.theme-crt .results-page { padding: 24px; }
   html.theme-crt .format-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   html.theme-crt .crt-appbar-inner { padding: 8px 24px; }
+  html.theme-crt .pool-head {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+  html.theme-crt .pool-auto { width: auto; }
+  html.theme-crt .pool-tabs { display: none; }
+  html.theme-crt .pools-section .pool-board { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  html.theme-crt .pool-panel {
+    display: flex;
+    max-height: none;
+  }
+  html.theme-crt .pool-panel.on { outline: 2px solid var(--crt-primary); outline-offset: 2px; }
+  html.theme-crt .pool-actions { flex-direction: row; align-items: center; }
+  html.theme-crt .pool-continue { flex: 1; }
 }
 @media (min-width: 1024px) {
   html.theme-crt .format-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
