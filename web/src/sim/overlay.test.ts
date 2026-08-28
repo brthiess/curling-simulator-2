@@ -8,19 +8,19 @@ describe('simulation overlay stages', () => {
   })
 
   it('includes the fake final stage in both modes', () => {
-    expect(SINGLE_RUN_STAGES).toContain('Stimulating Final…')
-    expect(MANY_RUN_STAGES).toContain('Stimulating Final…')
+    expect(SINGLE_RUN_STAGES).toContain('Simulating Final…')
+    expect(MANY_RUN_STAGES).toContain('Simulating Final…')
   })
 
   it('plays every stage in order and waits between them', async () => {
     vi.useFakeTimers()
     const seen: string[] = []
-    const done = playSimStages(['One…', 'Two…', 'Stimulating Final…'], (message) => seen.push(message), 1000)
+    const done = playSimStages(['One…', 'Two…', 'Simulating Final…'], (message) => seen.push(message), 1000)
     expect(seen).toEqual(['One…'])
     await vi.advanceTimersByTimeAsync(1000)
     expect(seen).toEqual(['One…', 'Two…'])
     await vi.advanceTimersByTimeAsync(1000)
-    expect(seen).toEqual(['One…', 'Two…', 'Stimulating Final…'])
+    expect(seen).toEqual(['One…', 'Two…', 'Simulating Final…'])
     await vi.advanceTimersByTimeAsync(1000)
     await done
     vi.useRealTimers()
