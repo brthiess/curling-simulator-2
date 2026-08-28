@@ -142,52 +142,106 @@
     </section>
 
     <section v-else-if="step === 'pools'" :key="step" class="pools-section step-panel">
-      <h1 class="page-title">Assign pools</h1>
-      <div class="pool-intro">
-        <p class="hint">Drag teams into pools. Each pool needs {{ store.variant.poolSize }}.</p>
-        <button class="btn" type="button" @click="autoAssignPools">Auto-balance pools</button>
+      <header class="pool-head">
+        <div>
+          <h1 class="page-title">Pool assignments</h1>
+          <p class="hint crt-path">STATUS: ALLOCATING_TEAMS // CAP: {{ store.variant.poolSize }}/POOL</p>
+        </div>
+        <button class="btn pool-auto" type="button" @click="autoAssignPools">
+          <svg class="crt-glyph" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 3v15M5 21h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" />
+            <path d="M12 6H5l-2.5 5H7.5L5 6M12 6h7l2.5 5H16.5L19 6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="miter" />
+          </svg>
+          [ AUTO-BALANCE ]
+        </button>
+      </header>
+
+      <div class="pool-tabs" role="tablist" aria-label="Pools">
+        <button
+          v-for="name in store.poolNames"
+          :key="name"
+          type="button"
+          role="tab"
+          class="pool-tab"
+          :class="{ on: activePool === name }"
+          :aria-selected="activePool === name"
+          @click="activePool = name"
+        >
+          [ POOL_{{ name }} ]
+        </button>
       </div>
+
+      <div class="pool-add">
+        <label class="pool-add-label" :for="poolSearchId">
+          Add to POOL_{{ activePool }}
+          <span v-if="unassigned.length"> · {{ unassigned.length }} unassigned</span>
+        </label>
+        <input
+          :id="poolSearchId"
+          ref="poolSearchEl"
+          v-model="poolQuery"
+          class="search pool-search"
+          type="search"
+          :placeholder="unassigned.length ? 'Search unassigned skip or location' : 'Search the field to move a team in'"
+          :disabled="activePoolFull"
+        />
+        <p v-if="activePoolFull" class="pool-add-hint">Pool is full. Click a team to remove it first.</p>
+        <ul v-else-if="poolAddCandidates.length" class="pool-add-list">
+          <li v-for="team in poolAddCandidates" :key="team.id">
+            <button class="pool-add-row" type="button" @click="addToActivePool(team.id)">
+              <Flag :team="team" />
+              <span class="pool-chip-name">{{ displayName(team) }}</span>
+              <span class="pool-from">{{ team.poolId ? `FROM POOL_${team.poolId}` : 'UNASSIGNED' }}</span>
+            </button>
+          </li>
+        </ul>
+        <p v-else-if="poolQuery.trim()" class="pool-add-hint">No matching teams to add.</p>
+      </div>
+
       <div class="pool-board">
-        <div class="pool-col unassigned">
-          <h2>Unassigned ({{ unassigned.length }})</h2>
-          <div
-            class="drop"
-            @dragover.prevent
-            @drop="onDrop(undefined, $event)"
-          >
-            <div
-              v-for="team in unassigned"
+        <section
+          v-for="name in store.poolNames"
+          :key="name"
+          class="pool-panel"
+          :class="{ on: activePool === name }"
+          @click="activePool = name"
+        >
+          <header class="pool-panel-head">
+            <h2>POOL_{{ name }}</h2>
+            <span class="pool-meter">{{ poolMeter(poolTeams(name).length, store.variant.poolSize) }}</span>
+          </header>
+          <div class="pool-panel-body">
+            <button
+              v-for="(team, index) in poolTeams(name)"
               :key="team.id"
-              class="chip"
-              draggable="true"
-              @dragstart="onDrag(team.id, $event)"
+              class="pool-chip"
+              type="button"
+              :aria-label="`Remove ${displayName(team)} from pool ${name}`"
+              @click.stop="removeFromPool(team.id)"
             >
-              <Flag :team="team" /> {{ displayName(team) }}
-            </div>
-          </div>
-        </div>
-        <div v-for="name in store.poolNames" :key="name" class="pool-col">
-          <h2>Pool {{ name }} ({{ poolTeams(name).length }}/{{ store.variant.poolSize }})</h2>
-          <div
-            class="drop"
-            @dragover.prevent
-            @drop="onDrop(name, $event)"
-          >
-            <div
-              v-for="team in poolTeams(name)"
-              :key="team.id"
-              class="chip"
-              draggable="true"
-              @dragstart="onDrag(team.id, $event)"
+              <span class="pool-idx">{{ stepIndexLabel(index) }}</span>
+              <Flag :team="team" />
+              <span class="pool-chip-name">{{ displayName(team) }}</span>
+              <span class="pool-chip-remove" aria-hidden="true">[−]</span>
+            </button>
+            <button
+              v-for="n in emptySlotCount(name)"
+              :key="`${name}-empty-${n}`"
+              class="pool-empty"
+              type="button"
+              @click.stop="focusAdd(name)"
             >
-              <Flag :team="team" /> {{ displayName(team) }}
-            </div>
+              [ EMPTY_SLOT ]
+            </button>
           </div>
-        </div>
+        </section>
       </div>
-      <div class="bar">
+
+      <div class="pool-actions">
         <button class="btn ghost" type="button" @click="backFromPools">Back</button>
-        <button class="btn primary" type="button" :disabled="!store.poolsReady" @click="step = 'run'">Continue</button>
+        <button class="btn primary pool-continue" type="button" :disabled="!store.poolsReady" @click="step = 'run'">
+          [ CONTINUE ]
+        </button>
       </div>
     </section>
 
@@ -234,7 +288,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import Flag from '../components/Flag.vue'
 import SimOverlay from '../components/SimOverlay.vue'
@@ -248,6 +302,10 @@ import { useSimStore } from '../stores/sim'
 type Step = 'format' | 'variant' | 'field' | 'teams' | 'pools' | 'run'
 const step = ref<Step>('format')
 const query = ref('')
+const poolQuery = ref('')
+const poolSearchEl = ref<HTMLInputElement | null>(null)
+const poolSearchId = 'pool-add-search'
+const activePool = ref('A')
 const custom = ref(false)
 const store = useSimStore()
 const router = useRouter()
@@ -287,6 +345,14 @@ const pickerFull = computed(() => fieldFull.value)
 const unassigned = computed(() => store.selected.filter((t) => !t.poolId))
 const currentStepIndex = computed(() => visibleSteps.value.findIndex((s) => s.id === step.value))
 const selectionProgress = computed(() => (100 * store.selected.length) / store.variant.fieldSize)
+const activePoolFull = computed(() => poolTeams(activePool.value).length >= store.variant.poolSize)
+const poolAddCandidates = computed(() => {
+  const q = poolQuery.value.trim().toLowerCase()
+  const rest = store.selected.filter((t) => t.poolId !== activePool.value)
+  const matches = rest.filter((t) => matchesPoolQuery(t, q))
+  if (!q) return matches.filter((t) => !t.poolId)
+  return matches
+})
 
 const filteredTour = computed(() => {
   const q = query.value.trim().toLowerCase()
@@ -313,6 +379,34 @@ function isSelected(id: string): boolean {
 }
 function poolTeams(name: string): Team[] {
   return store.selected.filter((t) => t.poolId === name)
+}
+function matchesPoolQuery(team: Team, q: string): boolean {
+  if (!q) return true
+  return (
+    displayName(team).toLowerCase().includes(q) ||
+    team.lastName.toLowerCase().includes(q) ||
+    team.firstName.toLowerCase().includes(q) ||
+    team.location.toLowerCase().includes(q)
+  )
+}
+function poolMeter(filled: number, cap: number): string {
+  const n = Math.max(0, Math.min(cap, filled))
+  return `[${'█'.repeat(n)}${'░'.repeat(cap - n)}] ${n}/${cap}`
+}
+function emptySlotCount(name: string): number {
+  return Math.max(0, store.variant.poolSize - poolTeams(name).length)
+}
+function addToActivePool(teamId: string) {
+  if (activePoolFull.value) return
+  store.setPool(teamId, activePool.value)
+  poolQuery.value = ''
+}
+function removeFromPool(teamId: string) {
+  store.setPool(teamId, undefined)
+}
+function focusAdd(name: string) {
+  activePool.value = name
+  poolSearchEl.value?.focus()
 }
 
 async function chooseFormat(formatId: FormatId, gender: Gender) {
@@ -366,19 +460,17 @@ function backFromRun() {
   else step.value = 'field'
 }
 
-function onDrag(id: string, ev: DragEvent) {
-  ev.dataTransfer?.setData('text/plain', id)
-}
-function onDrop(poolId: string | undefined, ev: DragEvent) {
-  const id = ev.dataTransfer?.getData('text/plain')
-  if (!id) return
-  if (poolId) {
-    const size = store.selected.filter((t) => t.poolId === poolId).length
-    const already = store.selected.find((t) => t.id === id)?.poolId === poolId
-    if (!already && size >= store.variant.poolSize) return
-  }
-  store.setPool(id, poolId)
-}
+watch(step, (next) => {
+  if (next !== 'pools') return
+  activePool.value = store.poolNames[0] ?? 'A'
+  poolQuery.value = ''
+})
+watch(
+  () => store.poolNames,
+  (names) => {
+    if (!names.includes(activePool.value)) activePool.value = names[0] ?? 'A'
+  },
+)
 
 async function go() {
   store.seed = 0
