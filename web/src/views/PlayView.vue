@@ -1,26 +1,35 @@
 <template>
   <div class="play">
-    <ol class="steps">
-      <li
-        v-for="(s, index) in visibleSteps"
-        :key="s.id"
-        :class="{ on: step === s.id, done: index < currentStepIndex }"
-      >
-        <button
-          type="button"
-          :disabled="index > currentStepIndex"
-          :aria-current="step === s.id ? 'step' : undefined"
-          @click="step = s.id"
-        >
-          <span>{{ index + 1 }}</span>{{ s.label }}
-        </button>
-      </li>
-    </ol>
+    <nav class="crt-steps" aria-label="Tournament setup">
+      <ol>
+        <template v-for="(s, index) in visibleSteps" :key="s.id">
+          <li
+            v-if="index > 0"
+            class="crt-steps-sep"
+            :class="{ dim: index > currentStepIndex }"
+            aria-hidden="true"
+          >&gt;</li>
+          <li :class="{ on: step === s.id, done: index < currentStepIndex, dim: index > currentStepIndex }">
+            <button
+              type="button"
+              :disabled="index > currentStepIndex"
+              :aria-current="step === s.id ? 'step' : undefined"
+              :aria-label="s.label"
+              @click="step = s.id"
+            >
+              {{ stepIndexLabel(index) }} {{ s.code }}
+            </button>
+          </li>
+        </template>
+      </ol>
+    </nav>
 
     <Transition name="step" mode="out-in">
-    <section v-if="step === 'format'" :key="step" class="step-panel">
-      <h1 class="page-title">Pick a championship</h1>
-      <p class="hint">Choose the ice. You can fine-tune the format next.</p>
+    <section v-if="step === 'format'" :key="step" class="step-panel champ-step">
+      <header class="crt-step-head">
+        <h1 class="page-title">Pick a championship_</h1>
+        <p class="hint crt-path">C:\SIM\SELECT_MODE.EXE</p>
+      </header>
       <div class="format-grid">
         <button
           v-for="card in formatCards"
@@ -29,14 +38,28 @@
           type="button"
           @click="chooseFormat(card.formatId, card.gender)"
         >
-          <span
-            class="format-logo"
-            :class="card.logo"
-            :style="card.image ? { backgroundImage: `url(${asset(card.image)})` } : undefined"
-          ></span>
-          <span>{{ card.label }}</span>
+          <span class="format-tag" :class="`tone-${card.tagTone}`">{{ card.tag }}</span>
+          <span class="format-icon" :class="`icon-${card.icon}`" aria-hidden="true">
+            <svg v-if="card.icon === 'globe'" viewBox="0 0 48 48" fill="none">
+              <circle cx="24" cy="24" r="15" stroke="currentColor" stroke-width="2.4" />
+              <ellipse cx="24" cy="24" rx="6.5" ry="15" stroke="currentColor" stroke-width="2.4" />
+              <path d="M9 24h30M12.5 16h23M12.5 32h23" stroke="currentColor" stroke-width="2.4" />
+            </svg>
+            <svg v-else-if="card.icon === 'map'" viewBox="0 0 48 48" fill="none">
+              <path d="M8 14 20 10l12 4 8-4v24l-8 4-12-4-12 4V14Z" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round" />
+              <path d="M20 10v24M32 14v24" stroke="currentColor" stroke-width="2.4" />
+            </svg>
+            <span v-else-if="card.icon === 'euro'">€</span>
+            <svg v-else-if="card.icon === 'flag'" viewBox="0 0 48 48" fill="none">
+              <path d="M12 6v36" stroke="currentColor" stroke-width="2.6" stroke-linecap="square" />
+              <rect x="14" y="8" width="22" height="16" stroke="currentColor" stroke-width="2" />
+              <path fill="currentColor" d="M16 10h5v4h-5zm10 0h5v4h-5zM21 14h5v4h-5zM16 18h5v4h-5zm10 0h5v4h-5z" />
+            </svg>
+          </span>
+          <span class="format-name">{{ card.label }}</span>
         </button>
       </div>
+      <p class="crt-ready"><span>STATUS: READY</span><span class="crt-cursor" aria-hidden="true">_</span></p>
     </section>
 
     <section v-else-if="step === 'variant'" :key="step" class="step-panel">
@@ -215,7 +238,6 @@ import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import Flag from '../components/Flag.vue'
 import SimOverlay from '../components/SimOverlay.vue'
-import { asset } from '../asset'
 import { useSimOverlay } from '../composables/useSimOverlay'
 import { assignSnakePools, presetsFor, type Preset } from '../data/presets'
 import { topN } from '../data/tour'
@@ -232,24 +254,24 @@ const router = useRouter()
 const { active: simulating, message: simMessage, progress: simProgress, stageIndex: simStageIndex, stageCount: simStageCount, present, dismiss } = useSimOverlay()
 
 const formatCards = [
-  { key: 'ww', formatId: 'worlds' as const, gender: 'women' as const, label: 'Women’s Worlds', logo: 'world-women', image: 'images/world-women-logo.png' },
-  { key: 'wm', formatId: 'worlds' as const, gender: 'men' as const, label: 'Men’s Worlds', logo: 'world-men', image: 'images/world-men-logo.png' },
-  { key: 'sc', formatId: 'scotties' as const, gender: 'women' as const, label: 'Scotties', logo: 'scotties', image: 'images/scotties-logo.png' },
-  { key: 'br', formatId: 'brier' as const, gender: 'men' as const, label: 'Brier', logo: 'brier', image: 'images/brier-logo.png' },
-  { key: 'ew', formatId: 'europeans' as const, gender: 'women' as const, label: 'Women’s Europeans', logo: 'europeans' },
-  { key: 'em', formatId: 'europeans' as const, gender: 'men' as const, label: 'Men’s Europeans', logo: 'europeans' },
-  { key: 'sw', formatId: 'slam' as const, gender: 'women' as const, label: 'Women’s Slam', logo: 'slam' },
-  { key: 'sm', formatId: 'slam' as const, gender: 'men' as const, label: 'Men’s Slam', logo: 'slam' },
+  { key: 'ww', formatId: 'worlds' as const, gender: 'women' as const, label: 'Women’s Worlds', tag: '[W]', tagTone: 'w', icon: 'globe' as const },
+  { key: 'wm', formatId: 'worlds' as const, gender: 'men' as const, label: 'Men’s Worlds', tag: '[M]', tagTone: 'm', icon: 'globe' as const },
+  { key: 'sc', formatId: 'scotties' as const, gender: 'women' as const, label: 'Scotties', tag: '[CAN]', tagTone: 'can', icon: 'map' as const },
+  { key: 'br', formatId: 'brier' as const, gender: 'men' as const, label: 'Brier', tag: '[CAN]', tagTone: 'can', icon: 'map' as const },
+  { key: 'ew', formatId: 'europeans' as const, gender: 'women' as const, label: 'Women’s Europeans', tag: '[W]', tagTone: 'w', icon: 'euro' as const },
+  { key: 'em', formatId: 'europeans' as const, gender: 'men' as const, label: 'Men’s Europeans', tag: '[M]', tagTone: 'm', icon: 'euro' as const },
+  { key: 'sw', formatId: 'slam' as const, gender: 'women' as const, label: 'Women’s Slam', tag: '[W]', tagTone: 'w', icon: 'flag' as const },
+  { key: 'sm', formatId: 'slam' as const, gender: 'men' as const, label: 'Men’s Slam', tag: '[M]', tagTone: 'm', icon: 'flag' as const },
 ]
 
 const visibleSteps = computed(() => {
-  const all: { id: Step; label: string }[] = [
-    { id: 'format', label: 'Championship' },
-    { id: 'variant', label: 'Variant' },
-    { id: 'field', label: 'Field' },
-    { id: 'teams', label: 'Teams' },
-    { id: 'pools', label: 'Pools' },
-    { id: 'run', label: 'Run' },
+  const all: { id: Step; label: string; code: string }[] = [
+    { id: 'format', label: 'Championship', code: '_CHAMP' },
+    { id: 'variant', label: 'Variant', code: '_VAR' },
+    { id: 'field', label: 'Field', code: '_FIELD' },
+    { id: 'teams', label: 'Teams', code: '_TEAM' },
+    { id: 'pools', label: 'Pools', code: '_POOL' },
+    { id: 'run', label: 'Run', code: '_RUN' },
   ]
   return all.filter((s) => {
     if (s.id === 'variant' && getFormat(store.formatId).variants.length === 1) return false
@@ -280,6 +302,9 @@ const filteredTour = computed(() => {
     .slice(0, 80)
 })
 
+function stepIndexLabel(index: number): string {
+  return String(index + 1).padStart(2, '0')
+}
 function displayName(team: Team): string {
   return team.firstName ? `${team.firstName} ${team.lastName}` : `Team ${team.lastName}`
 }
